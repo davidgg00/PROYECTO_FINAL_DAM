@@ -51,6 +51,7 @@
         android:layout_width="231dp"
         android:layout_height="70dp"
         android:background="@drawable/botonredondeado"
+        android:onClick="irACarta"
         android:text="¡Pedir Comida!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
