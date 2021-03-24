@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".FormularioRegistro"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".ActivityCartaAlimentos" />
         <activity android:name=".BienvenidaActivity" />
         <activity android:name=".MainActivity">

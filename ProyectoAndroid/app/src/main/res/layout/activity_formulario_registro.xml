@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background_image"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@drawable/background_image"
+    tools:context=".FormularioRegistro">
 
     <LinearLayout
         android:layout_width="263dp"
@@ -20,7 +20,26 @@
         app:layout_constraintVertical_bias="0.497">
 
         <TextView
-            android:id="@+id/labelCorreo"
+            android:id="@+id/labelNombreReg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="Nombre"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/etNombreReg"
+            android:layout_width="191dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/labelCorreoReg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -29,7 +48,7 @@
             android:textColor="#000000" />
 
         <EditText
-            android:id="@+id/etCorreo"
+            android:id="@+id/etCorreoReg"
             android:layout_width="191dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -39,7 +58,7 @@
             android:inputType="textEmailAddress" />
 
         <TextView
-            android:id="@+id/labelClave"
+            android:id="@+id/labelClaveReg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -48,7 +67,7 @@
             android:textColor="#000000" />
 
         <EditText
-            android:id="@+id/etPassword"
+            android:id="@+id/etPasswordReg"
             android:layout_width="186dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -58,34 +77,25 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnRegistro"
             android:layout_width="202dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="75dp"
             android:background="@drawable/botonredondeado"
-            android:onClick="iniciarSesion"
-            android:text="Iniciar Sesión" />
+            android:onClick="realizarRegistro"
+            android:text="Regístrate" />
 
         <TextView
             android:id="@+id/labelEntrarInvitado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:gravity="center"
-            android:onClick="iniciarSesionInvitado"
-            android:text="Entrar como Invitado"
+            android:onClick="irFormularioLogin"
+            android:text="Ir al Login"
             android:textColor="#000000" />
 
-        <TextView
-            android:id="@+id/labelRegistro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:onClick="irFormularioRegistro"
-            android:text="Regístrate"
-            android:textColor="#000000" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

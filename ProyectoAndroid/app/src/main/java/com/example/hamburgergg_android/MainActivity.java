@@ -36,10 +36,23 @@ public class MainActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.etPassword);
     }
 
+    /**
+     * Método que inicia sesión como invitado
+     * @param view
+     */
     public void iniciarSesionInvitado(View view){
         Intent intent = new Intent(this, BienvenidaActivity.class);
         intent.putExtra("email","invitado@invitado.com");
         intent.putExtra("nombre","invitado");
+        startActivity(intent);
+    }
+
+    /**
+     * Método que te lleva al formulario de registro
+     * @param view
+     */
+    public void irFormularioRegistro(View view){
+        Intent intent = new Intent(this, FormularioRegistro.class);
         startActivity(intent);
     }
 
