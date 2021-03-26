@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.hamburgergg_android.Modelo.Pedido;
+
 public class BienvenidaActivity extends AppCompatActivity {
 
     private Button btnVerHistorial;
+    private String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +21,7 @@ public class BienvenidaActivity extends AppCompatActivity {
 
         //Recibimos parametros
         Bundle bundle=getIntent().getExtras();
-        String email =bundle.getString("email");
+        email =bundle.getString("email");
         String nombre =bundle.getString("nombre");
 
         System.out.println(bundle.toString());
@@ -29,8 +32,8 @@ public class BienvenidaActivity extends AppCompatActivity {
 
     public void irACarta(View view){
         Intent intent = new Intent(BienvenidaActivity.this, ActivityCartaAlimentos.class);
-        //intent.putExtra("email",objResultado.get("email").toString());
-        //intent.putExtra("nombre",objResultado.get("nombre").toString());
+        Pedido pedido = new Pedido(email,0);
+        intent.putExtra("pedido",pedido);
         startActivity(intent);
     }
 }

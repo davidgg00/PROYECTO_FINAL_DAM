@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_image"
+    tools:context=".VerDetallesProducto">
+
+    <LinearLayout
+        android:layout_width="337dp"
+        android:layout_height="653dp"
+        android:background="#59FFFFFF"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.948">
+
+        <TextView
+            android:id="@+id/labelTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Titulo"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/labelIngredientes"
+            android:layout_width="315dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:text="Ingredientes:"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/etIngredProducto"
+            android:layout_width="310dp"
+            android:layout_height="190dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:editable="false"
+            android:ems="10"
+            android:enabled="false"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:id="@+id/labelPrecio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="0.00€"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/btnAddProductoPedido"
+            android:layout_width="234dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/botonredondeado"
+            android:onClick="addProducto"
+            android:text="Añadir al pedido" />
+
+        <Button
+            android:id="@+id/btnVolverCarta"
+            android:layout_width="237dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/botonredondeado"
+            android:onClick="volverCarta"
+            android:text="Volver a la carta" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
