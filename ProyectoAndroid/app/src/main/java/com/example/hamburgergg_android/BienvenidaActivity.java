@@ -1,13 +1,20 @@
 package com.example.hamburgergg_android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.hamburgergg_android.Controlador.GestionProductos;
 import com.example.hamburgergg_android.Modelo.Pedido;
+import com.example.hamburgergg_android.Modelo.Producto;
+
+import java.util.ArrayList;
 
 public class BienvenidaActivity extends AppCompatActivity {
 
@@ -31,9 +38,20 @@ public class BienvenidaActivity extends AppCompatActivity {
     }
 
     public void irACarta(View view){
-        Intent intent = new Intent(BienvenidaActivity.this, ActivityCartaAlimentos.class);
+        final Intent intent = new Intent(BienvenidaActivity.this, ActivityCartaAlimentos.class);
         Pedido pedido = new Pedido(email,0);
         intent.putExtra("pedido",pedido);
-        startActivity(intent);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<Producto> hamburguesas = GestionProductos.getHamburguesas(getApplicationContext());
+                intent.putExtra("hamburguesas", hamburguesas);
+                startActivity(intent);
+
+
+            }
+        });
+        thread.start();
+
     }
 }

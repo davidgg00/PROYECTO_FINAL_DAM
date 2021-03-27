@@ -1,5 +1,6 @@
 package com.example.hamburgergg_android;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +20,21 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.hamburgergg_android.Controlador.GestionProductos;
+import com.example.hamburgergg_android.Modelo.Ingrediente;
 import com.example.hamburgergg_android.Modelo.Pedido;
 import com.example.hamburgergg_android.Modelo.Producto;
 import com.example.hamburgergg_android.Modelo.recyclerAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
 public class ActivityCartaAlimentos extends AppCompatActivity {
     private ViewPager view1;
-    private ArrayList<Producto> hamburguesas;
+    private ArrayList<Producto> hamburguesas = new ArrayList<>();
     private ArrayList<Producto> bebidas;
     private LinearLayout pagina1,pagina2,pagina3;
     private RecyclerView recyclerView,recyclerView2;
@@ -38,37 +45,19 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carta_alimentos);
+
+        obtenerHamburguesas();
+
         btnPedidoTotal = (Button)findViewById(R.id.btnPedidoTotal);
-        hamburguesas = new ArrayList<>();
         bebidas = new ArrayList<>();
         //Recibimos parametros
         Bundle bundle=getIntent().getExtras();
+        pedido = (Pedido) bundle.get("pedido");
 
-        if (pedido == null){
-            pedido = (Pedido) bundle.get("pedido");
-            btnPedidoTotal.setText("Pedido total : " + pedido.getTotal_a_pagar() + "€");
-        } else {
-            pedido = (Pedido) bundle.get("pedido");
-            btnPedidoTotal.setText("Pedido total : " + pedido.getTotal_a_pagar() + "€");
-        }
+        btnPedidoTotal.setText("Pedido total : " + pedido.getTotal_a_pagar() + "€");
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-               hamburguesas = GestionProductos.getHamburguesas(getApplicationContext());
-                view1=(ViewPager)findViewById(R.id.view);
-                //Permitir modificar la vista desde un hilo que no es el principal.
-                new Handler(Looper.getMainLooper()).post(new Runnable(){
-                    @Override
-                    public void run(){
-                        view1.setAdapter(new AdminPageAdapter());
-                    }
-                });
-
-
-            }
-        });
-        thread.start();
+        view1=(ViewPager)findViewById(R.id.view);
+        view1.setAdapter(new AdminPageAdapter());
 
 
         btnPedidoTotal.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +71,47 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * Método que obtiene las hamburguesas almacenadas en las sesión
+     * Y las almacena en un arraylist para mostrarlas en el activity
+     */
+    private void obtenerHamburguesas() {
+        //Obtenemos las hamburguesas almacenadas en las sesión
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String hamburguesas_session = sharedPrefs.getString("hamburguesas","");
+        String ingredientesHamburguesas = sharedPrefs.getString("ingredientesHamburguesas","");
+
+        //Convertimos los Strings a JSONArray, los recorremos y los almacenamos en el arraylist de hamburguesas
+        try {
+            JSONArray jsonArray = new JSONArray(hamburguesas_session);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject e = jsonArray.getJSONObject(i);
+
+                JSONArray jsonArray2 = new JSONArray(ingredientesHamburguesas);
+                for (int j = 0; j < jsonArray2.length(); j++) {
+                    ArrayList<Ingrediente> ingredientes = new ArrayList<>();
+                    JSONObject e2 = jsonArray2.getJSONObject(j);
+                    if (e.get("id").toString().equalsIgnoreCase(e2.get("idHamburguesa").toString())){
+                        JSONArray jsonArrayIngredientes = new JSONArray(e2.get("ingredientes").toString());
+                        for (int n = 0; n < jsonArrayIngredientes.length(); n++){
+                            JSONObject e3 = jsonArrayIngredientes.getJSONObject(n);
+                            ingredientes.add(new Ingrediente(Integer.parseInt(e3.get("id").toString()), e3.get("nombre").toString()));
+                        }
+                        hamburguesas.add(new Producto(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()), e.get("ruta_img").toString(), e.get("tipo").toString(), ingredientes));
+                    }
+
+                }
+
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private void setOnClickListener() {
 

@@ -65,6 +65,27 @@ public class GestionProductos {
         return null;
     }
 
+    public static String getHamburguesas2(final Context contexto){
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(contexto);
+        RequestFuture<String> future = RequestFuture.newFuture();
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarHamburguesas.php", future, future);
+        requestQueue.add(request);
+
+        try {
+            String test = future.get().toString();
+            return test;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }
+
     public static ArrayList<Ingrediente> getIngredientesHamburguesa(final Context contexto, final int idHamburguesa){
         ArrayList<Ingrediente> ingredientesHamburguesa = new ArrayList<>();
 
@@ -92,6 +113,32 @@ public class GestionProductos {
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }
+
+    public static String getIngredientesHamburguesa2(final Context contexto, final int idHamburguesa){
+
+        RequestQueue requestQueue = Volley.newRequestQueue(contexto);
+        RequestFuture<String> future = RequestFuture.newFuture();
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarIngredientesHamburguesa.php?idHamburguesa="+idHamburguesa, future, future){
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("idHamburguesa", "1");
+                return params;
+            }
+        };
+        requestQueue.add(request);
+
+        try {
+            String test = future.get().toString();
+            return test;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
