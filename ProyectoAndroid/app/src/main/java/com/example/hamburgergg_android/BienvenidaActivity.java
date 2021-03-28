@@ -41,17 +41,7 @@ public class BienvenidaActivity extends AppCompatActivity {
         final Intent intent = new Intent(BienvenidaActivity.this, ActivityCartaAlimentos.class);
         Pedido pedido = new Pedido(email,0);
         intent.putExtra("pedido",pedido);
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ArrayList<Producto> hamburguesas = GestionProductos.getHamburguesas(getApplicationContext());
-                intent.putExtra("hamburguesas", hamburguesas);
-                startActivity(intent);
-
-
-            }
-        });
-        thread.start();
+        startActivity(intent);
 
     }
 }

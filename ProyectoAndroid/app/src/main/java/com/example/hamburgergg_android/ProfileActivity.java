@@ -20,16 +20,6 @@ public class ProfileActivity extends AppCompatActivity {
         TextView nameTxt = findViewById(R.id.nameTextView);
         TextView precio = findViewById(R.id.precio);
 
-
-        //String username = "Username not set";
-
-       // Bundle extras = getIntent().getExtras();
-
-      //  if (extras != null){
-      //      username = extras.getString("username");
-            //cuenta = (Cuenta) extras.get("cuenta");
-      //  }
-
         nameTxt.setText("xD");
     }
 }

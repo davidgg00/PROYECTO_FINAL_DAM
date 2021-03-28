@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 
 import com.example.hamburgergg_android.Controlador.GestionProductos;
 import com.example.hamburgergg_android.Modelo.Ingrediente;
+import com.example.hamburgergg_android.Modelo.Menu;
 import com.example.hamburgergg_android.Modelo.Pedido;
 import com.example.hamburgergg_android.Modelo.Producto;
 import com.example.hamburgergg_android.Modelo.recyclerAdapter;
@@ -35,9 +36,10 @@ import java.util.ArrayList;
 public class ActivityCartaAlimentos extends AppCompatActivity {
     private ViewPager view1;
     private ArrayList<Producto> hamburguesas = new ArrayList<>();
-    private ArrayList<Producto> bebidas;
-    private LinearLayout pagina1,pagina2,pagina3;
-    private RecyclerView recyclerView,recyclerView2;
+    private ArrayList<Producto> bebidas = new ArrayList<>();
+    private ArrayList<Producto> patatas = new ArrayList<>();
+    private ArrayList<Menu> menus = new ArrayList<>();
+    private LinearLayout pagina1,pagina2,pagina3,pagina4;
     private recyclerAdapter.RecyclerViewClickListener listener;
     private Pedido pedido;
     private Button btnPedidoTotal;
@@ -48,8 +50,13 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
 
         obtenerHamburguesas();
 
+        obtenerBebidas();
+
+        obtenerPatatas();
+
+        obtenerMenus();
+
         btnPedidoTotal = (Button)findViewById(R.id.btnPedidoTotal);
-        bebidas = new ArrayList<>();
         //Recibimos parametros
         Bundle bundle=getIntent().getExtras();
         pedido = (Pedido) bundle.get("pedido");
@@ -70,6 +77,83 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void obtenerMenus() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String menus_session = sharedPrefs.getString("menus", "");
+        String productosMenu_session = sharedPrefs.getString("productosMenu", "");
+        System.out.println(productosMenu_session);
+        System.out.println("FFF:" + menus_session);
+                //Convertimos los Strings a JSONArray, los recorremos y los almacenamos en el arraylist de hamburguesas
+        try {
+            JSONArray jsonArray = new JSONArray(menus_session);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject e = jsonArray.getJSONObject(i);
+
+                JSONArray jsonArray2 = new JSONArray(productosMenu_session);
+                for (int j = 0; j < jsonArray2.length(); j++) {
+                    ArrayList<Producto> productos = new ArrayList<>();
+                    JSONObject e2 = jsonArray2.getJSONObject(j);
+
+                    if (e.get("id").toString().equalsIgnoreCase(e2.get("idMenu").toString())) {
+                        JSONArray jsonArrayIngredientes = new JSONArray(e2.get("productos").toString());
+                        for (int n = 0; n < jsonArrayIngredientes.length(); n++) {
+                            JSONObject e3 = jsonArrayIngredientes.getJSONObject(n);
+                            productos.add(new Producto(Integer.parseInt(e3.get("id").toString()), e3.get("nombre").toString(), Double.parseDouble(e3.get("precio").toString()),e3.get("tipo").toString(),e3.get("ruta_img").toString()));
+                        }
+                        menus.add(new Menu(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()), productos));
+                    }
+
+                }
+
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+        private void obtenerPatatas() {
+        //Obtenemos las hamburguesas almacenadas en las sesión
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String patatas_session = sharedPrefs.getString("patatas","");
+
+
+        //Convertimos los Strings a JSONArray, los recorremos y los almacenamos en el arraylist de hamburguesas
+        try {
+            JSONArray jsonArray = new JSONArray(patatas_session);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject e = jsonArray.getJSONObject(i);
+                patatas.add(new Producto(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()), e.get("ruta_img").toString(), e.get("tipo").toString()));
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Método que obtiene las bebidas almacenadas en las sesión
+     * Y las almacena en un arraylist para mostrarlas en el activity
+     */
+    private void obtenerBebidas() {
+        //Obtenemos las hamburguesas almacenadas en las sesión
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String bebidas_session = sharedPrefs.getString("bebidas","");
+
+        //Convertimos los Strings a JSONArray, los recorremos y los almacenamos en el arraylist de hamburguesas
+        try {
+            JSONArray jsonArray = new JSONArray(bebidas_session);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject e = jsonArray.getJSONObject(i);
+                bebidas.add(new Producto(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()), e.get("ruta_img").toString(), e.get("tipo").toString()));
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -113,35 +197,34 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
 
 
 
-    private void setOnClickListener() {
+    private void setOnClickListener(final ArrayList<Producto> tipoProducto) {
 
         listener = new recyclerAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
                 Intent intent = new Intent(getApplicationContext(), VerDetallesProducto.class);
-                intent.putExtra("producto",hamburguesas.get(position));
+                intent.putExtra("producto",tipoProducto.get(position));
                 intent.putExtra("pedido",pedido);
                 startActivity(intent);
             }
         };
     }
 
-    private void setOnClickListener2() {
+    private void setOnClickListener2(final ArrayList<Menu> menu) {
+
         listener = new recyclerAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                intent.putExtra("username",hamburguesas.get(position).getId());
-                intent.putExtra("cuenta","xd");
+                Intent intent = new Intent(getApplicationContext(), VerDetallesMenu.class);
+                intent.putExtra("menu",menu.get(position));
+                intent.putExtra("pedido",pedido);
                 startActivity(intent);
             }
         };
     }
 
-    private void setAdapter() {
-        //setOnClickListener();
-        //recyclerView =(RecyclerView) findViewById(R.id.recyclerId);
-        recyclerAdapter adapter = new recyclerAdapter(hamburguesas,listener);
+    private void setAdapter(ArrayList<Producto> tipoProducto, RecyclerView recyclerView) {
+        recyclerAdapter adapter = new recyclerAdapter(tipoProducto,listener);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
         recyclerView.setLayoutManager(layoutManager);
@@ -149,9 +232,13 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void setUserInfo() {
-        hamburguesas.add(new Producto(1,"hamburguesa1",9.99,"fotoAlimento1","hamburguesa"));
-        hamburguesas.add(new Producto(1,"hamburguesa2",8.99,"fotoAlimento2","hamburguesa"));
+    private void setAdapter2(ArrayList<Menu> menu, RecyclerView recyclerView) {
+        recyclerAdapter adapter = new recyclerAdapter(listener,menu);
+
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
     }
 
     public void irPagina1(View v) {
@@ -167,13 +254,17 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         view1.setCurrentItem(2);
     }
 
+    public void irPagina4(View v) {
+        view1.setCurrentItem(3);
+    }
+
     class AdminPageAdapter extends PagerAdapter
     {
 
         @Override
         public int getCount()
         {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -186,11 +277,10 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
                     if (pagina1 == null)
                     {
                         pagina1 = (LinearLayout) LayoutInflater.from(ActivityCartaAlimentos.this).inflate(R.layout.pagina1, null);
+                        RecyclerView recyclerView = pagina1.findViewById(R.id.recyclerId);
                         recyclerView = pagina1.findViewById(R.id.recyclerId);
-
-
-                        setOnClickListener();
-                        setAdapter();
+                        setOnClickListener(hamburguesas);
+                        setAdapter(hamburguesas,recyclerView);
                     }
                     paginaactual = pagina1;
                     break;
@@ -198,17 +288,10 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
                     if (pagina2 == null)
                     {
                         pagina2 = (LinearLayout) LayoutInflater.from(ActivityCartaAlimentos.this).inflate(R.layout.pagina2, null);
-                        recyclerView2 = pagina2.findViewById(R.id.recyclerId);
-                        //setUserInfo();
-                        bebidas.add(new Producto(1,"bebida1",1.99,"fotobebida1","bebida"));
-                        bebidas.add(new Producto(1,"bebida2",2.99,"fotoBebida2","bebida"));
-                        setOnClickListener2();
-                        recyclerAdapter adapter2 = new recyclerAdapter(bebidas,listener);
+                        RecyclerView recyclerView = pagina2.findViewById(R.id.recyclerId);
+                        setOnClickListener(bebidas);
+                        setAdapter(bebidas,recyclerView);
 
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
-                        recyclerView2.setLayoutManager(layoutManager);
-                        recyclerView2.setItemAnimator(new DefaultItemAnimator());
-                        recyclerView2.setAdapter(adapter2);
                     }
                     paginaactual = pagina2;
                     break;
@@ -216,8 +299,22 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
                     if (pagina3 == null)
                     {
                         pagina3 = (LinearLayout) LayoutInflater.from(ActivityCartaAlimentos.this).inflate(R.layout.pagina3, null);
+                        RecyclerView recyclerView = pagina3.findViewById(R.id.recyclerId);
+                        setOnClickListener(patatas);
+                        setAdapter(patatas,recyclerView);
                     }
                     paginaactual = pagina3;
+                    break;
+
+                case 3:
+                    if (pagina4 == null)
+                    {
+                        pagina4 = (LinearLayout) LayoutInflater.from(ActivityCartaAlimentos.this).inflate(R.layout.pagina4, null);
+                        RecyclerView recyclerView = pagina4.findViewById(R.id.recyclerId);
+                        setOnClickListener2(menus);
+                        setAdapter2(menus,recyclerView);
+                    }
+                    paginaactual = pagina4;
                     break;
             }
             ViewPager vp=(ViewPager) collection;

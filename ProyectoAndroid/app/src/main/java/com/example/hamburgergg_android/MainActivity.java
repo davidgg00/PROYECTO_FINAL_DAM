@@ -42,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
         etCorreo = (EditText) findViewById(R.id.etCorreo);
         etPassword = (EditText) findViewById(R.id.etPassword);
 
-        guardarProductos_Sesion();
+        guardarHamburguesas_sesion();
+        guardarBebidas_sesion();
+        guardarPatatas_sesion();
+        guardarMenus_sesion();
 
     }
 
@@ -119,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
      * Los guarda en un JSONArray creado desde 0, y este JSONArray se guarda en la session de la app
      * Para que así solo tenga que acceder a la base de datos para obtener los productos una sola vez (al estar en la pantalla de inicio de la app)
      */
-    private void guardarProductos_Sesion() {
+    private void guardarHamburguesas_sesion() {
         //Se ejecuta en un hilo debido a que es una petición SINCRONA Y ES OBLIGATORIO
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = sharedPrefs.edit();
                 //Guardamos las hamburguesas
-                String hamburguesas = GestionProductos.getHamburguesas2(getApplicationContext());
+                String hamburguesas = GestionProductos.getHamburguesas(getApplicationContext());
                 editor.putString("hamburguesas",hamburguesas);
 
                 //Y a continuación los ingredientes de las hamburguesas, que habrá que hacer otra petición
@@ -143,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     {
                         JSONObject jsonObj = jsonArr.getJSONObject(i);
                         //Obtenemos los ingredientes de cada hamburguesa por su id
-                        String ingredientesHamburguesa = GestionProductos.getIngredientesHamburguesa2(getApplicationContext(),Integer.parseInt(jsonObj.get("id").toString()));
+                        String ingredientesHamburguesa = GestionProductos.getIngredientesHamburguesa(getApplicationContext(),Integer.parseInt(jsonObj.get("id").toString()));
                         JSONArray jsonArr2 = new JSONArray(ingredientesHamburguesa);
                         //guardamos el id de la hamburguesa
                         JSON.put("idHamburguesa",jsonObj.get("id").toString());
@@ -163,6 +166,101 @@ public class MainActivity extends AppCompatActivity {
                     }
                     //Guardamos el JSONArray creado en la sesión
                     editor.putString("ingredientesHamburguesas",JSONArrayPadre.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                // Y lo subimos
+                editor.commit();
+            }
+        });
+        thread.start();
+    }
+
+
+    private void guardarBebidas_sesion() {
+
+        //Guardamos las bebidas
+        //Se ejecuta en un hilo debido a que es una petición SINCRONA Y ES OBLIGATORIO
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //Guardaremos los datos de las bebidas en variables de sesión, para así solo acceder una vez por cada inicio de la app
+                SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                String bebidas = GestionProductos.getBebidas(getApplicationContext());
+                editor.putString("bebidas",bebidas);
+                editor.commit();
+            }
+            });
+        thread.start();
+
+    }
+
+
+    private void guardarPatatas_sesion() {
+        //Guardamos las patatas
+        //Se ejecuta en un hilo debido a que es una petición SINCRONA Y ES OBLIGATORIO
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //Guardaremos los datos de las patatas en variables de sesión, para así solo acceder una vez por cada inicio de la app
+                SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                String patatas = GestionProductos.getPatatas(getApplicationContext());
+                editor.putString("patatas",patatas);
+                editor.commit();
+            }
+        });
+        thread.start();
+    }
+
+    private void guardarMenus_sesion() {
+        //Guardamos los menus
+        //Se ejecuta en un hilo debido a que es una petición SINCRONA Y ES OBLIGATORIO
+
+        //Se ejecuta en un hilo debido a que es una petición SINCRONA Y ES OBLIGATORIO
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //Guardaremos los datos de los productos en variables de sesión, para así solo acceder una vez por cada inicio de la app
+                SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                //Guardamos las hamburguesas
+                String menus = GestionProductos.getMenus(getApplicationContext());
+                editor.putString("menus",menus);
+
+                //Y a continuación los ingredientes de las hamburguesas, que habrá que hacer otra petición
+                //ya que están en otra tabla (relación muchos a muchos)
+                JSONArray JSONArrayPadre = new JSONArray();
+                JSONObject JSON = new JSONObject();
+                JSONArray JSONArray = new JSONArray();
+                try {
+                    JSONArray jsonArr = new JSONArray(menus);
+                    //Recorremos las hamburguesas
+                    for (int i = 0; i < jsonArr.length(); i++)
+                    {
+                        JSONObject jsonObj = jsonArr.getJSONObject(i);
+                        //Obtenemos los ingredientes de cada hamburguesa por su id
+                        String productosMenu = GestionProductos.getProductosMenu(getApplicationContext(),Integer.parseInt(jsonObj.get("id").toString()));
+                        JSONArray jsonArr2 = new JSONArray(productosMenu);
+                        //guardamos el id de la hamburguesa
+                        JSON.put("idMenu",jsonObj.get("id").toString());
+
+                        for (int j = 0; j < jsonArr2.length(); j++){
+                            JSONObject jsonObj2 = jsonArr2.getJSONObject(j);
+                            JSONArray.put(jsonObj2);
+                        }
+                        //guardamos los ingredientes en el JSON
+                        JSON.put("productos",JSONArray);
+                        //Y todo lo anterior en el JSONPadre ya que será un array de JSONS
+                        JSONArrayPadre.put(JSON);
+
+                        //reseteamos para obtener nuevos datos y que no se juten
+                        JSONArray = new JSONArray();
+                        JSON = new JSONObject();
+                    }
+                    //Guardamos el JSONArray creado en la sesión
+                    editor.putString("productosMenu",JSONArrayPadre.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

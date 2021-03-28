@@ -30,42 +30,113 @@ import java.util.concurrent.TimeoutException;
 public class GestionProductos {
     private static ArrayList<Producto> hamburguesas = new ArrayList<>();
 
+
+
+    /**
+     * Método que obtendrá los menus que están disponibles en la BBDD
+     * @param contexto
+     * @return datos
+     */
+    public static String getMenus(Context contexto){
+
+        RequestQueue requestQueue = Volley.newRequestQueue(contexto);
+        RequestFuture<String> future = RequestFuture.newFuture();
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarMenus.php", future, future);
+        requestQueue.add(request);
+
+        try {
+            String test = future.get().toString();
+            return test;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getProductosMenu(Context contexto, final int idMenu){
+
+        RequestQueue requestQueue = Volley.newRequestQueue(contexto);
+        RequestFuture<String> future = RequestFuture.newFuture();
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarProductosMenu.php?idMenu="+idMenu, future, future){
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("idMenu", String.valueOf(idMenu));
+                return params;
+            }
+        };
+        requestQueue.add(request);
+
+        try {
+            String datos = future.get().toString();
+            return datos;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }
+
+
+    /**
+     * Método que obtendrá las bebidas que están disponibles en la BBDD
+     * @param contexto
+     * @return datos
+     */
+    public static String getBebidas(Context contexto){
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(contexto);
+        RequestFuture<String> future = RequestFuture.newFuture();
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarBebidas.php", future, future);
+        requestQueue.add(request);
+
+        try {
+            String test = future.get().toString();
+            return test;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Método que obtendrá las patatas que están disponibles en la BBDD
+     * @param contexto
+     * @return datos
+     */
+    public static String getPatatas(Context contexto){
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(contexto);
+        RequestFuture<String> future = RequestFuture.newFuture();
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarPatatas.php", future, future);
+        requestQueue.add(request);
+
+        try {
+            String test = future.get().toString();
+            return test;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     /**
      * Método que obtendrá las hamburguesas que están disponibles en la BBDD
      * @param contexto
-     * @return
+     * @return datos
      */
-    public static ArrayList<Producto> getHamburguesas(final Context contexto){
-        hamburguesas.clear();
-
-        RequestQueue requestQueue = Volley.newRequestQueue(contexto);
-        RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarHamburguesas.php", future, future);
-        requestQueue.add(request);
-
-        try {
-            String test = future.get().toString();
-
-            JSONArray jsonArray = new JSONArray(test);
-            for (int i = 0; i < jsonArray.length(); i++){
-                JSONObject e = jsonArray.getJSONObject(i);
-                ArrayList<Ingrediente> ingred = getIngredientesHamburguesa(contexto, Integer.parseInt(e.get("id").toString()));
-                hamburguesas.add(new Producto(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()), e.get("ruta_img").toString(), e.get("tipo").toString(),ingred));
-            }
-            return hamburguesas;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        return null;
-    }
-
-    public static String getHamburguesas2(final Context contexto){
+    public static String getHamburguesas(Context contexto){
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
@@ -74,20 +145,18 @@ public class GestionProductos {
         requestQueue.add(request);
 
         try {
-            String test = future.get().toString();
-            return test;
+            String datos = future.get().toString();
+            return datos;
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
-
         return null;
     }
 
-    public static ArrayList<Ingrediente> getIngredientesHamburguesa(final Context contexto, final int idHamburguesa){
-        ArrayList<Ingrediente> ingredientesHamburguesa = new ArrayList<>();
+
+    public static String getIngredientesHamburguesa(Context contexto, int idHamburguesa){
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
         RequestFuture<String> future = RequestFuture.newFuture();
@@ -101,41 +170,8 @@ public class GestionProductos {
         requestQueue.add(request);
 
         try {
-            String test = future.get().toString();
-            JSONArray jsonArray = new JSONArray(test);
-            for (int i = 0; i < jsonArray.length(); i++){
-                JSONObject e = jsonArray.getJSONObject(i);
-                ingredientesHamburguesa.add(new Ingrediente(Integer.parseInt(e.get("id").toString()),e.get("nombre").toString()));
-            }
-            return ingredientesHamburguesa;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        return null;
-    }
-
-    public static String getIngredientesHamburguesa2(final Context contexto, final int idHamburguesa){
-
-        RequestQueue requestQueue = Volley.newRequestQueue(contexto);
-        RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarIngredientesHamburguesa.php?idHamburguesa="+idHamburguesa, future, future){
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("idHamburguesa", "1");
-                return params;
-            }
-        };
-        requestQueue.add(request);
-
-        try {
-            String test = future.get().toString();
-            return test;
+            String datos = future.get().toString();
+            return datos;
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -148,25 +184,4 @@ public class GestionProductos {
 
 
 
-        public static String xd (Context contexto){
-            String response = new String();
-
-
-
-            RequestQueue requestQueue = Volley.newRequestQueue(contexto);
-
-            RequestFuture<String> future = RequestFuture.newFuture();
-            StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarHamburguesas.php", future, future);
-            requestQueue.add(request);
-
-            try {
-                response = future.get().toString();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-
-            return response;
-        }
 }

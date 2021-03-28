@@ -8,7 +8,7 @@ public class Pedido implements Serializable {
     private int id;
     private String email_cliente;
     private double total_a_pagar;
-    private ArrayList<Producto> productos;
+    private ArrayList<Object> cuenta;
 
     public Pedido(int id, String email_cliente, double total_a_pagar) {
         this.id = id;
@@ -19,7 +19,7 @@ public class Pedido implements Serializable {
     public Pedido(String email_cliente, double total_a_pagar) {
         this.email_cliente = email_cliente;
         this.total_a_pagar = total_a_pagar;
-        this.productos = new ArrayList<Producto>();
+        this.cuenta = new ArrayList<Object>();
     }
 
     public int getId() {
@@ -46,12 +46,12 @@ public class Pedido implements Serializable {
         this.total_a_pagar = total_a_pagar;
     }
 
-    public ArrayList<Producto> getProductos() {
-        return productos;
+    public ArrayList<Object> getProductos() {
+        return cuenta;
     }
 
-    public void setProductos(ArrayList<Producto> productos) {
-        this.productos = productos;
+    public void setProductos(ArrayList<Object> productos) {
+        this.cuenta = productos;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Pedido implements Serializable {
                 "id=" + id +
                 ", email_cliente='" + email_cliente + '\'' +
                 ", total_a_pagar=" + total_a_pagar +
-                ", productos=" + productos +
+                ", cuenta=" + cuenta +
                 '}';
     }
 }

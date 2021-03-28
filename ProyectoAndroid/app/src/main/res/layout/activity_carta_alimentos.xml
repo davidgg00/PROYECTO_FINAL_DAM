@@ -48,8 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="148dp"
-            android:layout_marginBottom="81dp"
+            android:layout_marginEnd="192dp"
+            android:layout_marginBottom="84dp"
             android:onClick="irPagina2"
             android:text="Bebidas" />
 
@@ -59,10 +59,21 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="23dp"
-            android:layout_marginBottom="79dp"
+            android:layout_marginEnd="101dp"
+            android:layout_marginBottom="84dp"
             android:onClick="irPagina3"
-            android:text="Acerca de" />
+            android:text="Patatas" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="85dp"
+            android:onClick="irPagina4"
+            android:text="Menús" />
 
         <Button
             android:id="@+id/btnPedidoTotal"

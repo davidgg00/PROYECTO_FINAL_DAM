@@ -14,12 +14,19 @@ import java.util.ArrayList;
 
 public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyViewHolder> {
     private ArrayList<Producto> productos;
+    private ArrayList<Menu> menus;
     private RecyclerViewClickListener listener;
 
     public recyclerAdapter(ArrayList<Producto> productos, RecyclerViewClickListener listener){
         this.productos = productos;
         this.listener = listener;
     }
+
+    public recyclerAdapter(RecyclerViewClickListener listener, ArrayList<Menu> menus){
+        this.menus = menus;
+        this.listener = listener;
+    }
+
     @NonNull
     @Override
     public recyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -30,12 +37,20 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull recyclerAdapter.MyViewHolder holder, int position) {
         //String name = usersList.get(position).getUsername();
-        holder.foto.setText(productos.get(position).getRuta_img());
-        holder.nametxt.setText(productos.get(position).getNombre());
+        if (productos == null){
+            holder.foto.setText(String.valueOf(menus.get(position).getId()));
+            holder.nametxt.setText(menus.get(position).getNombre());
+        }else {
+            holder.foto.setText(productos.get(position).getRuta_img());
+            holder.nametxt.setText(productos.get(position).getNombre());
+        }
     }
 
     @Override
     public int getItemCount() {
+        if (productos == null){
+            return menus.size();
+        }
         return productos.size();
     }
 
