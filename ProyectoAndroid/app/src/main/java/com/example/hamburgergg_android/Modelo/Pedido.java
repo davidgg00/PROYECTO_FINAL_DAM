@@ -1,6 +1,7 @@
 package com.example.hamburgergg_android.Modelo;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 //Serializable porque va a pasar de un activity a otro
@@ -43,10 +44,11 @@ public class Pedido implements Serializable {
     }
 
     public void setTotal_a_pagar(double total_a_pagar) {
-        this.total_a_pagar = total_a_pagar;
+        DecimalFormat df = new DecimalFormat("#.##");
+        this.total_a_pagar = Double.valueOf(df.format(total_a_pagar));
     }
 
-    public ArrayList<Object> getProductos() {
+    public ArrayList<Object> getCuenta() {
         return cuenta;
     }
 

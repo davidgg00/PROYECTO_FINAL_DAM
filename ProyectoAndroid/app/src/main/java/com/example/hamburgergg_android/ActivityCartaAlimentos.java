@@ -67,16 +67,12 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         view1.setAdapter(new AdminPageAdapter());
 
 
-        btnPedidoTotal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              //  System.out.println(hamburguesas.size());
+    }
 
-                //GestionProductos.getIngredientesHamburguesa(getApplicationContext(),1);
-                //System.out.println("ha llegado: " + x);
-            }
-        });
-
+    public void verPedidoActual(View view){
+        Intent intent = new Intent(getApplicationContext(), VerPedidoActual.class);
+        intent.putExtra("pedido",pedido);
+        startActivity(intent);
     }
 
     private void obtenerMenus() {

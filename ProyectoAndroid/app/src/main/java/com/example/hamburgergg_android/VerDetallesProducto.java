@@ -49,7 +49,7 @@ public class VerDetallesProducto extends AppCompatActivity {
     }
 
     public void addProducto(View view){
-        pedido.getProductos().add(producto);
+        pedido.getCuenta().add(producto);
         pedido.setTotal_a_pagar(pedido.getTotal_a_pagar() + producto.getPrecio());
         Intent intent = new Intent(getApplicationContext(), ActivityCartaAlimentos.class);
         intent.putExtra("pedido",pedido);

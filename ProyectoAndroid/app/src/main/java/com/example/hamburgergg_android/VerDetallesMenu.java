@@ -48,7 +48,7 @@ public class VerDetallesMenu extends AppCompatActivity {
 
     public void addProducto(View view){
         ArrayList<Producto> prods = menu.getProductos();
-        pedido.getProductos().add(menu);
+        pedido.getCuenta().add(menu);
 
         pedido.setTotal_a_pagar(pedido.getTotal_a_pagar() + menu.getPrecio());
         Intent intent = new Intent(getApplicationContext(), ActivityCartaAlimentos.class);

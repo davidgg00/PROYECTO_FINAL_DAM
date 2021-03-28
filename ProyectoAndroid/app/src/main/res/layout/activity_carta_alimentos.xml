@@ -84,6 +84,7 @@
             android:layout_marginEnd="37dp"
             android:layout_marginBottom="19dp"
             android:background="@drawable/botonredondeado"
+            android:onClick="verPedidoActual"
             android:text="Pedido total : 0€" />
     </RelativeLayout>
 
