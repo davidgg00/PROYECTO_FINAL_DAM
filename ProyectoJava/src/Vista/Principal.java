@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.JPanel;
+
 /**
  *
  * @author DavidGG
@@ -16,6 +21,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Hamburguesería GG");
     }
 
     /**
@@ -27,21 +34,149 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelPadre = new JPanel() {  
+            public void paintComponent(Graphics g) {  
+                Image img = Toolkit.getDefaultToolkit().getImage(  
+                    Principal.class.getResource("/imagenes/background.jpg"));  
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
+            }  
+        };
+        panelHeader = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        btnVerProd = new javax.swing.JButton();
+        btnVerProd1 = new javax.swing.JButton();
+        btnVerProd2 = new javax.swing.JButton();
+        btnVerProd5 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(941, 674));
+        setPreferredSize(new java.awt.Dimension(941, 674));
+
+        panelPadre.setMinimumSize(new java.awt.Dimension(1014, 728));
+        panelPadre.setPreferredSize(new java.awt.Dimension(1014, 728));
+
+        panelHeader.setBackground(new java.awt.Color(130, 93, 46));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("AJUSTES HAMBURGUESERÍA");
+
+        javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
+        panelHeader.setLayout(panelHeaderLayout);
+        panelHeaderLayout.setHorizontalGroup(
+            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelHeaderLayout.createSequentialGroup()
+                .addGap(277, 277, 277)
+                .addComponent(jLabel6)
+                .addContainerGap(392, Short.MAX_VALUE))
+        );
+        panelHeaderLayout.setVerticalGroup(
+            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        btnVerProd.setBackground(new java.awt.Color(171, 167, 111));
+        btnVerProd.setText("Ver Pedidos");
+        btnVerProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVerProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerProdActionPerformed(evt);
+            }
+        });
+
+        btnVerProd1.setBackground(new java.awt.Color(171, 167, 111));
+        btnVerProd1.setText("Opciones Menús");
+        btnVerProd1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVerProd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerProd1ActionPerformed(evt);
+            }
+        });
+
+        btnVerProd2.setBackground(new java.awt.Color(171, 167, 111));
+        btnVerProd2.setText("Opciones Producto");
+        btnVerProd2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVerProd2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerProd2ActionPerformed(evt);
+            }
+        });
+
+        btnVerProd5.setBackground(new java.awt.Color(171, 167, 111));
+        btnVerProd5.setText("Historial de Pedidos");
+        btnVerProd5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVerProd5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerProd5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelPadreLayout = new javax.swing.GroupLayout(panelPadre);
+        panelPadre.setLayout(panelPadreLayout);
+        panelPadreLayout.setHorizontalGroup(
+            panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPadreLayout.createSequentialGroup()
+                .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(panelPadreLayout.createSequentialGroup()
+                .addGap(387, 387, 387)
+                .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnVerProd5, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerProd2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerProd1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerProd, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelPadreLayout.setVerticalGroup(
+            panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPadreLayout.createSequentialGroup()
+                .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(btnVerProd, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btnVerProd1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(btnVerProd2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(btnVerProd5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(panelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 945, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(panelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVerProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProdActionPerformed
+        // TODO add your handling code here:
+      //  VerProductos m = new VerProductos();
+        //m.setVisible(true);
+        //setVisible(false);
+    }//GEN-LAST:event_btnVerProdActionPerformed
+
+    private void btnVerProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProd1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerProd1ActionPerformed
+
+    private void btnVerProd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProd2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerProd2ActionPerformed
+
+    private void btnVerProd5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProd5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerProd5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +214,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVerProd;
+    private javax.swing.JButton btnVerProd1;
+    private javax.swing.JButton btnVerProd2;
+    private javax.swing.JButton btnVerProd5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel panelHeader;
+    private javax.swing.JPanel panelPadre;
     // End of variables declaration//GEN-END:variables
 }
