@@ -87,7 +87,7 @@ public class GestionProducto {
      * @return
      */
     public static boolean add(Producto p) {
-        String values = "nombre=" + p.getNombre() + "&precio=" + p.getPrecio() + "&tipo=" + p.getTipo() + "&ruta_img=defecto.jpg";
+        String values = "nombre=" + p.getNombre() + "&precio=" + p.getPrecio() + "&tipo=" + p.getTipo() + "&ruta_img=" + p.getRuta_img();
         String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_INSERT_PRODUCTO, values);
         Gson gson = new Gson();
         System.out.println(resultado);
