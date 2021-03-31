@@ -128,7 +128,7 @@ public class GestionProducto {
      * @return
      */
     public static boolean editar(Producto p) {
-        String values = "id=" + p.getId() + "&nombre=" + p.getNombre() + "&precio=" + p.getPrecio();
+        String values = "id=" + p.getId() + "&nombre=" + p.getNombre() + "&precio=" + p.getPrecio() + "&ruta_img=" + p.getRuta_img();
         System.out.println(values);
         String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_MODIFY_PRODUCTO, values);
         Gson gson = new Gson();
