@@ -1,13 +1,17 @@
 package com.example.hamburgergg_android.Modelo;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.hamburgergg_android.ActivityCartaAlimentos;
 import com.example.hamburgergg_android.R;
 
 import java.util.ArrayList;
@@ -16,10 +20,12 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
     private ArrayList<Producto> productos;
     private ArrayList<Menu> menus;
     private RecyclerViewClickListener listener;
+    private Context contexto;
 
-    public recyclerAdapter(ArrayList<Producto> productos, RecyclerViewClickListener listener){
+    public recyclerAdapter(ArrayList<Producto> productos, RecyclerViewClickListener listener, Context applicationContext){
         this.productos = productos;
         this.listener = listener;
+        this.contexto = applicationContext;
     }
 
     public recyclerAdapter(RecyclerViewClickListener listener, ArrayList<Menu> menus){
@@ -38,10 +44,11 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
     public void onBindViewHolder(@NonNull recyclerAdapter.MyViewHolder holder, int position) {
         //String name = usersList.get(position).getUsername();
         if (productos == null){
-            holder.foto.setText(String.valueOf(menus.get(position).getId()));
+            //holder.foto.setText(String.valueOf(menus.get(position).getId()));
             holder.nametxt.setText(menus.get(position).getNombre());
         }else {
-            holder.foto.setText(productos.get(position).getRuta_img());
+            String imageUri = "https://autoburger.000webhostapp.com/imagenesProductos/"+productos.get(position).getRuta_img() ;
+            Glide.with(contexto).load(imageUri).into(holder.foto);
             holder.nametxt.setText(productos.get(position).getNombre());
         }
     }
@@ -59,13 +66,13 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView foto;
+        private ImageView foto;
         private TextView nametxt;
 
         public MyViewHolder(final View view){
             super(view);
             nametxt = view.findViewById(R.id.textView4);
-            foto = view.findViewById(R.id.textView3);
+            foto = view.findViewById(R.id.imageProductoMenu);
             view.setOnClickListener(this);
         }
 

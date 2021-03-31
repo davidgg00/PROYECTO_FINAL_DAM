@@ -111,7 +111,7 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         }
     }
 
-        private void obtenerPatatas() {
+    private void obtenerPatatas() {
         //Obtenemos las hamburguesas almacenadas en las sesión
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String patatas_session = sharedPrefs.getString("patatas","");
@@ -220,7 +220,7 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
     }
 
     private void setAdapter(ArrayList<Producto> tipoProducto, RecyclerView recyclerView) {
-        recyclerAdapter adapter = new recyclerAdapter(tipoProducto,listener);
+        recyclerAdapter adapter = new recyclerAdapter(tipoProducto,listener, getApplicationContext());
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
         recyclerView.setLayoutManager(layoutManager);
@@ -274,7 +274,6 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
                     {
                         pagina1 = (LinearLayout) LayoutInflater.from(ActivityCartaAlimentos.this).inflate(R.layout.pagina1, null);
                         RecyclerView recyclerView = pagina1.findViewById(R.id.recyclerId);
-                        recyclerView = pagina1.findViewById(R.id.recyclerId);
                         setOnClickListener(hamburguesas);
                         setAdapter(hamburguesas,recyclerView);
                     }
