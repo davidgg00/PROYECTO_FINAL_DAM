@@ -168,9 +168,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
         btnEditarProducto = new javax.swing.JButton();
         btnBorrarProducto = new javax.swing.JButton();
 
-        dialogCrearProducto.setMaximumSize(null);
         dialogCrearProducto.setMinimumSize(new java.awt.Dimension(1000, 700));
-        dialogCrearProducto.setPreferredSize(new java.awt.Dimension(1000, 700));
 
         panelHeader1.setBackground(new java.awt.Color(130, 93, 46));
 
@@ -339,7 +337,6 @@ public class OpcionesProducto extends javax.swing.JFrame {
         );
 
         dialogEditarProducto.setMinimumSize(new java.awt.Dimension(1000, 700));
-        dialogEditarProducto.setPreferredSize(new java.awt.Dimension(1000, 700));
 
         panelHeader2.setBackground(new java.awt.Color(130, 93, 46));
 
@@ -513,7 +510,6 @@ public class OpcionesProducto extends javax.swing.JFrame {
         );
 
         dialogBorrarProducto.setMinimumSize(new java.awt.Dimension(1000, 615));
-        dialogBorrarProducto.setPreferredSize(new java.awt.Dimension(1000, 615));
 
         panelHeader3.setBackground(new java.awt.Color(130, 93, 46));
 

@@ -5,17 +5,94 @@
  */
 package Vista;
 
+import controlador.GestionFTP;
+import controlador.GestionMenu;
+import controlador.GestionProducto;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ItemEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import modelo.Ingrediente;
+import modelo.Menu;
+import modelo.Producto;
+
 /**
  *
  * @author DavidGG
  */
 public class OpcionesMenus extends javax.swing.JFrame {
 
+    private static ArrayList<Menu> menus;
+    private static ArrayList<Producto> productos;
+    private static Menu menuSeleccionado;
+
     /**
      * Creates new form OpcionesMenus
      */
     public OpcionesMenus() {
         initComponents();
+
+        productos = GestionProducto.getAll();
+        DefaultListModel modelo = new DefaultListModel();
+        for (Producto producto : productos) {
+            modelo.addElement(producto.getNombre());
+        }
+        listaProductos_crearmenu.setModel(modelo);
+
+        menus = GestionMenu.getAll();
+        for (Menu menu : menus) {
+
+            elegirMenu_editar.addItem(menu.getNombre() + "-" + menu.getId());
+            elegirMenu_borrar.addItem(menu.getNombre() + "-" + menu.getId());
+        }
+        listaProductos_crearmenu.setModel(modelo);
+
+        modelo = new DefaultListModel();
+        for (Producto producto : productos) {
+            modelo.addElement(producto.getNombre());
+        }
+        listaProductos_editarMenu.setModel(modelo);
+        listaProductos_borrarMenu.setModel(modelo);
+
+        ArrayList<Integer> selecs = new ArrayList<>();
+        menuSeleccionado = menus.get(elegirMenu_editar.getSelectedIndex());
+        int contador = 0;
+        for (int i = 0; i < menus.size(); i++) {
+            if (menus.get(i).getId() == menuSeleccionado.getId()) {
+                for (int j = 0; j < menus.get(i).getProductos().size(); j++) {
+                    for (int k = 0; k < menuSeleccionado.getProductos().size(); k++) {
+                        if (menus.get(i).getProductos().get(j).getId() == menuSeleccionado.getProductos().get(k).getId()) {
+                            for (int l = 0; l < productos.size(); l++) {
+                                if (productos.get(l).getId() == menus.get(i).getProductos().get(j).getId()) {
+                                    selecs.add(l);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+        listaProductos_borrarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+        etNombre_borrarMenu.setText(menuSeleccionado.getNombre());
+        etPrecio_borrarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));
     }
 
     /**
@@ -27,21 +104,932 @@ public class OpcionesMenus extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialogCrearMenu = new javax.swing.JDialog();
+        jPanel3 = new JPanel() {  
+            public void paintComponent(Graphics g) {  
+                Image img = Toolkit.getDefaultToolkit().getImage(  
+                    Principal.class.getResource("/imagenes/back_opcHamburguesas.jpg"));  
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
+            }  
+        };
+        panelHeader1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        etNombre_crearmenu = new javax.swing.JTextField();
+        etPrecio_crearMenu = new javax.swing.JTextField();
+        btnEnviarCrearMenu = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaProductos_crearmenu = new javax.swing.JList<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        btnSubirImagen_addMenu = new javax.swing.JButton();
+        lblImagen = new javax.swing.JLabel();
+        dialogEditarMenu = new javax.swing.JDialog();
+        jPanel4 = new JPanel() {  
+            public void paintComponent(Graphics g) {  
+                Image img = Toolkit.getDefaultToolkit().getImage(  
+                    Principal.class.getResource("/imagenes/back_opcHamburguesas.jpg"));  
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
+            }  
+        };
+        panelHeader2 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel5 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        etPrecio_editarMenu = new javax.swing.JTextField();
+        btnEnviarEditarMenu = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaProductos_editarMenu = new javax.swing.JList<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        btnSubirImagen_editarMenu = new javax.swing.JButton();
+        lblImagen_editarMenu = new javax.swing.JLabel();
+        elegirMenu_editar = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        etNombre_editarMenu = new javax.swing.JTextField();
+        dialogBorrarMenu = new javax.swing.JDialog();
+        jPanel6 = new JPanel() {  
+            public void paintComponent(Graphics g) {  
+                Image img = Toolkit.getDefaultToolkit().getImage(  
+                    Principal.class.getResource("/imagenes/back_opcHamburguesas.jpg"));  
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
+            }  
+        };
+        panelHeader3 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel7 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        etPrecio_borrarMenu = new javax.swing.JTextField();
+        btnEnviarBorrarMenu = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaProductos_borrarMenu = new javax.swing.JList<>();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        lblImagen_borrarMenu = new javax.swing.JLabel();
+        elegirMenu_borrar = new javax.swing.JComboBox<>();
+        jLabel21 = new javax.swing.JLabel();
+        etNombre_borrarMenu = new javax.swing.JTextField();
+        subirImagenCrearMenu = new javax.swing.JFileChooser();
+        subirImagenEditarMenu = new javax.swing.JFileChooser();
+        jPanel1 = new JPanel() {  
+            public void paintComponent(Graphics g) {  
+                Image img = Toolkit.getDefaultToolkit().getImage(  
+                    Principal.class.getResource("/imagenes/back_opcMenus.jpg"));  
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
+            }  
+        };
+        panelHeader = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        btnCrearMenu = new javax.swing.JButton();
+        btnEditarMenu = new javax.swing.JButton();
+        btnBorrarMenu = new javax.swing.JButton();
+
+        dialogCrearMenu.setMinimumSize(new java.awt.Dimension(1000, 700));
+
+        panelHeader1.setBackground(new java.awt.Color(130, 93, 46));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Crear Menú");
+
+        javax.swing.GroupLayout panelHeader1Layout = new javax.swing.GroupLayout(panelHeader1);
+        panelHeader1.setLayout(panelHeader1Layout);
+        panelHeader1Layout.setHorizontalGroup(
+            panelHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader1Layout.createSequentialGroup()
+                .addContainerGap(455, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(361, 361, 361))
+        );
+        panelHeader1Layout.setVerticalGroup(
+            panelHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel2.setBackground(new java.awt.Color(181, 97, 54));
+
+        jLabel1.setText("Nombre:");
+
+        jLabel3.setText("Precio:");
+
+        jLabel4.setText("Productos:");
+
+        btnEnviarCrearMenu.setText("Añadir Menu");
+        btnEnviarCrearMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarCrearMenuActionPerformed(evt);
+            }
+        });
+
+        listaProductos_crearmenu.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(listaProductos_crearmenu);
+
+        jLabel5.setText("€");
+
+        jLabel17.setText("Imagen:");
+
+        btnSubirImagen_addMenu.setText("Seleccionar fich..");
+        btnSubirImagen_addMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirImagen_addMenuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(etPrecio_crearMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(etNombre_crearmenu, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnSubirImagen_addMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(192, 192, 192))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(258, 258, 258)
+                .addComponent(btnEnviarCrearMenu)
+                .addContainerGap(259, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(etNombre_crearmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(etPrecio_crearMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel4)
+                        .addGap(102, 102, 102))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubirImagen_addMenu)
+                    .addComponent(jLabel17))
+                .addGap(18, 18, 18)
+                .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(btnEnviarCrearMenu)
+                .addGap(22, 22, 22))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(254, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(panelHeader1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(143, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addComponent(panelHeader1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(615, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout dialogCrearMenuLayout = new javax.swing.GroupLayout(dialogCrearMenu.getContentPane());
+        dialogCrearMenu.getContentPane().setLayout(dialogCrearMenuLayout);
+        dialogCrearMenuLayout.setHorizontalGroup(
+            dialogCrearMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dialogCrearMenuLayout.setVerticalGroup(
+            dialogCrearMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        dialogEditarMenu.setMaximumSize(null);
+        dialogEditarMenu.setMinimumSize(new java.awt.Dimension(1000, 700));
+        dialogEditarMenu.setPreferredSize(new java.awt.Dimension(1000, 700));
+
+        panelHeader2.setBackground(new java.awt.Color(130, 93, 46));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Editar Menú");
+
+        javax.swing.GroupLayout panelHeader2Layout = new javax.swing.GroupLayout(panelHeader2);
+        panelHeader2.setLayout(panelHeader2Layout);
+        panelHeader2Layout.setHorizontalGroup(
+            panelHeader2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader2Layout.createSequentialGroup()
+                .addContainerGap(455, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(361, 361, 361))
+        );
+        panelHeader2Layout.setVerticalGroup(
+            panelHeader2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel5.setBackground(new java.awt.Color(181, 97, 54));
+
+        jLabel2.setText("Menu:");
+
+        jLabel9.setText("Precio:");
+
+        jLabel10.setText("Productos:");
+
+        btnEnviarEditarMenu.setText("Editar Menu");
+        btnEnviarEditarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarEditarMenuActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(listaProductos_editarMenu);
+
+        jLabel11.setText("€");
+
+        jLabel18.setText("Imagen:");
+
+        btnSubirImagen_editarMenu.setText("Seleccionar fich..");
+        btnSubirImagen_editarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirImagen_editarMenuActionPerformed(evt);
+            }
+        });
+
+        elegirMenu_editar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                elegirMenu_editarItemStateChanged(evt);
+            }
+        });
+
+        jLabel12.setText("Nombre:");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblImagen_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(192, 192, 192))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(258, 258, 258)
+                .addComponent(btnEnviarEditarMenu)
+                .addContainerGap(259, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(etPrecio_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(elegirMenu_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSubirImagen_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(etNombre_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(elegirMenu_editar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(etPrecio_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(etNombre_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubirImagen_editarMenu)
+                    .addComponent(jLabel18))
+                .addGap(18, 18, 18)
+                .addComponent(lblImagen_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(btnEnviarEditarMenu)
+                .addGap(22, 22, 22))
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(258, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(panelHeader2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(151, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addComponent(panelHeader2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(615, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout dialogEditarMenuLayout = new javax.swing.GroupLayout(dialogEditarMenu.getContentPane());
+        dialogEditarMenu.getContentPane().setLayout(dialogEditarMenuLayout);
+        dialogEditarMenuLayout.setHorizontalGroup(
+            dialogEditarMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dialogEditarMenuLayout.setVerticalGroup(
+            dialogEditarMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        dialogBorrarMenu.setMaximumSize(null);
+        dialogBorrarMenu.setMinimumSize(new java.awt.Dimension(1000, 700));
+        dialogBorrarMenu.setPreferredSize(new java.awt.Dimension(1000, 700));
+
+        panelHeader3.setBackground(new java.awt.Color(130, 93, 46));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Borrar Menú");
+
+        javax.swing.GroupLayout panelHeader3Layout = new javax.swing.GroupLayout(panelHeader3);
+        panelHeader3.setLayout(panelHeader3Layout);
+        panelHeader3Layout.setHorizontalGroup(
+            panelHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader3Layout.createSequentialGroup()
+                .addContainerGap(455, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(361, 361, 361))
+        );
+        panelHeader3Layout.setVerticalGroup(
+            panelHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel7.setBackground(new java.awt.Color(181, 97, 54));
+
+        jLabel14.setText("Menu:");
+
+        jLabel15.setText("Precio:");
+
+        jLabel16.setText("Productos:");
+
+        etPrecio_borrarMenu.setEditable(false);
+
+        btnEnviarBorrarMenu.setText("Borrar Menu");
+        btnEnviarBorrarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarBorrarMenuActionPerformed(evt);
+            }
+        });
+
+        listaProductos_borrarMenu.setEnabled(false);
+        jScrollPane3.setViewportView(listaProductos_borrarMenu);
+
+        jLabel19.setText("€");
+
+        jLabel20.setText("Imagen:");
+
+        elegirMenu_borrar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                elegirMenu_borrarItemStateChanged(evt);
+            }
+        });
+
+        jLabel21.setText("Nombre:");
+
+        etNombre_borrarMenu.setEditable(false);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(258, 258, 258)
+                .addComponent(btnEnviarBorrarMenu)
+                .addContainerGap(259, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(etNombre_borrarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(etPrecio_borrarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(elegirMenu_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblImagen_borrarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(elegirMenu_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(etPrecio_borrarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21)
+                            .addComponent(etNombre_borrarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel16)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(151, 151, 151))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(lblImagen_borrarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)))
+                .addComponent(btnEnviarBorrarMenu)
+                .addGap(22, 22, 22))
+        );
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(256, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136))
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(panelHeader3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(160, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addComponent(panelHeader3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(615, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout dialogBorrarMenuLayout = new javax.swing.GroupLayout(dialogBorrarMenu.getContentPane());
+        dialogBorrarMenu.getContentPane().setLayout(dialogBorrarMenuLayout);
+        dialogBorrarMenuLayout.setHorizontalGroup(
+            dialogBorrarMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dialogBorrarMenuLayout.setVerticalGroup(
+            dialogBorrarMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        panelHeader.setBackground(new java.awt.Color(130, 93, 46));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Opciones Menús");
+
+        javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
+        panelHeader.setLayout(panelHeaderLayout);
+        panelHeaderLayout.setHorizontalGroup(
+            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(330, 330, 330))
+        );
+        panelHeaderLayout.setVerticalGroup(
+            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+        );
+
+        btnCrearMenu.setBackground(new java.awt.Color(171, 167, 111));
+        btnCrearMenu.setText("Crear Menu");
+        btnCrearMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCrearMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearMenuActionPerformed(evt);
+            }
+        });
+
+        btnEditarMenu.setBackground(new java.awt.Color(171, 167, 111));
+        btnEditarMenu.setText("Editar Menu");
+        btnEditarMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEditarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarMenuActionPerformed(evt);
+            }
+        });
+
+        btnBorrarMenu.setBackground(new java.awt.Color(171, 167, 111));
+        btnBorrarMenu.setText("Borrar Menu");
+        btnBorrarMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnBorrarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarMenuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(343, 343, 343)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCrearMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditarMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBorrarMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
+                .addContainerGap(345, Short.MAX_VALUE))
+            .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addComponent(btnCrearMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(btnEditarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90)
+                .addComponent(btnBorrarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCrearMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearMenuActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        dialogCrearMenu.setVisible(true);
+        dialogCrearMenu.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnCrearMenuActionPerformed
+
+    private void btnEditarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMenuActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        dialogEditarMenu.setVisible(true);
+        dialogEditarMenu.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnEditarMenuActionPerformed
+
+    private void btnBorrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarMenuActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        dialogBorrarMenu.setVisible(true);
+        dialogBorrarMenu.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnBorrarMenuActionPerformed
+
+    private void btnEnviarCrearMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCrearMenuActionPerformed
+
+        //Creamos un arraylist con los productos seleccionados y los añadimos
+        ArrayList<Producto> productosSel = new ArrayList<>();
+        int[] listaProductosSelInd = listaProductos_crearmenu.getSelectedIndices();
+        for (int i = 0; i < listaProductosSelInd.length; i++) {
+            productosSel.add(productos.get(listaProductosSelInd[i]));
+        }
+
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String rutalocal = subirImagenCrearMenu.getSelectedFile().toString();
+        GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+
+        boolean resultado = GestionMenu.add(new Menu(etNombre_crearmenu.getText(), Double.parseDouble(etPrecio_crearMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
+        if (resultado) {
+            JOptionPane.showMessageDialog(null, "Menu insertado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error de inserción");
+        }
+    }//GEN-LAST:event_btnEnviarCrearMenuActionPerformed
+
+    private void btnSubirImagen_addMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirImagen_addMenuActionPerformed
+        // TODO add your handling code here:
+        int resp = subirImagenCrearMenu.showOpenDialog(this);
+
+        if (resp == JFileChooser.APPROVE_OPTION) {
+            JOptionPane.showMessageDialog(null, "Imagen seleccionada correctamente!");
+            File file = subirImagenCrearMenu.getSelectedFile();
+            BufferedImage bi;
+            try {
+                // display the image in a Jlabel
+                bi = ImageIO.read(file);
+                Image image_escalada = bi.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+                lblImagen.setIcon(new ImageIcon(image_escalada));
+            } catch (IOException e) {
+                e.printStackTrace(); // todo: implement proper error handeling
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Se pulsó la opcion Cancelar");
+        }
+    }//GEN-LAST:event_btnSubirImagen_addMenuActionPerformed
+
+    private void btnEnviarEditarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarEditarMenuActionPerformed
+        // TODO add your handling code here:
+        if (elegirMenu_editar.getSelectedIndex() >= 0) {
+            ArrayList<Producto> productosSel = new ArrayList<>();
+
+            int[] listaMenuSelInd = listaProductos_editarMenu.getSelectedIndices();
+
+            for (int i = 0; i < listaMenuSelInd.length; i++) {
+                productosSel.add(productos.get(listaMenuSelInd[i]));
+            }
+
+            GestionMenu.borrarTodosProductos(menuSeleccionado.getId());
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            String rutalocal = subirImagenEditarMenu.getSelectedFile().toString();
+            System.out.println(sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+            GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+            //new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productoSeleccionado.getTipo(), ingredientesSel)
+            boolean resultado = GestionMenu.editar(new Menu(menuSeleccionado.getId(), etNombre_editarMenu.getText().toString(), Double.parseDouble(etPrecio_editarMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
+
+            if (resultado) {
+                JOptionPane.showMessageDialog(null, "Producto editado correctamente");
+                productos = GestionProducto.getAll();
+                elegirMenu_editar.removeAllItems();
+                for (Menu menu : menus) {
+                    elegirMenu_editar.addItem(menu.getNombre() + "-" + menu.getId());
+                }
+                DefaultListModel modelo = new DefaultListModel();
+                modelo = new DefaultListModel();
+                for (Producto producto : productos) {
+                    modelo.addElement(producto.getNombre());
+                }
+                listaProductos_editarMenu.setModel(modelo);
+                menus = GestionMenu.getAll();
+                ArrayList<Integer> selecs = new ArrayList<>();
+                menuSeleccionado = menus.get(elegirMenu_editar.getSelectedIndex());
+                int contador = 0;
+                for (int i = 0; i < menus.size(); i++) {
+                    if (menus.get(i).getId() == menuSeleccionado.getId()) {
+                        for (int j = 0; j < menus.get(i).getProductos().size(); j++) {
+                            for (int k = 0; k < menuSeleccionado.getProductos().size(); k++) {
+                                if (menus.get(i).getProductos().get(j).getId() == menuSeleccionado.getProductos().get(k).getId()) {
+                                    for (int l = 0; l < productos.size(); l++) {
+                                        if (productos.get(l).getId() == menus.get(i).getProductos().get(j).getId()) {
+                                            selecs.add(l);
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+            } else {
+                JOptionPane.showMessageDialog(null, "Error de inserción");
+            }
+        }
+    }//GEN-LAST:event_btnEnviarEditarMenuActionPerformed
+
+    private void btnSubirImagen_editarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirImagen_editarMenuActionPerformed
+        // TODO add your handling code here:
+        int resp = subirImagenEditarMenu.showOpenDialog(this);
+
+        if (resp == JFileChooser.APPROVE_OPTION) {
+            JOptionPane.showMessageDialog(null, "Imagen seleccionada correctamente!");
+            File file = subirImagenEditarMenu.getSelectedFile();
+            BufferedImage bi;
+            try {
+                // display the image in a Jlabel
+                bi = ImageIO.read(file);
+                Image image_escalada = bi.getScaledInstance(lblImagen_editarMenu.getWidth(), lblImagen_editarMenu.getHeight(), Image.SCALE_SMOOTH);
+                lblImagen_editarMenu.setIcon(new ImageIcon(image_escalada));
+            } catch (IOException e) {
+                e.printStackTrace(); // todo: implement proper error handeling
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Se pulsó la opcion Cancelar");
+        }
+    }//GEN-LAST:event_btnSubirImagen_editarMenuActionPerformed
+
+    private void elegirMenu_editarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_elegirMenu_editarItemStateChanged
+        // TODO add your handling code here:
+        if (elegirMenu_editar.getItemCount() > 0) {
+            menuSeleccionado = menus.get(elegirMenu_editar.getSelectedIndex());
+            if (evt.getStateChange() == ItemEvent.SELECTED && menuSeleccionado != null) {
+                listaProductos_editarMenu.clearSelection();
+
+                ArrayList<Integer> selecs = new ArrayList<>();
+                for (int i = 0; i < menus.size(); i++) {
+                    if (menus.get(i).getId() == menuSeleccionado.getId()) {
+                        for (int j = 0; j < menus.get(i).getProductos().size(); j++) {
+                            for (int k = 0; k < menuSeleccionado.getProductos().size(); k++) {
+                                if (menus.get(i).getProductos().get(j).getId() == menuSeleccionado.getProductos().get(k).getId()) {
+                                    for (int l = 0; l < productos.size(); l++) {
+                                        if (productos.get(l).getId() == menus.get(i).getProductos().get(j).getId()) {
+                                            selecs.add(l);
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                 URL url;
+                BufferedImage image = null;
+                try {
+                    url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + menuSeleccionado.getRuta_img());
+                    image = ImageIO.read(url);
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                lblImagen_editarMenu.setIcon(new ImageIcon(image_escalada));
+                
+                listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+                etNombre_editarMenu.setText(menuSeleccionado.getNombre());
+                etPrecio_editarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));
+
+            }
+        }
+    }//GEN-LAST:event_elegirMenu_editarItemStateChanged
+
+    private void btnEnviarBorrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarBorrarMenuActionPerformed
+        // TODO add your handling code here:
+        boolean resultado = GestionMenu.remove(menuSeleccionado.getId());
+        //Si la ejecución de añadir el producto con sus ingredientes es correcta.
+        if (resultado) {
+            JOptionPane.showMessageDialog(null, "Menu borrado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error de borrado");
+        }
+        elegirMenu_borrar.removeAllItems();
+        
+        menus = GestionMenu.getAll();
+        for (Menu menu : menus) {
+            elegirMenu_borrar.addItem(menu.getNombre() + "-" + menu.getId());
+        }
+    }//GEN-LAST:event_btnEnviarBorrarMenuActionPerformed
+
+    private void elegirMenu_borrarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_elegirMenu_borrarItemStateChanged
+        // TODO add your handling code here:
+        if (elegirMenu_borrar.getItemCount() > 0) {
+            menuSeleccionado = menus.get(elegirMenu_borrar.getSelectedIndex());
+            if (evt.getStateChange() == ItemEvent.SELECTED && menuSeleccionado != null) {
+                listaProductos_borrarMenu.clearSelection();
+
+                ArrayList<Integer> selecs = new ArrayList<>();
+                for (int i = 0; i < menus.size(); i++) {
+                    if (menus.get(i).getId() == menuSeleccionado.getId()) {
+                        for (int j = 0; j < menus.get(i).getProductos().size(); j++) {
+                            for (int k = 0; k < menuSeleccionado.getProductos().size(); k++) {
+                                if (menus.get(i).getProductos().get(j).getId() == menuSeleccionado.getProductos().get(k).getId()) {
+                                    for (int l = 0; l < productos.size(); l++) {
+                                        if (productos.get(l).getId() == menus.get(i).getProductos().get(j).getId()) {
+                                            selecs.add(l);
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                URL url;
+                BufferedImage image = null;
+                try {
+                    url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + menuSeleccionado.getRuta_img());
+                    image = ImageIO.read(url);
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                lblImagen_borrarMenu.setIcon(new ImageIcon(image_escalada));
+                listaProductos_borrarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+                etNombre_borrarMenu.setText(menuSeleccionado.getNombre());
+                etPrecio_borrarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));
+
+            }
+        }
+    }//GEN-LAST:event_elegirMenu_borrarItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -79,5 +1067,64 @@ public class OpcionesMenus extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrarMenu;
+    private javax.swing.JButton btnCrearMenu;
+    private javax.swing.JButton btnEditarMenu;
+    private javax.swing.JButton btnEnviarBorrarMenu;
+    private javax.swing.JButton btnEnviarCrearMenu;
+    private javax.swing.JButton btnEnviarEditarMenu;
+    private javax.swing.JButton btnSubirImagen_addMenu;
+    private javax.swing.JButton btnSubirImagen_editarMenu;
+    private javax.swing.JDialog dialogBorrarMenu;
+    private javax.swing.JDialog dialogCrearMenu;
+    private javax.swing.JDialog dialogEditarMenu;
+    private javax.swing.JComboBox<String> elegirMenu_borrar;
+    private javax.swing.JComboBox<String> elegirMenu_editar;
+    private javax.swing.JTextField etNombre_borrarMenu;
+    private javax.swing.JTextField etNombre_crearmenu;
+    private javax.swing.JTextField etNombre_editarMenu;
+    private javax.swing.JTextField etPrecio_borrarMenu;
+    private javax.swing.JTextField etPrecio_crearMenu;
+    private javax.swing.JTextField etPrecio_editarMenu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblImagen;
+    private javax.swing.JLabel lblImagen_borrarMenu;
+    private javax.swing.JLabel lblImagen_editarMenu;
+    private javax.swing.JList<String> listaProductos_borrarMenu;
+    private javax.swing.JList<String> listaProductos_crearmenu;
+    private javax.swing.JList<String> listaProductos_editarMenu;
+    private javax.swing.JPanel panelHeader;
+    private javax.swing.JPanel panelHeader1;
+    private javax.swing.JPanel panelHeader2;
+    private javax.swing.JPanel panelHeader3;
+    private javax.swing.JFileChooser subirImagenCrearMenu;
+    private javax.swing.JFileChooser subirImagenEditarMenu;
     // End of variables declaration//GEN-END:variables
 }

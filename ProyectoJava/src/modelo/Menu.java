@@ -12,15 +12,31 @@ import java.util.ArrayList;
  * @author DavidGG
  */
 public class Menu {
-     private int id;
+    private int id;
     private String nombre;
     private double precio;
+    private String ruta_img;
     private ArrayList<Producto> productos;
 
-    public Menu(int id, String nombre, double precio, ArrayList<Producto> productos) {
+    public Menu(String nombre, double precio, String ruta_img, ArrayList<Producto> productos) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
+        this.ruta_img = ruta_img;
+        this.productos = productos;
+    }
+    
+    public Menu(int id, String nombre, double precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+    
+    public Menu(int id, String nombre, double precio, String ruta_img,ArrayList<Producto> productos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.ruta_img = ruta_img;
         this.productos = productos;
     }
 
@@ -55,4 +71,20 @@ public class Menu {
     public void setProductos(ArrayList<Producto> productos) {
         this.productos = productos;
     }
+
+    public String getRuta_img() {
+        return ruta_img;
+    }
+
+    public void setRuta_img(String ruta_img) {
+        this.ruta_img = ruta_img;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" + "id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", ruta_img=" + ruta_img + ", productos=" + productos + '}';
+    }
+    
+    
+    
 }
