@@ -9,6 +9,7 @@ public class Producto implements Serializable {
     private String nombre,ruta_img, tipo;
     private double precio;
     private ArrayList<Ingrediente> ingredientes = new ArrayList<>();
+    private static final long serialVersionUID = 1L;
 
     public Producto(int id, String nombre, double precio, String fotoAlimento, String tipo) {
         this.id = id;

@@ -39,8 +39,9 @@ public class BienvenidaActivity extends AppCompatActivity {
 
     public void irACarta(View view){
         final Intent intent = new Intent(BienvenidaActivity.this, ActivityCartaAlimentos.class);
-        Pedido pedido = new Pedido(email,0);
+        Pedido pedido = new Pedido(email,0,null);
         intent.putExtra("pedido",pedido);
+        finish();
         startActivity(intent);
 
     }

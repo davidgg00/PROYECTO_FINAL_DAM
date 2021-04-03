@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Ingrediente implements Serializable{
     private int id;
     private String nombre;
+    private static final long serialVersionUID = 1L;
 
     public Ingrediente(int id, String nombre) {
         this.id = id;

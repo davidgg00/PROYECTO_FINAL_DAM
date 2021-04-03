@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".VerPedidoActual"></activity>
+        <activity android:name=".EsperarComida"></activity>
+        <activity android:name=".VerPedidoActual" />
         <activity android:name=".VerDetallesMenu" />
         <activity android:name=".VerDetallesProducto" />
         <activity android:name=".FormularioRegistro" />

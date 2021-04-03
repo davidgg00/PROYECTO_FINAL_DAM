@@ -53,6 +53,7 @@ public class FormularioRegistro extends AppCompatActivity {
                                 if (estado.equalsIgnoreCase("exito")){
                                     Toast.makeText(FormularioRegistro.this,"Registro realizado correctamente, inicie sesión.",Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    finish();
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(FormularioRegistro.this,"El email ya existe, inténtelo de nuevo.",Toast.LENGTH_LONG).show();
@@ -85,6 +86,7 @@ public class FormularioRegistro extends AppCompatActivity {
      */
     public void irFormularioLogin(View view){
         Intent intent = new Intent(this, MainActivity.class);
+        finish();
         startActivity(intent);
     }
 }

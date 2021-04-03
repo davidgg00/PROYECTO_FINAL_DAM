@@ -45,7 +45,9 @@ public class VerDetallesProducto extends AppCompatActivity {
     }
 
     public void volverCarta(View view){
+        Intent intent = new Intent(getApplicationContext(), ActivityCartaAlimentos.class);
         finish();
+        startActivity(intent);
     }
 
     public void addProducto(View view){
@@ -53,6 +55,7 @@ public class VerDetallesProducto extends AppCompatActivity {
         pedido.setTotal_a_pagar(pedido.getTotal_a_pagar() + producto.getPrecio());
         Intent intent = new Intent(getApplicationContext(), ActivityCartaAlimentos.class);
         intent.putExtra("pedido",pedido);
+        finish();
         startActivity(intent);
     }
 }

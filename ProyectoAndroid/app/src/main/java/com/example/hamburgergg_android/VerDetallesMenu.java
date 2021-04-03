@@ -53,6 +53,7 @@ public class VerDetallesMenu extends AppCompatActivity {
         pedido.setTotal_a_pagar(pedido.getTotal_a_pagar() + menu.getPrecio());
         Intent intent = new Intent(getApplicationContext(), ActivityCartaAlimentos.class);
         intent.putExtra("pedido",pedido);
+        finish();
         startActivity(intent);
     }
 }

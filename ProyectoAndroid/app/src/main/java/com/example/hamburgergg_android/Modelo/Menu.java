@@ -8,7 +8,7 @@ public class Menu implements Serializable {
     private String nombre;
     private double precio;
     private ArrayList<Producto> productos;
-
+    private static final long serialVersionUID = 1L;
     public Menu(int id, String nombre, double precio, ArrayList<Producto> productos) {
         this.id = id;
         this.nombre = nombre;
