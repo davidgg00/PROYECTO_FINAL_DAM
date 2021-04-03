@@ -43,14 +43,13 @@ public class Principal extends javax.swing.JFrame {
         };
         panelHeader = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        btnVerProd = new javax.swing.JButton();
-        btnVerProd1 = new javax.swing.JButton();
-        btnVerProd2 = new javax.swing.JButton();
-        btnVerProd5 = new javax.swing.JButton();
+        btnVerPedidos = new javax.swing.JButton();
+        btnOpcMenus = new javax.swing.JButton();
+        btnOpcProductos = new javax.swing.JButton();
+        btnHistorialPedidos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 615));
-        setPreferredSize(new java.awt.Dimension(1000, 615));
 
         panelPadre.setMinimumSize(new java.awt.Dimension(1014, 728));
         panelPadre.setPreferredSize(new java.awt.Dimension(1014, 728));
@@ -78,39 +77,39 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnVerProd.setBackground(new java.awt.Color(171, 167, 111));
-        btnVerProd.setText("Ver Pedidos");
-        btnVerProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnVerProd.addActionListener(new java.awt.event.ActionListener() {
+        btnVerPedidos.setBackground(new java.awt.Color(171, 167, 111));
+        btnVerPedidos.setText("Ver Pedidos");
+        btnVerPedidos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVerPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerProdActionPerformed(evt);
+                btnVerPedidosActionPerformed(evt);
             }
         });
 
-        btnVerProd1.setBackground(new java.awt.Color(171, 167, 111));
-        btnVerProd1.setText("Opciones Menús");
-        btnVerProd1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnVerProd1.addActionListener(new java.awt.event.ActionListener() {
+        btnOpcMenus.setBackground(new java.awt.Color(171, 167, 111));
+        btnOpcMenus.setText("Opciones Menús");
+        btnOpcMenus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnOpcMenus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerProd1ActionPerformed(evt);
+                btnOpcMenusActionPerformed(evt);
             }
         });
 
-        btnVerProd2.setBackground(new java.awt.Color(171, 167, 111));
-        btnVerProd2.setText("Opciones Producto");
-        btnVerProd2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnVerProd2.addActionListener(new java.awt.event.ActionListener() {
+        btnOpcProductos.setBackground(new java.awt.Color(171, 167, 111));
+        btnOpcProductos.setText("Opciones Producto");
+        btnOpcProductos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnOpcProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerProd2ActionPerformed(evt);
+                btnOpcProductosActionPerformed(evt);
             }
         });
 
-        btnVerProd5.setBackground(new java.awt.Color(171, 167, 111));
-        btnVerProd5.setText("Historial de Pedidos");
-        btnVerProd5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnVerProd5.addActionListener(new java.awt.event.ActionListener() {
+        btnHistorialPedidos.setBackground(new java.awt.Color(171, 167, 111));
+        btnHistorialPedidos.setText("Historial de Pedidos");
+        btnHistorialPedidos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnHistorialPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerProd5ActionPerformed(evt);
+                btnHistorialPedidosActionPerformed(evt);
             }
         });
 
@@ -124,10 +123,10 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(panelPadreLayout.createSequentialGroup()
                 .addGap(369, 369, 369)
                 .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVerProd5, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                    .addComponent(btnVerProd2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVerProd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVerProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnHistorialPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                    .addComponent(btnOpcProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOpcMenus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelPadreLayout.setVerticalGroup(
@@ -135,13 +134,13 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(panelPadreLayout.createSequentialGroup()
                 .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(btnVerProd, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVerPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(btnVerProd1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnOpcMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(btnVerProd2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnOpcProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
-                .addComponent(btnVerProd5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnHistorialPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -161,24 +160,33 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVerProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProdActionPerformed
+    private void btnVerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPedidosActionPerformed
         // TODO add your handling code here:
-      //  VerProductos m = new VerProductos();
-        //m.setVisible(true);
-        //setVisible(false);
-    }//GEN-LAST:event_btnVerProdActionPerformed
+        VerPedidos m = new VerPedidos();
+       m.setVisible(true);
+       m.setLocationRelativeTo(null);
+        setVisible(false);
+    }//GEN-LAST:event_btnVerPedidosActionPerformed
 
-    private void btnVerProd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProd1ActionPerformed
+    private void btnOpcMenusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcMenusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVerProd1ActionPerformed
+        OpcionesMenus opcMenu = new OpcionesMenus();
+       opcMenu.setVisible(true);
+       opcMenu.setLocationRelativeTo(null);
+        setVisible(false);
+    }//GEN-LAST:event_btnOpcMenusActionPerformed
 
-    private void btnVerProd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProd2ActionPerformed
+    private void btnOpcProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcProductosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVerProd2ActionPerformed
+        OpcionesProducto opcProd = new OpcionesProducto();
+       opcProd.setVisible(true);
+       opcProd.setLocationRelativeTo(null);
+        setVisible(false);
+    }//GEN-LAST:event_btnOpcProductosActionPerformed
 
-    private void btnVerProd5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProd5ActionPerformed
+    private void btnHistorialPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialPedidosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVerProd5ActionPerformed
+    }//GEN-LAST:event_btnHistorialPedidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,10 +224,10 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnVerProd;
-    private javax.swing.JButton btnVerProd1;
-    private javax.swing.JButton btnVerProd2;
-    private javax.swing.JButton btnVerProd5;
+    private javax.swing.JButton btnHistorialPedidos;
+    private javax.swing.JButton btnOpcMenus;
+    private javax.swing.JButton btnOpcProductos;
+    private javax.swing.JButton btnVerPedidos;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelPadre;
