@@ -24,14 +24,13 @@ public class GestionIngrediente {
      * @param nombre
      * @return 
      */
-    public static boolean add(String nombre) {
-        String values = "nombre=" + nombre;
-        String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_INSERT_INGREDIENTE, values);
-        Gson gson = new Gson();
-        Json json = gson.fromJson(resultado, Json.class);
-        System.out.println("xd: " + json.toString());
-        return json.getCodigo().equals(Constantes.CR_OK);
-    }
+//    public static boolean add(String nombre) {
+//        String values = "nombre=" + nombre;
+//        String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_INSERT_INGREDIENTE, values);
+//        Gson gson = new Gson();
+//        Json json = gson.fromJson(resultado, Json.class);
+//        return json.getCodigo().equals(Constantes.CR_OK);
+//    }
 
     /**
      * Método que obtiente todos los ingredientes a la base de datos

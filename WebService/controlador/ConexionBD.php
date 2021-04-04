@@ -63,11 +63,12 @@ class ConexionBD
     function consultaManipulacion($sql, $parametros)
     {
         $conexion = $this->abrirConexion();
-
-        $sentencia = $conexion->prepare($sql);
-        $sentencia->execute($parametros);
-        $this->cerrarConexion();
-        return $sentencia->rowCount();
+        if (isset($parametros)) {
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute($parametros);
+            $this->cerrarConexion();
+            return $sentencia->rowCount();
+        }
     }
 
     /**
@@ -85,6 +86,28 @@ class ConexionBD
         }
         $this->cerrarConexion();
         return $conexion->lastInsertId();
+    }
+
+    /**
+     * Método añadido para que me retorne un campo despues de insertar o hacer update
+     */
+    function consultaManipulacion_retornarFila($sql, $parametros)
+    {
+        $resultado = false;
+        $conexion = $this->abrirConexion();
+
+        $sentencia = $conexion->prepare($sql);
+
+        if ($sentencia) {
+            $resultado = $sentencia->execute($parametros);
+            $id = $conexion->lastInsertId();
+            $stmt = $conexion->prepare("SELECT * FROM pedidos WHERE id=?");
+            $stmt->execute([$id]);
+            $lastrow = $stmt->fetchObject();
+            return $lastrow;
+        }
+
+        $this->cerrarConexion();
     }
 
     function cerrarConexion()

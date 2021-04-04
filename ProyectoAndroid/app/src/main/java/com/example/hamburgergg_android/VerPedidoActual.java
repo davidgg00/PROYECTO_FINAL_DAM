@@ -124,7 +124,7 @@ public class VerPedidoActual extends AppCompatActivity {
 
     public void pagarPedido(View view){
         RequestQueue queue = Volley.newRequestQueue(VerPedidoActual.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Conexion.URL_WEB_SERVICES + "insertarPedido.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Conexion.URL_WEB_SERVICES + "Pedido/insertarPedido.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -178,7 +178,7 @@ public class VerPedidoActual extends AppCompatActivity {
 
     private void addDetallePedidoBBDD(final int detalle, final int idPedido){
         RequestQueue queue = Volley.newRequestQueue(VerPedidoActual.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Conexion.URL_WEB_SERVICES + "insertarDetallePedido.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Conexion.URL_WEB_SERVICES + "Pedido/insertarDetallePedido.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

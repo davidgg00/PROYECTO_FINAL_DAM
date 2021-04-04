@@ -43,7 +43,7 @@ public class FormularioRegistro extends AppCompatActivity {
     public void realizarRegistro(View view){
             RequestQueue queue = Volley.newRequestQueue(FormularioRegistro.this);
             StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
-                    Conexion.URL_WEB_SERVICES + "registroUsuario.php",
+                    Conexion.URL_WEB_SERVICES + "Usuario/registroUsuario.php",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

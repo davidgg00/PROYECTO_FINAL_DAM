@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
-                Conexion.URL_WEB_SERVICES + "iniciarSesion.php",
+                Conexion.URL_WEB_SERVICES + "Usuario/iniciarSesion.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

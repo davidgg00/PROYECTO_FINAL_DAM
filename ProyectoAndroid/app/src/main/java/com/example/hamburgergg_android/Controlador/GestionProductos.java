@@ -41,7 +41,7 @@ public class GestionProductos {
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
         RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarMenus.php", future, future);
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Menu/listarMenus.php", future, future);
         requestQueue.add(request);
 
         try {
@@ -59,7 +59,7 @@ public class GestionProductos {
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
         RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarProductosMenu.php?idMenu="+idMenu, future, future){
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Menu_Productos/listarProductosMenu.php?idMenu="+idMenu, future, future){
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("idMenu", String.valueOf(idMenu));
@@ -92,7 +92,7 @@ public class GestionProductos {
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
         RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarBebidas.php", future, future);
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Productos/listarBebidas.php", future, future);
         requestQueue.add(request);
 
         try {
@@ -116,7 +116,7 @@ public class GestionProductos {
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
         RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarPatatas.php", future, future);
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Productos/listarPatatas.php", future, future);
         requestQueue.add(request);
 
         try {
@@ -141,7 +141,7 @@ public class GestionProductos {
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
         RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarHamburguesas.php", future, future);
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Productos/listarHamburguesas.php", future, future);
         requestQueue.add(request);
 
         try {
@@ -160,7 +160,7 @@ public class GestionProductos {
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
         RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "listarIngredientesHamburguesa.php?idHamburguesa="+idHamburguesa, future, future){
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Ingredientes_Hamburguesa/listarIngredientesHamburguesa.php?idHamburguesa="+idHamburguesa, future, future){
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("idHamburguesa", "1");
