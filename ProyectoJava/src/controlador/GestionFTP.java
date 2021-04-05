@@ -56,5 +56,26 @@ public class GestionFTP {
         return true;
     }
     
+    public static boolean borrar(String ruta_img){
+        FTPClient cliente = new FTPClient();
+        try {
+            cliente.connect(servidor);
+            
+            if (cliente.login(usuario, clave)) {
+                cliente.changeWorkingDirectory("public_html");
+                cliente.changeWorkingDirectory("imagenesProductos");
+                cliente.setFileType(FTPClient.BINARY_FILE_TYPE);
+                if (cliente.deleteFile(ruta_img)) {
+                    return true;
+                } 
+                cliente.disconnect();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    
     
 }

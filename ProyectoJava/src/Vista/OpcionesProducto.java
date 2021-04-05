@@ -721,7 +721,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -822,6 +822,8 @@ public class OpcionesProducto extends javax.swing.JFrame {
             System.out.println(sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
             GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
 
+            GestionFTP.borrar(productoSeleccionado.getRuta_img());
+            
             boolean resultado = GestionProducto.editar(new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productoSeleccionado.getTipo(), ingredientesSel));
 
             if (resultado) {
@@ -943,6 +945,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         System.out.println(productoSeleccionado.getId());
+        GestionFTP.borrar(productoSeleccionado.getRuta_img());
         boolean resultado = GestionProducto.remove(productoSeleccionado.getId());
         //Si la ejecución de añadir el producto con sus ingredientes es correcta.
         if (resultado) {
