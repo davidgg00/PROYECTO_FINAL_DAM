@@ -823,7 +823,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
             GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
 
             GestionFTP.borrar(productoSeleccionado.getRuta_img());
-            
+
             boolean resultado = GestionProducto.editar(new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productoSeleccionado.getTipo(), ingredientesSel));
 
             if (resultado) {
@@ -843,38 +843,32 @@ public class OpcionesProducto extends javax.swing.JFrame {
 
     private void elegirProducItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_elegirProducItemStateChanged
         // TODO add your handling code here:
-        if (elegirProduc.getItemCount() > 0) {
-
+        //Si hay algun en el combobox y se hace click para cambiar
+        if (elegirProduc.getItemCount() > 0 && evt.getStateChange() == ItemEvent.SELECTED) {
             productoSeleccionado = productos.get(elegirProduc.getSelectedIndex());
+            //Si es hamburguesa, habrá que seleccionar los ingredientes
             if (productoSeleccionado.getTipo().equalsIgnoreCase("Hamburguesa")) {
                 listaIngredientes1.setEnabled(true);
-                if (evt.getStateChange() == ItemEvent.SELECTED) {
-                    if (elegirProduc.getSelectedIndex() != -1) {
-                        productoSeleccionado = productos.get(elegirProduc.getSelectedIndex());
-                        if (productoSeleccionado != null) {
-                            //  ingredientesProductoActual = GestionIngredientesProducto.getAll(String.valueOf(productoSeleccionado.getId()));
-                            listaIngredientes1.clearSelection();
-                            //int selecs[] = new int[ingredientes.size()];
-                            ArrayList<Integer> selecs = new ArrayList<>();
-
-                            int contador = 0;
-                            for (int i = 0; i < ingredientes.size(); i++) {
-                                try {
-                                    if (ingredientes.get(i).getId() == productoSeleccionado.getIngredientes().get(contador).getId()) {
-                                        selecs.add(i);
-                                        contador++;
-                                    }
-                                } catch (IndexOutOfBoundsException e) {
-                                }
-
+                if (productoSeleccionado != null) {
+                    //Seleccionamos los ingredientes que tiene la hamburguesa en el momento
+                    listaIngredientes1.clearSelection();
+                    //Array que contendrá los indices de los ingredientes que están seleccionados en la bbdd
+                    ArrayList<Integer> selecs = new ArrayList<>();
+                    int contador = 0;
+                    for (int i = 0; i < ingredientes.size(); i++) {
+                        try {
+                            if (contador < productoSeleccionado.getIngredientes().size() && ingredientes.get(i).getId() == productoSeleccionado.getIngredientes().get(contador).getId()) {
+                                selecs.add(i);
+                                contador++;
                             }
-                            listaIngredientes1.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
-                            etNombre_ep.setText(productoSeleccionado.getNombre());
-
-                            etPrecio_ep.setText(String.valueOf(productoSeleccionado.getPrecio()));
-                            selecs.clear();
+                        } catch (IndexOutOfBoundsException e) {
+                            e.printStackTrace();
                         }
                     }
+                    listaIngredientes1.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+                    etNombre_ep.setText(productoSeleccionado.getNombre());
+                    etPrecio_ep.setText(String.valueOf(productoSeleccionado.getPrecio()));
+                    selecs.clear();
                 }
             } else {
                 listaIngredientes1.clearSelection();
@@ -882,56 +876,46 @@ public class OpcionesProducto extends javax.swing.JFrame {
                 etNombre_ep.setText(productoSeleccionado.getNombre());
                 etPrecio_ep.setText(String.valueOf(productoSeleccionado.getPrecio()));
             }
+
+            URL url;
+            BufferedImage image = null;
+            try {
+                url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + productoSeleccionado.getRuta_img());
+                image = ImageIO.read(url);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            lblImagen_ed.setIcon(new ImageIcon(image_escalada));
         }
     }//GEN-LAST:event_elegirProducItemStateChanged
 
     private void elegirProduc_borrarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_elegirProduc_borrarItemStateChanged
         // TODO add your handling code here:
-        if (elegirProduc_borrar.getItemCount() > 0) {
+        if (elegirProduc_borrar.getItemCount() > 0 && evt.getStateChange() == ItemEvent.SELECTED) {
             listaDatosProducto_borrar.removeAll();
             productoSeleccionado = productos.get(elegirProduc_borrar.getSelectedIndex());
             if (productoSeleccionado.getTipo().equalsIgnoreCase("Hamburguesa")) {
                 listaIngredientes1.setEnabled(true);
-                if (evt.getStateChange() == ItemEvent.SELECTED) {
-                    if (elegirProduc_borrar.getSelectedIndex() != -1) {
-                        productoSeleccionado = productos.get(elegirProduc_borrar.getSelectedIndex());
-                        if (productoSeleccionado != null) {
-                            //  ingredientesProductoActual = GestionIngredientesProducto.getAll(String.valueOf(productoSeleccionado.getId()));
-                            listaIngredientes1.clearSelection();
-                            //int selecs[] = new int[ingredientes.size()];
-                            ArrayList<Integer> selecs = new ArrayList<>();
-
-                            
-                            if (ingredientes.size() != 0) {
-                                int contador = 0;
-                                for (int i = 0; i < ingredientes.size(); i++) {
-                                    try {
-                                        System.out.println(productoSeleccionado.getIngredientes().toString());
-                                        if (ingredientes.get(i).getId() == productoSeleccionado.getIngredientes().get(contador).getId()) {
-                                            selecs.add(i);
-                                            contador++;
-                                        }
-                                    } catch (IndexOutOfBoundsException e) {
-                                    }
-
-                                }
-                            }
-                            URL url;
-                            BufferedImage image = null;
+                if (productoSeleccionado != null) {
+                    listaIngredientes1.clearSelection();
+                    ArrayList<Integer> selecs = new ArrayList<>();
+                    if (ingredientes.size() != 0) {
+                        int contador = 0;
+                        for (int i = 0; i < ingredientes.size(); i++) {
                             try {
-                                url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + productoSeleccionado.getRuta_img());
-                                image = ImageIO.read(url);
-                            } catch (MalformedURLException ex) {
-                                Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (IOException ex) {
-                                Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+                                if (ingredientes.get(i).getId() == productoSeleccionado.getIngredientes().get(contador).getId()) {
+                                    selecs.add(i);
+                                    contador++;
+                                }
+                            } catch (IndexOutOfBoundsException e) {
                             }
-                            Image image_escalada = image.getScaledInstance(lblImagen_borrarProducto.getWidth(), lblImagen_borrarProducto.getHeight(),Image.SCALE_SMOOTH);
-                            lblImagen_borrarProducto.setIcon(new ImageIcon(image_escalada));
-                            listaDatosProducto_borrar.setText(productoSeleccionado.getNombre() + "\n" + productoSeleccionado.getTipo() + "\n" + productoSeleccionado.getPrecio());
-                            selecs.clear();
+
                         }
                     }
+                    selecs.clear();
                 }
             } else {
                 listaIngredientes1.clearSelection();
@@ -939,6 +923,20 @@ public class OpcionesProducto extends javax.swing.JFrame {
                 listaDatosProducto_borrar.setText(productoSeleccionado.getNombre() + "," + productoSeleccionado.getTipo() + "," + productoSeleccionado.getPrecio());
             }
         }
+        URL url;
+        BufferedImage image = null;
+        try {
+            url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + productoSeleccionado.getRuta_img());
+            image = ImageIO.read(url);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        lblImagen_borrarProducto.setIcon(new ImageIcon(image_escalada));
+        listaDatosProducto_borrar.setText(productoSeleccionado.getNombre() + "\n" + productoSeleccionado.getTipo() + "\n" + productoSeleccionado.getPrecio());
+
     }//GEN-LAST:event_elegirProduc_borrarItemStateChanged
 
     private void btnBorrarEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarEditarProductoActionPerformed
@@ -971,7 +969,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
             try {
                 // display the image in a Jlabel
                 bi = ImageIO.read(file);
-                Image image_escalada = bi.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(),Image.SCALE_SMOOTH);
+                Image image_escalada = bi.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
                 lblImagen.setIcon(new ImageIcon(image_escalada));
             } catch (IOException e) {
                 e.printStackTrace(); // todo: implement proper error handeling
@@ -992,7 +990,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
             try {
                 // display the image in a Jlabel
                 bi = ImageIO.read(file);
-                Image image_escalada = bi.getScaledInstance(lblImagen_ed.getWidth(), lblImagen_ed.getHeight(),Image.SCALE_SMOOTH);
+                Image image_escalada = bi.getScaledInstance(lblImagen_ed.getWidth(), lblImagen_ed.getHeight(), Image.SCALE_SMOOTH);
                 lblImagen_ed.setIcon(new ImageIcon(image_escalada));
             } catch (IOException e) {
                 e.printStackTrace(); // todo: implement proper error handeling
