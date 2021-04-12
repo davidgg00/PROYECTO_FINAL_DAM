@@ -71,7 +71,10 @@ public class OpcionesMenus extends javax.swing.JFrame {
         listaProductos_borrarMenu.setModel(modelo);
 
         ArrayList<Integer> selecs = new ArrayList<>();
-        menuSeleccionado = menus.get(elegirMenu_editar.getSelectedIndex());
+        if (menus.size() > 0) {
+            menuSeleccionado = menus.get(elegirMenu_editar.getSelectedIndex());
+        }
+        
         int contador = 0;
         for (int i = 0; i < menus.size(); i++) {
             if (menus.get(i).getId() == menuSeleccionado.getId()) {
@@ -89,10 +92,12 @@ public class OpcionesMenus extends javax.swing.JFrame {
                 }
             }
         }
-        listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+        if (menuSeleccionado != null) {
+         listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
         listaProductos_borrarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
         etNombre_borrarMenu.setText(menuSeleccionado.getNombre());
-        etPrecio_borrarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));
+        etPrecio_borrarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));   
+        }
     }
 
     /**

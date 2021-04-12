@@ -15,14 +15,44 @@ import javax.swing.JPanel;
  * @author DavidGG
  */
 public class Principal extends javax.swing.JFrame {
-
+VerPedidos m;
     /**
      * Creates new form Principal
      */
+    public Principal(boolean abrirSocket) {
+        initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Hamburguesería GG");
+
+        m = new VerPedidos();
+        if (abrirSocket) {
+            new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+            @Override
+            public void run() {
+                VerPedidos.abrirServerSocket();
+            }
+        },
+                1000
+        );
+        }
+        
+    }
+
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Hamburguesería GG");
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+            @Override
+            public void run() {
+                VerPedidos.abrirServerSocket();
+            }
+        },
+                1000
+        );
     }
 
     /**
@@ -162,25 +192,24 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnVerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerPedidosActionPerformed
         // TODO add your handling code here:
-        VerPedidos m = new VerPedidos();
-       m.setVisible(true);
-       m.setLocationRelativeTo(null);
-        setVisible(false);
+        m.setVisible(true);
+        m.setLocationRelativeTo(null);
+        //setVisible(false);
     }//GEN-LAST:event_btnVerPedidosActionPerformed
 
     private void btnOpcMenusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcMenusActionPerformed
         // TODO add your handling code here:
         OpcionesMenus opcMenu = new OpcionesMenus();
-       opcMenu.setVisible(true);
-       opcMenu.setLocationRelativeTo(null);
+        opcMenu.setVisible(true);
+        opcMenu.setLocationRelativeTo(null);
         setVisible(false);
     }//GEN-LAST:event_btnOpcMenusActionPerformed
 
     private void btnOpcProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcProductosActionPerformed
         // TODO add your handling code here:
         OpcionesProducto opcProd = new OpcionesProducto();
-       opcProd.setVisible(true);
-       opcProd.setLocationRelativeTo(null);
+        opcProd.setVisible(true);
+        opcProd.setLocationRelativeTo(null);
         setVisible(false);
     }//GEN-LAST:event_btnOpcProductosActionPerformed
 
@@ -218,7 +247,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new Principal(true).setVisible(true);
             }
         });
     }

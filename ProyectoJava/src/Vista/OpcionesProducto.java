@@ -66,7 +66,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
         int contador = 0;
         for (int i = 0; i < ingredientes.size(); i++) {
             try {
-                if (productoSeleccionado.getTipo().equalsIgnoreCase("Hamburguesa")) {
+                if (productoSeleccionado != null && productoSeleccionado.getTipo().equalsIgnoreCase("Hamburguesa")) {
                     if (ingredientes.get(i).getId() == productoSeleccionado.getIngredientes().get(contador).getId()) {
                         selecs.add(i);
                         contador++;

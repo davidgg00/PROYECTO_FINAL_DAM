@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -35,8 +36,55 @@ public class VerPedidos extends javax.swing.JFrame {
      */
     public VerPedidos() {
         initComponents();
+        System.out.println("a");
+       
+//        new java.util.Timer().schedule( 
+//        new java.util.TimerTask() {
+//            @Override
+//            public void run() {
+//                abrirServerSocket();
+//            }
+//        }, 
+//        5000 
+//);
+       // abrirServerSocket();
+        
     }
 
+    public static void abrirServerSocket(){
+        
+    InputStreamReader isr;
+        BufferedReader br;
+        
+        ServerSocket serverSocket = null;
+        
+        try {
+            serverSocket = new ServerSocket(8000);
+        } catch (IOException ex) {
+            Logger.getLogger(VerPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        while (true) {
+            Socket socket = null;
+            try {
+
+                System.out.println("entro");
+                socket = serverSocket.accept();
+
+                ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+                Pedido cuentaRecibido = (Pedido) objectInputStream.readObject();
+
+                Thread nuevoHilo = new ClientHandler(socket, new DataInputStream(socket.getInputStream()), new DataOutputStream(socket.getOutputStream()), cuentaRecibido);
+
+                nuevoHilo.start();
+               
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +103,7 @@ public class VerPedidos extends javax.swing.JFrame {
         };
         panelHeader = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +119,13 @@ public class VerPedidos extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Pedidos Pendientes");
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
         panelHeaderLayout.setHorizontalGroup(
@@ -77,11 +133,17 @@ public class VerPedidos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeaderLayout.createSequentialGroup()
                 .addContainerGap(268, Short.MAX_VALUE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(199, 199, 199))
+                .addGap(101, 101, 101)
+                .addComponent(jButton1)
+                .addGap(25, 25, 25))
         );
         panelHeaderLayout.setVerticalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelHeaderLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         panelPedidos.add(panelHeader);
@@ -99,6 +161,14 @@ public class VerPedidos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       // Principal p = new Principal(false);
+       //p.setVisible(true);
+      // p.setLocationRelativeTo(null);
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,41 +201,15 @@ public class VerPedidos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VerPedidos().setVisible(true);
+                
             }
         });
         
-        InputStreamReader isr;
-        BufferedReader br;
         
-        ServerSocket serverSocket = null;
-        
-        try {
-            serverSocket = new ServerSocket(8000);
-        } catch (IOException ex) {
-            Logger.getLogger(VerPedidos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        while (true) {
-            Socket socket = null;
-            try {
-
-                socket = serverSocket.accept();
-
-                ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-                Pedido cuentaRecibido = (Pedido) objectInputStream.readObject();
-
-                Thread nuevoHilo = new ClientHandler(socket, new DataInputStream(socket.getInputStream()), new DataOutputStream(socket.getOutputStream()), cuentaRecibido);
-
-                nuevoHilo.start();
-               
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel panelHeader;
     public static javax.swing.JPanel panelPedidos;
