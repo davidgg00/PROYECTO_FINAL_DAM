@@ -96,8 +96,9 @@ public class GestionProductos {
         requestQueue.add(request);
 
         try {
-            String test = future.get().toString();
-            return test;
+            String bebidas = future.get().toString();
+            System.out.print(bebidas);
+            return bebidas;
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

@@ -19,7 +19,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view"
             android:layout_width="398dp"
-            android:layout_height="576dp"
+            android:layout_height="423dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="9dp"
             android:layout_marginEnd="9dp"
@@ -31,20 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="irPagina4"
-                android:text="Menús" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="irPagina3"
-                android:text="Patatas" />
 
             <Button
                 android:id="@+id/button"
@@ -59,6 +45,21 @@
                 android:layout_height="wrap_content"
                 android:onClick="irPagina2"
                 android:text="Bebidas" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="irPagina3"
+                android:text="Patatas" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="irPagina4"
+                android:text="Menús" />
+
         </LinearLayout>
 
         <Button

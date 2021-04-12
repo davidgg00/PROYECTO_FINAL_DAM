@@ -46,6 +46,7 @@ public class VerDetallesProducto extends AppCompatActivity {
 
     public void volverCarta(View view){
         Intent intent = new Intent(getApplicationContext(), ActivityCartaAlimentos.class);
+        intent.putExtra("pedido",pedido);
         finish();
         startActivity(intent);
     }

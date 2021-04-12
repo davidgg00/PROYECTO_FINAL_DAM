@@ -5,15 +5,16 @@ import java.util.ArrayList;
 
 public class Menu implements Serializable {
     private int id;
-    private String nombre;
+    private String nombre,ruta_img;
     private double precio;
     private ArrayList<Producto> productos;
     private static final long serialVersionUID = 1L;
-    public Menu(int id, String nombre, double precio, ArrayList<Producto> productos) {
+    public Menu(int id, String nombre, double precio, ArrayList<Producto> productos, String ruta_img) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.productos = productos;
+        this.ruta_img = ruta_img;
     }
 
     public int getId() {
@@ -40,11 +41,30 @@ public class Menu implements Serializable {
         this.precio = precio;
     }
 
+    public void setRuta_img(String ruta_img) {
+        this.ruta_img = ruta_img;
+    }
+
+    public String getRuta_img() {
+        return ruta_img;
+    }
+
     public ArrayList<Producto> getProductos() {
         return productos;
     }
 
     public void setProductos(ArrayList<Producto> productos) {
         this.productos = productos;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", ruta_img='" + ruta_img + '\'' +
+                ", precio=" + precio +
+                ", productos=" + productos +
+                '}';
     }
 }

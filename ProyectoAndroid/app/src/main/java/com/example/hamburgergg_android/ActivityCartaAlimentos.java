@@ -72,7 +72,6 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
     public void verPedidoActual(View view){
         Intent intent = new Intent(getApplicationContext(), VerPedidoActual.class);
         intent.putExtra("pedido",pedido);
-        finish();
         startActivity(intent);
     }
 
@@ -80,8 +79,6 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String menus_session = sharedPrefs.getString("menus", "");
         String productosMenu_session = sharedPrefs.getString("productosMenu", "");
-        System.out.println(productosMenu_session);
-        System.out.println("FFF:" + menus_session);
                 //Convertimos los Strings a JSONArray, los recorremos y los almacenamos en el arraylist de hamburguesas
         try {
             JSONArray jsonArray = new JSONArray(menus_session);
@@ -100,7 +97,7 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
                             JSONObject e3 = jsonArrayIngredientes.getJSONObject(n);
                             productos.add(new Producto(Integer.parseInt(e3.get("id").toString()), e3.get("nombre").toString(), Double.parseDouble(e3.get("precio").toString()),e3.get("tipo").toString(),e3.get("ruta_img").toString()));
                         }
-                        menus.add(new Menu(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()), productos));
+                        menus.add(new Menu(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()), productos, e.get("ruta_img").toString()));
                     }
 
                 }
@@ -222,8 +219,8 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         };
     }
 
-    private void setAdapter(ArrayList<Producto> tipoProducto, RecyclerView recyclerView) {
-        recyclerAdapter adapter = new recyclerAdapter(tipoProducto,listener, getApplicationContext());
+    private void setAdapter(ArrayList<Producto> productos, RecyclerView recyclerView) {
+        recyclerAdapter adapter = new recyclerAdapter(productos,listener, getApplicationContext(), this);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
         recyclerView.setLayoutManager(layoutManager);
@@ -232,7 +229,7 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
     }
 
     private void setAdapter2(ArrayList<Menu> menu, RecyclerView recyclerView) {
-        recyclerAdapter adapter = new recyclerAdapter(listener,menu);
+        recyclerAdapter adapter = new recyclerAdapter(getApplicationContext(),menu,listener,this);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
         recyclerView.setLayoutManager(layoutManager);
