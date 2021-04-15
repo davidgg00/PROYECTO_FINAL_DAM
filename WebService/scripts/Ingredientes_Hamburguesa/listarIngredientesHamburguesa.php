@@ -2,7 +2,6 @@
 require_once '../MyWebService.php';
 
 $idHamburguesa = $_REQUEST['idHamburguesa'];
-//$resultado=consultar($dni);
 if (isset($idHamburguesa)) {
     $sql = "SELECT ingredientes.* FROM ingredientes_hamburguesa INNER JOIN ingredientes ON ingredientes.id = ingredientes_hamburguesa.idIngrediente  where ingredientes_hamburguesa.idHamburguesa = ?";
     $cbd = new ConexionBD();
@@ -12,5 +11,5 @@ if (isset($idHamburguesa)) {
     $resultado = json_encode($resultado);
 
 
-    echo $resultado;
+    echo !empty($resultado) ? $resultado : "sin_ingredientes";
 }

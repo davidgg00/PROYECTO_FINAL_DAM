@@ -92,7 +92,7 @@ public class GestionProductos {
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
         RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Productos/listarBebidas.php", future, future);
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Productos/listarTipoProducto.php?tipoProducto=Bebida", future, future);
         requestQueue.add(request);
 
         try {
@@ -117,7 +117,7 @@ public class GestionProductos {
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
         RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Productos/listarPatatas.php", future, future);
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Productos/listarTipoProducto.php?tipoProducto=Patatas", future, future);
         requestQueue.add(request);
 
         try {
@@ -142,7 +142,7 @@ public class GestionProductos {
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
         RequestFuture<String> future = RequestFuture.newFuture();
-        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Productos/listarHamburguesas.php", future, future);
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Productos/listarTipoProducto.php?tipoProducto=Hamburguesa", future, future);
         requestQueue.add(request);
 
         try {
