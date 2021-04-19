@@ -27,7 +27,7 @@ public class EnviarSocket extends AsyncTask<Pedido, Pedido,Pedido> {
         Boolean fin = false;
         Pedido cuentareturn = null;
         try {
-            s = new Socket("10.0.2.2",8000);
+            s = new Socket("192.168.1.23",8000);
             OutputStream outputStream = s.getOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(pedido);

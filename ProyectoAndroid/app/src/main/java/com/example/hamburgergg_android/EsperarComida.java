@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -59,12 +60,13 @@ public class EsperarComida extends AppCompatActivity {
                                 // The dialog is automatically dismissed when a dialog button is clicked.
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(EsperarComida.this, MainActivity.class);
                                         finish();
+                                        startActivity(intent);
                                     }
                                 })
 
-                                // A null listener allows the button to dismiss the dialog and take no further action.
-                                .setNegativeButton(android.R.string.no, null)
+                                // A null listener allows the button to dismiss the dialog and take no further action
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .show();
 

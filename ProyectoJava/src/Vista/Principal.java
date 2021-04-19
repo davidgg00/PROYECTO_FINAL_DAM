@@ -194,7 +194,7 @@ VerPedidos m;
         // TODO add your handling code here:
         m.setVisible(true);
         m.setLocationRelativeTo(null);
-        //setVisible(false);
+        //etVisible(false);
     }//GEN-LAST:event_btnVerPedidosActionPerformed
 
     private void btnOpcMenusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcMenusActionPerformed

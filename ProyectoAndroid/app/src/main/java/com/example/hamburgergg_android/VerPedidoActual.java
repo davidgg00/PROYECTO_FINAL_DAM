@@ -90,9 +90,26 @@ public class VerPedidoActual extends AppCompatActivity {
                 botones.add(btn);
                 wrapperPedidos.addView(wrapPedido);
             } else if (producto instanceof Menu){
+                final LinearLayout wrapPedido = new LinearLayout(this);
+                wrapPedido.setOrientation(LinearLayout.HORIZONTAL);
                 TextView txt = new TextView(this);
                 txt.setText(((Menu) producto).getNombre());
-                wrapperPedidos.addView(txt);
+                txt.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+
+                final Button btn = new Button(this);
+                btn.setId(index);
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        borrarProductoPedido(btn.getId(),wrapPedido);
+                    }
+                });
+                btn.setText("Eliminar");
+                btn.setGravity(Gravity.RIGHT);
+                wrapPedido.addView(txt);
+                wrapPedido.addView(btn);
+                botones.add(btn);
+                wrapperPedidos.addView(wrapPedido);
             }
             index++;
         }

@@ -27,7 +27,7 @@ public class GestionMenu {
      * @return
      */
     public static ArrayList<Menu> getAll() {
-        String values = "";
+        String values = "tipoProducto=Menu";
 
         String json = utilidades.HttpRequest.GET_REQUEST(Constantes.URL_LISTAR_MENUS, values);
 
@@ -71,8 +71,8 @@ public class GestionMenu {
      * @return
      */
     public static boolean add(Menu menu) {
-        String values = "nombre=" + menu.getNombre() + "&precio=" + menu.getPrecio() + "&ruta_img=" + menu.getRuta_img();
-        String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_INSERT_MENU, values);
+        String values = "nombre=" + menu.getNombre() + "&precio=" + menu.getPrecio() + "&ruta_img=" + menu.getRuta_img() + "&tipo=Menu";
+        String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_INSERT_PRODUCTO, values);
         Gson gson = new Gson();
         System.out.println(resultado);
         Json json = null;

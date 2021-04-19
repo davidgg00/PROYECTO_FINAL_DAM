@@ -5,18 +5,22 @@
  */
 package modelo;
 
+import com.example.hamburgergg_android.Modelo.*;
+import java.io.Serializable;
+import modelo.*;
 import java.util.ArrayList;
 
 /**
  *
  * @author DavidGG
  */
-public class Menu {
+public class Menu implements Serializable{
     private int id;
     private String nombre;
     private double precio;
     private String ruta_img;
     private ArrayList<Producto> productos;
+    private static final long serialVersionUID = 1L;
 
     public Menu(String nombre, double precio, String ruta_img, ArrayList<Producto> productos) {
         this.id = id;

@@ -15,12 +15,11 @@ public class Constantes {
     public static final String URL_INSERT_PRODUCTO = SERVER + "Productos/insertarProducto.php";
     public static final String URL_INSERT_INGREDIENTES_PRODUCTO = SERVER + "Ingredientes_Hamburguesa/insertarIngredientesHamburguesa.php";
     //public static final String URL_INSERT_INGREDIENTE = SERVER + "insertarIngrediente.php";
-    public static final String URL_INSERT_MENU = SERVER + "Menu/insertarMenu.php";
     public static final String URL_INSERT_PRODUCTOS_MENU = SERVER + "Menu_Productos/insertarProductoMenu.php";
     public static final String URL_LISTAR_INGREDIENTES = SERVER + "Ingredientes/listarIngredientes.php";
     public static final String URL_LISTAR_INGREDIENTES_HAMBURGUESA = SERVER + "Ingredientes_Hamburguesa/listarIngredientesHamburguesa.php";
     public static final String URL_LISTAR_PRODUCTO = SERVER + "Productos/listarProductos.php";
-    public static final String URL_LISTAR_MENUS = SERVER + "Menu/listarMenus.php";
+    public static final String URL_LISTAR_MENUS = SERVER + "Productos/listarTipoProducto.php";
     public static final String URL_LISTAR_PRODUCTOS_MENU = SERVER + "Menu_Productos/listarProductosMenu.php";
     public static final String URL_MODIFY_PRODUCTO = SERVER + "Productos/modificarProducto.php";
     public static final String URL_MODIFY_MENU = SERVER + "Menu/modificarMenu.php";

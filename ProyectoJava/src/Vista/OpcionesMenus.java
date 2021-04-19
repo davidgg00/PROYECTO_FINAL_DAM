@@ -57,7 +57,6 @@ public class OpcionesMenus extends javax.swing.JFrame {
 
         menus = GestionMenu.getAll();
         for (Menu menu : menus) {
-
             elegirMenu_editar.addItem(menu.getNombre() + "-" + menu.getId());
             elegirMenu_borrar.addItem(menu.getNombre() + "-" + menu.getId());
         }
@@ -527,9 +526,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        dialogBorrarMenu.setMaximumSize(null);
         dialogBorrarMenu.setMinimumSize(new java.awt.Dimension(1000, 700));
-        dialogBorrarMenu.setPreferredSize(new java.awt.Dimension(1000, 700));
 
         panelHeader3.setBackground(new java.awt.Color(130, 93, 46));
 

@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EsperarComida"></activity>
+        <activity android:name=".ActivityVerHistorialPedidos"></activity>
+        <activity android:name=".EsperarComida" />
         <activity android:name=".VerPedidoActual" />
         <activity android:name=".VerDetallesMenu" />
         <activity android:name=".VerDetallesProducto" />

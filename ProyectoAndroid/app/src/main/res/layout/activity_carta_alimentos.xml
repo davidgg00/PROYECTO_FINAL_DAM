@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/background_image"
     tools:context=".ActivityCartaAlimentos">
 
@@ -12,50 +12,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="97dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".MainActivity">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view"
             android:layout_width="398dp"
-            android:layout_height="423dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="9dp"
             android:layout_marginEnd="9dp"
-            android:layout_marginRight="9dp">
+            android:layout_marginRight="9dp"
+            android:layout_weight="1">
 
         </androidx.viewpager.widget.ViewPager>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:onClick="irPagina1"
                 android:text="Hamburguesas" />
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:onClick="irPagina2"
                 android:text="Bebidas" />
 
             <Button
                 android:id="@+id/button3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:onClick="irPagina3"
                 android:text="Patatas" />
 
             <Button
                 android:id="@+id/button4"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:onClick="irPagina4"
                 android:text="Menús" />
@@ -68,7 +75,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:layout_weight="1"
             android:background="@drawable/botonredondeado"
             android:onClick="verPedidoActual"
             android:text="Pedido total : 0€" />
