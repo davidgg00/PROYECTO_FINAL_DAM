@@ -10,28 +10,53 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/wrapperEspaciadoArriba"
             android:layout_width="match_parent"
-            android:layout_height="542dp">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"></LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/wrapperHistorialPedidos"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5">
+
+                <LinearLayout
+                    android:id="@+id/wrapperHistorialPedidos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+
+            <Button
+                android:id="@+id/button5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+                android:layout_gravity="bottom"
+                android:onClick="irAtras"
+                android:text="Volver hacia atrás" />
 
-        <Button
-            android:id="@+id/button5"
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wrapperEspaciadoAbajo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="irAtras"
-            android:text="Volver hacia atrás" />
-
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"></LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

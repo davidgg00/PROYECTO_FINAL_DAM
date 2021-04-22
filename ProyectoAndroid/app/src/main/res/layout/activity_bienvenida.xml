@@ -7,71 +7,89 @@
     android:background="@drawable/background_image"
     tools:context=".BienvenidaActivity">
 
-    <TextView
-        android:id="@+id/label1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¡Bienvenido a HamburgerGG! "
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/label3"
-        android:layout_width="224dp"
-        android:layout_height="65dp"
-        android:text="¡Haz click en el siguiente botón  para ver la carta y pedir!"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.328" />
+        <LinearLayout
+            android:id="@+id/WrapperTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/label2"
-        android:layout_width="226dp"
-        android:layout_height="86dp"
-        android:text="Desde esta aplicación podrás pedir y pagar la comida, sin  necesidad de esperar a que  te atiendan. "
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.182" />
+            <TextView
+                android:id="@+id/label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="¡Bienvenido a HamburgerGG! "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/btnPedirComida"
-        android:layout_width="231dp"
-        android:layout_height="70dp"
-        android:background="@drawable/botonredondeado"
-        android:onClick="irACarta"
-        android:text="¡Pedir Comida!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.564" />
+        <LinearLayout
+            android:id="@+id/wapperInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnVerHistorial"
-        android:layout_width="231dp"
-        android:layout_height="70dp"
-        android:background="@drawable/botonredondeado"
-        android:cursorVisible="false"
-        android:onClick="irAHistorialPedidos"
-        android:text="Ver historial Pedidos"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.733" />
+            <TextView
+                android:id="@+id/label2"
+                android:layout_width="match_parent"
+                android:layout_height="86dp"
+                android:layout_weight="1"
+                android:gravity="center|center_vertical"
+                android:text="Desde esta aplicación podrás pedir y pagar la comida, sin  necesidad de esperar a que  te atiendan. "
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/label3"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="¡Haz click en el siguiente botón  para ver la carta y pedir!"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wrapperBotones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnPedirComida"
+                android:layout_width="231dp"
+                android:layout_height="70dp"
+                android:background="@drawable/botonredondeado"
+                android:onClick="irACarta"
+                android:text="¡Pedir Comida!" />
+
+            <Button
+                android:id="@+id/btnVerHistorial"
+                android:layout_width="231dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/botonredondeado"
+                android:cursorVisible="false"
+                android:onClick="irAHistorialPedidos"
+                android:text="Ver historial Pedidos"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

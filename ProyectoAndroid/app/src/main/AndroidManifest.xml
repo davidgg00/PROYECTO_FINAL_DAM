@@ -20,7 +20,6 @@
         <activity android:name=".VerDetallesMenu" />
         <activity android:name=".VerDetallesProducto" />
         <activity android:name=".FormularioRegistro" />
-        <activity android:name=".ProfileActivity" />
         <activity android:name=".ActivityCartaAlimentos" />
         <activity android:name=".BienvenidaActivity" />
         <activity android:name=".MainActivity">

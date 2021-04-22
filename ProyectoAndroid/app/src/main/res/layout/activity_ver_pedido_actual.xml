@@ -8,65 +8,95 @@
     tools:context=".VerPedidoActual">
 
     <LinearLayout
-        android:layout_width="337dp"
-        android:layout_height="653dp"
-        android:background="#59FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.948">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/labelTitulo"
+        <LinearLayout
+            android:id="@+id/wrapperEspaciadoArriba"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:text="PEDIDO ACTUAL:"
-            android:textSize="24sp" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"></LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="397dp">
+        <LinearLayout
+            android:layout_width="337dp"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:background="#59FFFFFF"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/labelTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="PEDIDO ACTUAL:"
+                android:textSize="24sp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5">
+
+                <LinearLayout
+                    android:id="@+id/wrapperPedidos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" />
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/labelPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="0.00€"
+                android:textSize="30sp" />
 
             <LinearLayout
-                android:id="@+id/wrapperPedidos"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/labelPrecio"
+                <Button
+                    android:id="@+id/btnAddProductoPedido"
+                    android:layout_width="234dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#79B556"
+                    android:onClick="pagarPedido"
+                    android:text="Pagar Pedido" />
+
+                <Button
+                    android:id="@+id/btnVolverCarta"
+                    android:layout_width="237dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:background="#EC524B"
+                    android:onClick="volveraCarta"
+                    android:text="Volver a la carta" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wrapperEspaciadoAbajo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:text="0.00€"
-            android:textSize="30sp" />
-
-        <Button
-            android:id="@+id/btnAddProductoPedido"
-            android:layout_width="234dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:background="#79B556"
-            android:onClick="pagarPedido"
-            android:text="Pagar Pedido" />
-
-        <Button
-            android:id="@+id/btnVolverCarta"
-            android:layout_width="237dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:background="#EC524B"
-            android:onClick="volveraCarta"
-            android:text="Volver a la carta" />
-
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"></LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

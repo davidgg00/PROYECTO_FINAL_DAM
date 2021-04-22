@@ -165,6 +165,9 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
 
     public void irAtras(View view){
         Intent intent = new Intent(ActivityVerHistorialPedidos.this, BienvenidaActivity.class);
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.getString("email");
+        intent.putExtra("email",email);
         finish();
         startActivity(intent);
     }
