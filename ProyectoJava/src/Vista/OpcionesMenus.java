@@ -118,6 +118,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
         };
         panelHeader1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -141,6 +142,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
         };
         panelHeader2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         javax.swing.JPanel jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -166,6 +168,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
         };
         panelHeader3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         javax.swing.JPanel jPanel7 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -191,11 +194,17 @@ public class OpcionesMenus extends javax.swing.JFrame {
         };
         panelHeader = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         btnCrearMenu = new javax.swing.JButton();
         btnEditarMenu = new javax.swing.JButton();
         btnBorrarMenu = new javax.swing.JButton();
 
-        dialogCrearMenu.setMinimumSize(new java.awt.Dimension(1000, 700));
+        dialogCrearMenu.setMaximumSize(null);
+        dialogCrearMenu.setMinimumSize(null);
+        dialogCrearMenu.setResizable(false);
+        dialogCrearMenu.setSize(new java.awt.Dimension(700, 700));
+
+        jPanel3.setPreferredSize(new java.awt.Dimension(700, 700));
 
         panelHeader1.setBackground(new java.awt.Color(130, 93, 46));
 
@@ -203,24 +212,40 @@ public class OpcionesMenus extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Crear Menú");
 
+        jButton5.setText("Atrás");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelHeader1Layout = new javax.swing.GroupLayout(panelHeader1);
         panelHeader1.setLayout(panelHeader1Layout);
         panelHeader1Layout.setHorizontalGroup(
             panelHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader1Layout.createSequentialGroup()
-                .addContainerGap(455, Short.MAX_VALUE)
+                .addContainerGap(272, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addGap(361, 361, 361))
+                .addGap(129, 129, 129)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         panelHeader1Layout.setVerticalGroup(
             panelHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader1Layout.createSequentialGroup()
+            .addGroup(panelHeader1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(panelHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader1Layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addGap(30, 30, 30))))
         );
 
         jPanel2.setBackground(new java.awt.Color(181, 97, 54));
+        jPanel2.setMaximumSize(new java.awt.Dimension(500, 600));
+        jPanel2.setPreferredSize(new java.awt.Dimension(500, 600));
 
         jLabel1.setText("Nombre:");
 
@@ -288,7 +313,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(258, 258, 258)
                 .addComponent(btnEnviarCrearMenu)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,38 +351,40 @@ public class OpcionesMenus extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(254, Short.MAX_VALUE)
+                .addContainerGap(128, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
+                .addGap(72, 72, 72))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(panelHeader1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(143, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addComponent(panelHeader1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(615, Short.MAX_VALUE)))
+                    .addContainerGap(614, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout dialogCrearMenuLayout = new javax.swing.GroupLayout(dialogCrearMenu.getContentPane());
         dialogCrearMenu.getContentPane().setLayout(dialogCrearMenuLayout);
         dialogCrearMenuLayout.setHorizontalGroup(
             dialogCrearMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         dialogCrearMenuLayout.setVerticalGroup(
             dialogCrearMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        dialogEditarMenu.setMaximumSize(null);
-        dialogEditarMenu.setMinimumSize(new java.awt.Dimension(1000, 700));
-        dialogEditarMenu.setPreferredSize(new java.awt.Dimension(1000, 700));
+        dialogEditarMenu.setMinimumSize(null);
+        dialogEditarMenu.setResizable(false);
+        dialogEditarMenu.setSize(new java.awt.Dimension(700, 700));
+
+        jPanel4.setPreferredSize(new java.awt.Dimension(700, 700));
 
         panelHeader2.setBackground(new java.awt.Color(130, 93, 46));
 
@@ -365,14 +392,23 @@ public class OpcionesMenus extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Editar Menú");
 
+        jButton3.setText("Atrás");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelHeader2Layout = new javax.swing.GroupLayout(panelHeader2);
         panelHeader2.setLayout(panelHeader2Layout);
         panelHeader2Layout.setHorizontalGroup(
             panelHeader2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader2Layout.createSequentialGroup()
-                .addContainerGap(455, Short.MAX_VALUE)
+                .addContainerGap(224, Short.MAX_VALUE)
                 .addComponent(jLabel8)
-                .addGap(361, 361, 361))
+                .addGap(185, 185, 185)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
         panelHeader2Layout.setVerticalGroup(
             panelHeader2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,9 +416,14 @@ public class OpcionesMenus extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(panelHeader2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(181, 97, 54));
+        jPanel5.setMaximumSize(new java.awt.Dimension(500, 600));
 
         jLabel2.setText("Menu:");
 
@@ -422,14 +463,6 @@ public class OpcionesMenus extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblImagen_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(192, 192, 192))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(258, 258, 258)
-                .addComponent(btnEnviarEditarMenu)
-                .addContainerGap(259, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,6 +490,15 @@ public class OpcionesMenus extends javax.swing.JFrame {
                             .addComponent(btnSubirImagen_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etNombre_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(264, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(lblImagen_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(192, 192, 192))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnEnviarEditarMenu)
+                        .addGap(253, 253, 253))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,9 +529,9 @@ public class OpcionesMenus extends javax.swing.JFrame {
                     .addComponent(jLabel18))
                 .addGap(18, 18, 18)
                 .addComponent(lblImagen_editarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(44, 44, 44)
                 .addComponent(btnEnviarEditarMenu)
-                .addGap(22, 22, 22))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -497,22 +539,22 @@ public class OpcionesMenus extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(258, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
+                .addGap(37, 37, 37))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(panelHeader2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(94, 94, 94)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addComponent(panelHeader2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(615, Short.MAX_VALUE)))
+                    .addContainerGap(614, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout dialogEditarMenuLayout = new javax.swing.GroupLayout(dialogEditarMenu.getContentPane());
@@ -526,7 +568,11 @@ public class OpcionesMenus extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        dialogBorrarMenu.setMinimumSize(new java.awt.Dimension(1000, 700));
+        dialogBorrarMenu.setMaximumSize(null);
+        dialogBorrarMenu.setMinimumSize(null);
+        dialogBorrarMenu.setPreferredSize(new java.awt.Dimension(700, 700));
+        dialogBorrarMenu.setResizable(false);
+        dialogBorrarMenu.setSize(new java.awt.Dimension(700, 700));
 
         panelHeader3.setBackground(new java.awt.Color(130, 93, 46));
 
@@ -534,24 +580,42 @@ public class OpcionesMenus extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Borrar Menú");
 
+        jButton4.setText("Atrás");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelHeader3Layout = new javax.swing.GroupLayout(panelHeader3);
         panelHeader3.setLayout(panelHeader3Layout);
         panelHeader3Layout.setHorizontalGroup(
             panelHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader3Layout.createSequentialGroup()
-                .addContainerGap(455, Short.MAX_VALUE)
+            .addGroup(panelHeader3Layout.createSequentialGroup()
+                .addGap(276, 276, 276)
                 .addComponent(jLabel13)
-                .addGap(361, 361, 361))
+                .addContainerGap(227, Short.MAX_VALUE))
+            .addGroup(panelHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader3Layout.createSequentialGroup()
+                    .addContainerGap(890, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(51, Short.MAX_VALUE)))
         );
         panelHeader3Layout.setVerticalGroup(
             panelHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelHeader3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeader3Layout.createSequentialGroup()
+                    .addContainerGap(31, Short.MAX_VALUE)
+                    .addComponent(jButton4)
+                    .addContainerGap(32, Short.MAX_VALUE)))
         );
 
         jPanel7.setBackground(new java.awt.Color(181, 97, 54));
+        jPanel7.setPreferredSize(new java.awt.Dimension(609, 603));
 
         jLabel14.setText("Menu:");
 
@@ -592,7 +656,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(258, 258, 258)
                 .addComponent(btnEnviarBorrarMenu)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(260, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -660,22 +724,22 @@ public class OpcionesMenus extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(256, Short.MAX_VALUE)
+                .addContainerGap(61, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
+                .addGap(30, 30, 30))
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(panelHeader3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(160, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addContainerGap(97, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addComponent(panelHeader3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(615, Short.MAX_VALUE)))
+                    .addContainerGap(614, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout dialogBorrarMenuLayout = new javax.swing.GroupLayout(dialogBorrarMenu.getContentPane());
@@ -686,7 +750,9 @@ public class OpcionesMenus extends javax.swing.JFrame {
         );
         dialogBorrarMenuLayout.setVerticalGroup(
             dialogBorrarMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(dialogBorrarMenuLayout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -697,18 +763,31 @@ public class OpcionesMenus extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Opciones Menús");
 
+        jButton6.setText("Atrás");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
         panelHeaderLayout.setHorizontalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeaderLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(384, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addGap(330, 330, 330))
+                .addGap(236, 236, 236)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
         panelHeaderLayout.setVerticalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+            .addGroup(panelHeaderLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jButton6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnCrearMenu.setBackground(new java.awt.Color(171, 167, 111));
@@ -748,7 +827,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
                     .addComponent(btnCrearMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditarMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnBorrarMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(318, Short.MAX_VALUE))
             .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -783,6 +862,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
     private void btnCrearMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearMenuActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        dialogCrearMenu.pack();
         dialogCrearMenu.setVisible(true);
         dialogCrearMenu.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnCrearMenuActionPerformed
@@ -790,6 +870,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
     private void btnEditarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMenuActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        dialogEditarMenu.pack();
         dialogEditarMenu.setVisible(true);
         dialogEditarMenu.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnEditarMenuActionPerformed
@@ -797,52 +878,10 @@ public class OpcionesMenus extends javax.swing.JFrame {
     private void btnBorrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarMenuActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        dialogBorrarMenu.pack();
         dialogBorrarMenu.setVisible(true);
         dialogBorrarMenu.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnBorrarMenuActionPerformed
-
-    private void btnEnviarCrearMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCrearMenuActionPerformed
-
-        //Creamos un arraylist con los productos seleccionados y los añadimos
-        ArrayList<Producto> productosSel = new ArrayList<>();
-        int[] listaProductosSelInd = listaProductos_crearmenu.getSelectedIndices();
-        for (int i = 0; i < listaProductosSelInd.length; i++) {
-            productosSel.add(productos.get(listaProductosSelInd[i]));
-        }
-
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        String rutalocal = subirImagenCrearMenu.getSelectedFile().toString();
-        GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
-
-        boolean resultado = GestionMenu.add(new Menu(etNombre_crearmenu.getText(), Double.parseDouble(etPrecio_crearMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
-        if (resultado) {
-            JOptionPane.showMessageDialog(null, "Menu insertado correctamente");
-        } else {
-            JOptionPane.showMessageDialog(null, "Error de inserción");
-        }
-    }//GEN-LAST:event_btnEnviarCrearMenuActionPerformed
-
-    private void btnSubirImagen_addMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirImagen_addMenuActionPerformed
-        // TODO add your handling code here:
-        int resp = subirImagenCrearMenu.showOpenDialog(this);
-
-        if (resp == JFileChooser.APPROVE_OPTION) {
-            JOptionPane.showMessageDialog(null, "Imagen seleccionada correctamente!");
-            File file = subirImagenCrearMenu.getSelectedFile();
-            BufferedImage bi;
-            try {
-                // display the image in a Jlabel
-                bi = ImageIO.read(file);
-                Image image_escalada = bi.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
-                lblImagen.setIcon(new ImageIcon(image_escalada));
-            } catch (IOException e) {
-                e.printStackTrace(); // todo: implement proper error handeling
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Se pulsó la opcion Cancelar");
-        }
-    }//GEN-LAST:event_btnSubirImagen_addMenuActionPerformed
 
     private void btnEnviarEditarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarEditarMenuActionPerformed
         // TODO add your handling code here:
@@ -1033,6 +1072,75 @@ public class OpcionesMenus extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_elegirMenu_borrarItemStateChanged
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        dialogEditarMenu.setVisible(false);
+        setVisible(true);
+        setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        dialogBorrarMenu.setVisible(false);
+        setVisible(true);
+        setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void btnSubirImagen_addMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirImagen_addMenuActionPerformed
+        // TODO add your handling code here:
+        int resp = subirImagenCrearMenu.showOpenDialog(this);
+
+        if (resp == JFileChooser.APPROVE_OPTION) {
+            JOptionPane.showMessageDialog(null, "Imagen seleccionada correctamente!");
+            File file = subirImagenCrearMenu.getSelectedFile();
+            BufferedImage bi;
+            try {
+                // display the image in a Jlabel
+                bi = ImageIO.read(file);
+                Image image_escalada = bi.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+                lblImagen.setIcon(new ImageIcon(image_escalada));
+            } catch (IOException e) {
+                e.printStackTrace(); // todo: implement proper error handeling
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Se pulsó la opcion Cancelar");
+        }
+    }//GEN-LAST:event_btnSubirImagen_addMenuActionPerformed
+
+    private void btnEnviarCrearMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCrearMenuActionPerformed
+
+        //Creamos un arraylist con los productos seleccionados y los añadimos
+        ArrayList<Producto> productosSel = new ArrayList<>();
+        int[] listaProductosSelInd = listaProductos_crearmenu.getSelectedIndices();
+        for (int i = 0; i < listaProductosSelInd.length; i++) {
+            productosSel.add(productos.get(listaProductosSelInd[i]));
+        }
+
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String rutalocal = subirImagenCrearMenu.getSelectedFile().toString();
+        GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+
+        boolean resultado = GestionMenu.add(new Menu(etNombre_crearmenu.getText(), Double.parseDouble(etPrecio_crearMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
+        if (resultado) {
+            JOptionPane.showMessageDialog(null, "Menu insertado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error de inserción");
+        }
+    }//GEN-LAST:event_btnEnviarCrearMenuActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        dialogCrearMenu.setVisible(false);
+        setVisible(true);
+        setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1088,6 +1196,10 @@ public class OpcionesMenus extends javax.swing.JFrame {
     private javax.swing.JTextField etPrecio_borrarMenu;
     private javax.swing.JTextField etPrecio_crearMenu;
     private javax.swing.JTextField etPrecio_editarMenu;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

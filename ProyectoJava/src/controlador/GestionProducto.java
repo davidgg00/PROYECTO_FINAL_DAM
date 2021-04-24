@@ -53,6 +53,7 @@ public class GestionProducto {
 
                 String json = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_LISTAR_INGREDIENTES_HAMBURGUESA, values);
 
+                System.out.println(json);
                 Gson gson = new Gson();
                 Type listType = new TypeToken<ArrayList<Ingrediente>>() {
                 }.getType();

@@ -182,9 +182,7 @@ VerPedidos m;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+            .addComponent(panelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -202,7 +200,7 @@ VerPedidos m;
         OpcionesMenus opcMenu = new OpcionesMenus();
         opcMenu.setVisible(true);
         opcMenu.setLocationRelativeTo(null);
-        setVisible(false);
+        //setVisible(false);
     }//GEN-LAST:event_btnOpcMenusActionPerformed
 
     private void btnOpcProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcProductosActionPerformed
@@ -210,7 +208,7 @@ VerPedidos m;
         OpcionesProducto opcProd = new OpcionesProducto();
         opcProd.setVisible(true);
         opcProd.setLocationRelativeTo(null);
-        setVisible(false);
+        //setVisible(false);
     }//GEN-LAST:event_btnOpcProductosActionPerformed
 
     private void btnHistorialPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialPedidosActionPerformed

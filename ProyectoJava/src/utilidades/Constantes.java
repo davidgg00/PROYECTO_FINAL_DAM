@@ -22,7 +22,7 @@ public class Constantes {
     public static final String URL_LISTAR_MENUS = SERVER + "Productos/listarTipoProducto.php";
     public static final String URL_LISTAR_PRODUCTOS_MENU = SERVER + "Menu_Productos/listarProductosMenu.php";
     public static final String URL_MODIFY_PRODUCTO = SERVER + "Productos/modificarProducto.php";
-    public static final String URL_MODIFY_MENU = SERVER + "Menu/modificarMenu.php";
+    public static final String URL_MODIFY_MENU = SERVER + "Productos/modificarProducto.php";
    // public static final String URL_MODIFY_INGREDIENTE = SERVER + "modificarIngrediente.php";
    // public static final String URL_MODIFY_INGREDIENTES_PRODUCTO = SERVER + "modificarIngredientesProducto.php";
     public static final String URL_DELETE_PRODUCTO = SERVER + "Productos/eliminarProducto.php";
