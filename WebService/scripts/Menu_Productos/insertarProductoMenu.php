@@ -5,8 +5,8 @@ $idMenu = $_REQUEST['idMenu'];
 
 if (isset($idProducto) && isset($idMenu)) {
     $cbd = new ConexionBD();
-    $sql = "INSERT into productos_menu(id,idProducto,idMenu) VALUES(null,?,?)";
-    $parametros = array($idProducto, $idMenu);
+    $sql = "INSERT into comida_menu(id,idProductoMenu,idProductoAlimento) VALUES(null,?,?)";
+    $parametros = array($idMenu, $idProducto);
     $resultado = $cbd->consultaManipulacion($sql, $parametros);
 
     if ($resultado) {

@@ -7,9 +7,16 @@ $ruta_img = $_REQUEST['ruta_img'];
 
 if (isset($id) && isset($nombre) && isset($precio) && isset($ruta_img)) {
     $cbd = new ConexionBD();
-    $sql = "UPDATE producto SET nombre = ?, precio = ?, ruta_img = ? where id = ?";
-    $parametros = array($nombre, $precio, $ruta_img, $id);
-    $resultado = $cbd->consultaManipulacion($sql, $parametros);
+    if ($ruta_img == "null") {
+        $sql = "UPDATE producto SET nombre = ?, precio = ? where id = ?";
+        $parametros = array($nombre, $precio, $id);
+        $resultado = $cbd->consultaManipulacion($sql, $parametros);
+    } else {
+        $sql = "UPDATE producto SET nombre = ?, precio = ?, ruta_img = ? where id = ?";
+        $parametros = array($nombre, $precio, $ruta_img, $id);
+        $resultado = $cbd->consultaManipulacion($sql, $parametros);
+    }
+
 
     if ($resultado) {
         $resultado = Protocolo::CR_OK_MANIPULACION;

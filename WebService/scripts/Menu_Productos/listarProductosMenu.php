@@ -3,12 +3,14 @@ require_once '../MyWebService.php';
 
 $idMenu = $_REQUEST['idMenu'];
 if (isset($idMenu)) {
-    $sql = "Select producto.* FROM productos_menu INNER JOIN producto ON productos_menu.idProducto = producto.id INNER JOIN menus ON menus.id = productos_menu.idMenu WHERE menus.id= ?";
+    $sql = "SELECT producto.* FROM producto INNER JOIN comida_menu ON producto.id = comida_menu.idProductoAlimento WHERE comida_menu.idProductoMenu = ?";
     $cbd = new ConexionBD();
     $parametros = array($idMenu);
     $resultado = $cbd->consultaSeleccionParam($sql, $parametros);
 
     $resultado = json_encode($resultado);
 
-    echo !empty($resultado) ? $resultado : "sin_ProductosMenu";
+    echo $resultado;
+
+    // echo !empty($resultado) ? $resultado : "menu_noexiste";
 }

@@ -8,7 +8,7 @@ package Vista;
 import controlador.GestionFTP;
 import controlador.GestionIngrediente;
 import controlador.GestionProducto;
-import controlador.ValidarDatos;
+import controlador.Validar;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -843,8 +843,29 @@ public class OpcionesProducto extends javax.swing.JFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
 
-        //Si ha introducido nombre, precio, y seleccionado MINIMO un ingrediente
-        if (ValidarDatos.validarNombre(etNombre.getText()) && ValidarDatos.precioValido(etPrecio.getText()) && ValidarDatos.precioValido(etPrecio.getText())) {
+        String error = "";
+        if (!Validar.nombreCorrecto(etNombre.getText())) {
+            error += "El nombre no es correcto \n";
+        }
+
+        if (!Validar.precioCorrecto(etPrecio.getText())) {
+            error += "El precio no es correcto \n";
+        }
+
+        try {
+            String rutalocal = subirImagenaddProducto.getSelectedFile().toString();
+            if (!Validar.imagenCorrecta(rutalocal)) {
+                error += "La extensión de la imagen no es la correcta. (Tiene que ser JPG,JPEG o PNG) \n";
+            }
+        } catch (NullPointerException e) {
+            error += "¡Debes seleccionar un fichero! \n";
+        }
+
+        if (etTipoProducto.getSelectedItem().toString().equalsIgnoreCase("Hamburguesa") && listaIngredientes.getSelectedIndices().length == 0) {
+            error += "Las hamburguesas deben tener algun ingrediene mínimo \n";
+        }
+
+        if (error.isEmpty()) {
             //Creamos un arraylist con los ingredientes seleccionados y los añadimos
             ArrayList<Ingrediente> ingredientesSel = new ArrayList<>();
             int[] listaIngredientesSelInd = listaIngredientes.getSelectedIndices();
@@ -856,17 +877,24 @@ public class OpcionesProducto extends javax.swing.JFrame {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             String rutalocal = subirImagenaddProducto.getSelectedFile().toString();
             System.out.println(sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
-            GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+            boolean resultado = GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
 
-            boolean resultado = GestionProducto.add(new Producto(etNombre.getText(), Double.parseDouble(etPrecio.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), etTipoProducto.getSelectedItem().toString(), ingredientesSel));
+            if (resultado) {
+                resultado = GestionProducto.add(new Producto(etNombre.getText(), Double.parseDouble(etPrecio.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), etTipoProducto.getSelectedItem().toString(), ingredientesSel));
+            } else {
+                error += "Error al seleccionar la imagen";
+            }
+
             //Si la ejecución de añadir el producto con sus ingredientes es correcta.
             if (resultado) {
+                productos = GestionProducto.getAll();
                 JOptionPane.showMessageDialog(null, "Producto insertado correctamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Error de inserción");
             }
+            
         } else {
-            JOptionPane.showMessageDialog(null, "Error, hay datos requeridos que están vacíos o son incorrectos");
+            JOptionPane.showMessageDialog(null, error);
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
@@ -889,42 +917,71 @@ public class OpcionesProducto extends javax.swing.JFrame {
 
     private void btnEnviarEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarEditarProductoActionPerformed
         // TODO add your handling code here:
+        String error = "";
         if (elegirProduc.getSelectedIndex() >= 0) {
-            ArrayList<Ingrediente> ingredientesSel = new ArrayList<>();
-            if (productoSeleccionado.getTipo().equalsIgnoreCase("Hamburguesa")) {
-
-                int[] listaIngredientesSelInd = listaIngredientes1.getSelectedIndices();
-
-                for (int i = 0; i < listaIngredientesSelInd.length; i++) {
-                    ingredientesSel.add(ingredientes.get(listaIngredientesSelInd[i]));
-                }
-
-                GestionProducto.borrarTodosIngredientes(productoSeleccionado.getId());
-
+            if (!Validar.nombreCorrecto(etNombre_ep.getText())) {
+                error += "Nombre incorrecto \n";
             }
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            String rutalocal = subirImagenedProducto.getSelectedFile().toString();
-            System.out.println(sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
-            GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+            if (!Validar.precioCorrecto(etPrecio_ep.getText())) {
+                error += "Precio incorrecto \n";
+            }
 
-            GestionFTP.borrar(productoSeleccionado.getRuta_img());
+            if (subirImagenedProducto.getSelectedFile() != null && !Validar.imagenCorrecta(subirImagenedProducto.getSelectedFile().getAbsolutePath())) {
+                error += "Extension de imagen incorrecta \n";
+            }
 
-            boolean resultado = GestionProducto.editar(new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productoSeleccionado.getTipo(), ingredientesSel));
+            if (productoSeleccionado.getTipo().equals("Hamburguesa") && listaIngredientes1.getSelectedIndices().length == 0) {
+                error += "La hamburguesa debe de tener un ingrediente minimo";
+            }
 
-            if (resultado) {
-                JOptionPane.showMessageDialog(null, "Producto editado correctamente");
-                productos = GestionProducto.getAll();
-                elegirProduc.removeAllItems();
-                for (Producto producto : productos) {
-                    elegirProduc.addItem(producto.getNombre() + "," + producto.getPrecio() + "€");
+            System.out.println(error);
+            if (error.isEmpty()) {
+
+                ArrayList<Ingrediente> ingredientesSel = new ArrayList<>();
+
+                if (productoSeleccionado.getTipo().equalsIgnoreCase("Hamburguesa")) {
+
+                    int[] listaIngredientesSelInd = listaIngredientes1.getSelectedIndices();
+
+                    for (int i = 0; i < listaIngredientesSelInd.length; i++) {
+                        ingredientesSel.add(ingredientes.get(listaIngredientesSelInd[i]));
+                    }
+
+                    GestionProducto.borrarTodosIngredientes(productoSeleccionado.getId());
+
+                }
+
+                boolean resultado = false;
+                if (subirImagenedProducto.getSelectedFile() != null) {
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String rutalocal = subirImagenedProducto.getSelectedFile().toString();
+
+                    GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+
+                    GestionFTP.borrar(productoSeleccionado.getRuta_img());
+
+                    resultado = GestionProducto.editar(new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productoSeleccionado.getTipo(), ingredientesSel));
+                } else {
+                    resultado = GestionProducto.editar(new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), null, productoSeleccionado.getTipo(), ingredientesSel));
+                }
+
+                if (resultado) {
+                    JOptionPane.showMessageDialog(null, "Producto editado correctamente");
+                    productos = GestionProducto.getAll();
+                    elegirProduc.removeAllItems();
+                    productos = GestionProducto.getAll();
+                    for (Producto producto : productos) {
+                        elegirProduc.addItem(producto.getNombre() + "," + producto.getPrecio() + "€");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error de inserción");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Error de inserción");
+                JOptionPane.showMessageDialog(null, error);
             }
         }
-
 
     }//GEN-LAST:event_btnEnviarEditarProductoActionPerformed
 
@@ -1009,20 +1066,23 @@ public class OpcionesProducto extends javax.swing.JFrame {
                 listaIngredientes1.setEnabled(false);
                 listaDatosProducto_borrar.setText(productoSeleccionado.getNombre() + "," + productoSeleccionado.getTipo() + "," + productoSeleccionado.getPrecio());
             }
+
+            URL url;
+            BufferedImage image = null;
+            try {
+                System.out.println(productoSeleccionado.toString());
+                url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + productoSeleccionado.getRuta_img());
+                image = ImageIO.read(url);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            lblImagen_borrarProducto.setIcon(new ImageIcon(image_escalada));
+            listaDatosProducto_borrar.setText(productoSeleccionado.getNombre() + "\n" + productoSeleccionado.getTipo() + "\n" + productoSeleccionado.getPrecio());
         }
-        URL url;
-        BufferedImage image = null;
-        try {
-            url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + productoSeleccionado.getRuta_img());
-            image = ImageIO.read(url);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        lblImagen_borrarProducto.setIcon(new ImageIcon(image_escalada));
-        listaDatosProducto_borrar.setText(productoSeleccionado.getNombre() + "\n" + productoSeleccionado.getTipo() + "\n" + productoSeleccionado.getPrecio());
+
 
     }//GEN-LAST:event_elegirProduc_borrarItemStateChanged
 
@@ -1043,6 +1103,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
         for (Producto producto : productos) {
             elegirProduc_borrar.addItem(producto.getNombre() + "," + producto.getPrecio() + "€");
         }
+        elegirProduc_borrar.setSelectedIndex(0);
     }//GEN-LAST:event_btnBorrarEditarProductoActionPerformed
 
     private void btnSubirImagen_addproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirImagen_addproductoActionPerformed
@@ -1050,16 +1111,20 @@ public class OpcionesProducto extends javax.swing.JFrame {
         int resp = subirImagenaddProducto.showOpenDialog(this);
 
         if (resp == JFileChooser.APPROVE_OPTION) {
-            JOptionPane.showMessageDialog(null, "Imagen seleccionada correctamente!");
+
             File file = subirImagenaddProducto.getSelectedFile();
-            BufferedImage bi;
-            try {
-                // display the image in a Jlabel
-                bi = ImageIO.read(file);
-                Image image_escalada = bi.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
-                lblImagen.setIcon(new ImageIcon(image_escalada));
-            } catch (IOException e) {
-                e.printStackTrace(); // todo: implement proper error handeling
+            if (Validar.imagenCorrecta(file.getAbsolutePath())) {
+                BufferedImage bi;
+                try {
+                    // display the image in a Jlabel
+                    bi = ImageIO.read(file);
+                    Image image_escalada = bi.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+                    lblImagen.setIcon(new ImageIcon(image_escalada));
+                } catch (IOException e) {
+                    e.printStackTrace(); // todo: implement proper error handeling
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error, selecciona una imagen con extensión correcta");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Se pulsó la opcion Cancelar");
@@ -1071,17 +1136,21 @@ public class OpcionesProducto extends javax.swing.JFrame {
         int resp = subirImagenedProducto.showOpenDialog(this);
 
         if (resp == JFileChooser.APPROVE_OPTION) {
-            JOptionPane.showMessageDialog(null, "Imagen seleccionada correctamente!");
             File file = subirImagenedProducto.getSelectedFile();
-            BufferedImage bi;
-            try {
-                // display the image in a Jlabel
-                bi = ImageIO.read(file);
-                Image image_escalada = bi.getScaledInstance(lblImagen_ed.getWidth(), lblImagen_ed.getHeight(), Image.SCALE_SMOOTH);
-                lblImagen_ed.setIcon(new ImageIcon(image_escalada));
-            } catch (IOException e) {
-                e.printStackTrace(); // todo: implement proper error handeling
+            if (Validar.imagenCorrecta(subirImagenedProducto.getSelectedFile().getAbsolutePath())) {
+                BufferedImage bi;
+                try {
+                    // display the image in a Jlabel
+                    bi = ImageIO.read(file);
+                    Image image_escalada = bi.getScaledInstance(lblImagen_ed.getWidth(), lblImagen_ed.getHeight(), Image.SCALE_SMOOTH);
+                    lblImagen_ed.setIcon(new ImageIcon(image_escalada));
+                } catch (IOException e) {
+                    e.printStackTrace(); // todo: implement proper error handeling
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error, selecciona una imagen con extensión correcta");
             }
+
         } else {
             JOptionPane.showMessageDialog(null, "Se pulsó la opcion Cancelar");
         }
@@ -1089,7 +1158,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1101,14 +1170,14 @@ public class OpcionesProducto extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-         dialogEditarProducto.setVisible(false);
+        dialogEditarProducto.setVisible(false);
         setVisible(true);
         setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         dialogBorrarProducto.setVisible(false);
+        dialogBorrarProducto.setVisible(false);
         setVisible(true);
         setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton4ActionPerformed

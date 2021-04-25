@@ -37,15 +37,16 @@ public class GestionFTP {
 			fis = new FileInputStream(rutaLocal);
 			transferencia = cliente.storeFile(timestamp, fis);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Error, no se ha encontrado el fichero a subir");
+                    e.printStackTrace();
+			return false;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+                        return false;
+			
 		}
 
 		if (!transferencia) {
-			System.out.println("Error de subida");
+			return false;
 		}
                 cliente.disconnect();
 		return transferencia;
