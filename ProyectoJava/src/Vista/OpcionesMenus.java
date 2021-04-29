@@ -8,6 +8,7 @@ package Vista;
 import controlador.GestionFTP;
 import controlador.GestionMenu;
 import controlador.GestionProducto;
+import controlador.Validar;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -73,7 +74,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
         if (menus.size() > 0) {
             menuSeleccionado = menus.get(elegirMenu_editar.getSelectedIndex());
         }
-        
+
         int contador = 0;
         for (int i = 0; i < menus.size(); i++) {
             if (menus.get(i).getId() == menuSeleccionado.getId()) {
@@ -92,10 +93,10 @@ public class OpcionesMenus extends javax.swing.JFrame {
             }
         }
         if (menuSeleccionado != null) {
-         listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
-        listaProductos_borrarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
-        etNombre_borrarMenu.setText(menuSeleccionado.getNombre());
-        etPrecio_borrarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));   
+            listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+            listaProductos_borrarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+            etNombre_borrarMenu.setText(menuSeleccionado.getNombre());
+            etPrecio_borrarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));
         }
     }
 
@@ -886,6 +887,29 @@ public class OpcionesMenus extends javax.swing.JFrame {
     private void btnEnviarEditarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarEditarMenuActionPerformed
         // TODO add your handling code here:
         if (elegirMenu_editar.getSelectedIndex() >= 0) {
+            String error = "";
+
+            if (!Validar.nombreCorrecto(etNombre_editarMenu.getText())) {
+                error += "El nombre no es correcto \n";
+            }
+
+            if (!Validar.precioCorrecto(etPrecio_editarMenu.getText())) {
+                error += "El precio no es correcto \n";
+            }
+
+            try {
+                String rutalocal = subirImagenEditarMenu.getSelectedFile().toString();
+                if (!Validar.imagenCorrecta(rutalocal)) {
+                    error += "La extensión de la imagen no es la correcta. (Tiene que ser JPG,JPEG o PNG) \n";
+                }
+            } catch (NullPointerException e) {
+                error += "¡Debes seleccionar un fichero! \n";
+            }
+
+            if (listaProductos_editarMenu.getSelectedIndices().length == 0) {
+                error += "Las hamburguesas deben tener algun ingrediene mínimo \n";
+            }
+
             ArrayList<Producto> productosSel = new ArrayList<>();
 
             int[] listaMenuSelInd = listaProductos_editarMenu.getSelectedIndices();
@@ -893,54 +917,59 @@ public class OpcionesMenus extends javax.swing.JFrame {
             for (int i = 0; i < listaMenuSelInd.length; i++) {
                 productosSel.add(productos.get(listaMenuSelInd[i]));
             }
+            if (error.isEmpty()) {
+                GestionMenu.borrarTodosProductos(menuSeleccionado.getId());
 
-            GestionMenu.borrarTodosProductos(menuSeleccionado.getId());
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                String rutalocal = subirImagenEditarMenu.getSelectedFile().toString();
+                System.out.println(sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+                GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+                //new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productoSeleccionado.getTipo(), ingredientesSel)
+                boolean resultado = GestionMenu.editar(new Menu(menuSeleccionado.getId(), etNombre_editarMenu.getText().toString(), Double.parseDouble(etPrecio_editarMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            String rutalocal = subirImagenEditarMenu.getSelectedFile().toString();
-            System.out.println(sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
-            GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
-            //new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productoSeleccionado.getTipo(), ingredientesSel)
-            boolean resultado = GestionMenu.editar(new Menu(menuSeleccionado.getId(), etNombre_editarMenu.getText().toString(), Double.parseDouble(etPrecio_editarMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
-
-            if (resultado) {
-                JOptionPane.showMessageDialog(null, "Producto editado correctamente");
-                productos = GestionProducto.getAll();
-                elegirMenu_editar.removeAllItems();
-                for (Menu menu : menus) {
-                    elegirMenu_editar.addItem(menu.getNombre() + "-" + menu.getId());
-                }
-                DefaultListModel modelo = new DefaultListModel();
-                modelo = new DefaultListModel();
-                for (Producto producto : productos) {
-                    modelo.addElement(producto.getNombre());
-                }
-                listaProductos_editarMenu.setModel(modelo);
-                menus = GestionMenu.getAll();
-                ArrayList<Integer> selecs = new ArrayList<>();
-                menuSeleccionado = menus.get(elegirMenu_editar.getSelectedIndex());
-                int contador = 0;
-                for (int i = 0; i < menus.size(); i++) {
-                    if (menus.get(i).getId() == menuSeleccionado.getId()) {
-                        for (int j = 0; j < menus.get(i).getProductos().size(); j++) {
-                            for (int k = 0; k < menuSeleccionado.getProductos().size(); k++) {
-                                if (menus.get(i).getProductos().get(j).getId() == menuSeleccionado.getProductos().get(k).getId()) {
-                                    for (int l = 0; l < productos.size(); l++) {
-                                        if (productos.get(l).getId() == menus.get(i).getProductos().get(j).getId()) {
-                                            selecs.add(l);
+                if (resultado) {
+                    JOptionPane.showMessageDialog(null, "Producto editado correctamente");
+                    productos = GestionProducto.getAll();
+                    elegirMenu_editar.removeAllItems();
+                    for (Menu menu : menus) {
+                        elegirMenu_editar.addItem(menu.getNombre() + "-" + menu.getId());
+                    }
+                    DefaultListModel modelo = new DefaultListModel();
+                    modelo = new DefaultListModel();
+                    for (Producto producto : productos) {
+                        modelo.addElement(producto.getNombre());
+                    }
+                    listaProductos_editarMenu.setModel(modelo);
+                    menus = GestionMenu.getAll();
+                    ArrayList<Integer> selecs = new ArrayList<>();
+                    menuSeleccionado = menus.get(elegirMenu_editar.getSelectedIndex());
+                    int contador = 0;
+                    for (int i = 0; i < menus.size(); i++) {
+                        if (menus.get(i).getId() == menuSeleccionado.getId()) {
+                            for (int j = 0; j < menus.get(i).getProductos().size(); j++) {
+                                for (int k = 0; k < menuSeleccionado.getProductos().size(); k++) {
+                                    if (menus.get(i).getProductos().get(j).getId() == menuSeleccionado.getProductos().get(k).getId()) {
+                                        for (int l = 0; l < productos.size(); l++) {
+                                            if (productos.get(l).getId() == menus.get(i).getProductos().get(j).getId()) {
+                                                selecs.add(l);
+                                            }
                                         }
-                                    }
 
+                                    }
                                 }
                             }
                         }
                     }
+                    listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error de inserción");
                 }
-                listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
             } else {
-                JOptionPane.showMessageDialog(null, "Error de inserción");
+                JOptionPane.showMessageDialog(null, error);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error no hay seleccionado ningún menú.");
         }
     }//GEN-LAST:event_btnEnviarEditarMenuActionPerformed
 
@@ -990,7 +1019,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
                     }
                 }
 
-                 URL url;
+                URL url;
                 BufferedImage image = null;
                 try {
                     url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + menuSeleccionado.getRuta_img());
@@ -1002,7 +1031,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
                 }
                 Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 lblImagen_editarMenu.setIcon(new ImageIcon(image_escalada));
-                
+
                 listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
                 etNombre_editarMenu.setText(menuSeleccionado.getNombre());
                 etPrecio_editarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));
@@ -1021,7 +1050,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error de borrado");
         }
         elegirMenu_borrar.removeAllItems();
-        
+
         menus = GestionMenu.getAll();
         for (Menu menu : menus) {
             elegirMenu_borrar.addItem(menu.getNombre() + "-" + menu.getId());
@@ -1114,24 +1143,52 @@ public class OpcionesMenus extends javax.swing.JFrame {
 
     private void btnEnviarCrearMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCrearMenuActionPerformed
 
-        //Creamos un arraylist con los productos seleccionados y los añadimos
-        ArrayList<Producto> productosSel = new ArrayList<>();
-        int[] listaProductosSelInd = listaProductos_crearmenu.getSelectedIndices();
-        for (int i = 0; i < listaProductosSelInd.length; i++) {
-            productosSel.add(productos.get(listaProductosSelInd[i]));
+        String error = "";
+        if (!Validar.nombreCorrecto(etNombre_crearmenu.getText())) {
+            error += "El nombre no es correcto \n";
         }
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        String rutalocal = subirImagenCrearMenu.getSelectedFile().toString();
-        GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+        if (!Validar.precioCorrecto(etPrecio_crearMenu.getText())) {
+            error += "El precio no es correcto \n";
+        }
 
-        boolean resultado = GestionMenu.add(new Menu(etNombre_crearmenu.getText(), Double.parseDouble(etPrecio_crearMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
-        if (resultado) {
-            JOptionPane.showMessageDialog(null, "Menu insertado correctamente");
+        try {
+            String rutalocal = subirImagenCrearMenu.getSelectedFile().toString();
+            if (!Validar.imagenCorrecta(rutalocal)) {
+                error += "La extensión de la imagen no es la correcta. (Tiene que ser JPG,JPEG o PNG) \n";
+            }
+        } catch (NullPointerException e) {
+            error += "¡Debes seleccionar un fichero! \n";
+        }
+
+        if (listaProductos_crearmenu.getSelectedIndices().length == 0) {
+            error += "El menú deben tener algun alimento como mínimo \n";
+        }
+
+        if (error.isEmpty()) {
+            //Creamos un arraylist con los productos seleccionados y los añadimos
+            ArrayList<Producto> productosSel = new ArrayList<>();
+            int[] listaProductosSelInd = listaProductos_crearmenu.getSelectedIndices();
+            for (int i = 0; i < listaProductosSelInd.length; i++) {
+                productosSel.add(productos.get(listaProductosSelInd[i]));
+            }
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            String rutalocal = subirImagenCrearMenu.getSelectedFile().toString();
+            GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+
+            boolean resultado = GestionMenu.add(new Menu(etNombre_crearmenu.getText(), Double.parseDouble(etPrecio_crearMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
+            if (resultado) {
+                JOptionPane.showMessageDialog(null, "Menu insertado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error de inserción");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Error de inserción");
+            JOptionPane.showMessageDialog(null, error);
         }
+
+
     }//GEN-LAST:event_btnEnviarCrearMenuActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
