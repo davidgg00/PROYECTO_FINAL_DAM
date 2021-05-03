@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package com.AutoBurger.android.Modelo;
 
+import modelo.*;
 import java.io.Serializable;
 import modelo.*;
 import java.util.ArrayList;

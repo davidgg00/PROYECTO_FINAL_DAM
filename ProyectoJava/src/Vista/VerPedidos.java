@@ -5,8 +5,8 @@
  */
 package Vista;
 
-import com.example.hamburgergg_android.Modelo.ClientHandler;
-import com.example.hamburgergg_android.Modelo.Pedido;
+import modelo.ClientHandler;
+import com.AutoBurger.android.Modelo.Pedido;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
