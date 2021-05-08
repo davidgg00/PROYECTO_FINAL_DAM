@@ -46,7 +46,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;   public void paintComponent(Graphics g) {  &#xd;&#xa;     Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;     Principal.class.getResource(&quot;/imagenes/background_2.png&quot;));  &#xd;&#xa;     g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;     }  &#xd;&#xa;   };"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      Principal.class.getResource(&quot;/imagenes/background_2.png&quot;));  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
       </AuxValues>
 
       <Layout>
@@ -57,12 +57,12 @@
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="369" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnHistorialPedidos" pref="289" max="32767" attributes="0"/>
-                      <Component id="btnOpcProductos" max="32767" attributes="0"/>
-                      <Component id="btnOpcMenus" max="32767" attributes="0"/>
-                      <Component id="btnVerPedidos" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="355" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnHistorialPedidos" min="-2" pref="289" max="-2" attributes="0"/>
+                      <Component id="btnOpcMenus" min="-2" pref="289" max="-2" attributes="0"/>
+                      <Component id="btnVerPedidos" min="-2" pref="289" max="-2" attributes="0"/>
+                      <Component id="btnOpcProductos" alignment="0" min="-2" pref="289" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -76,9 +76,9 @@
                   <Component id="btnVerPedidos" min="-2" pref="66" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="btnOpcMenus" min="-2" pref="66" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="btnOpcProductos" min="-2" pref="66" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="btnHistorialPedidos" min="-2" pref="66" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>

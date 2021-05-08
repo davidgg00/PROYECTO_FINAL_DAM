@@ -97,67 +97,53 @@ public class VerPedidos extends javax.swing.JFrame {
         panelPedidos = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/background_pedidosPendientes.jpg"));  
+                    VerPedidos.class.getResource("/imagenes/background_pedidosPendientes.jpg"));  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
         panelHeader = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        panelContent = new JPanel() {  
+            public void paintComponent(Graphics g) {  
+                Image img = Toolkit.getDefaultToolkit().getImage(  
+                    Principal.class.getResource("/imagenes/background_pedidosPendientes.jpg"));  
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
+            }  
+        };
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelPedidos.setMaximumSize(new java.awt.Dimension(800, 500));
         panelPedidos.setMinimumSize(new java.awt.Dimension(800, 500));
         panelPedidos.setPreferredSize(new java.awt.Dimension(800, 500));
-        panelPedidos.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        panelPedidos.setLayout(new java.awt.BorderLayout());
 
         panelHeader.setBackground(new java.awt.Color(130, 93, 46));
         panelHeader.setPreferredSize(new java.awt.Dimension(786, 84));
+        panelHeader.setLayout(new java.awt.BorderLayout());
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Pedidos Pendientes");
+        jLabel6.setMinimumSize(null);
+        panelHeader.add(jLabel6, java.awt.BorderLayout.CENTER);
 
-        jButton1.setText("Atrás");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/goback.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        panelHeader.add(jButton1, java.awt.BorderLayout.EAST);
 
-        javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
-        panelHeader.setLayout(panelHeaderLayout);
-        panelHeaderLayout.setHorizontalGroup(
-            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeaderLayout.createSequentialGroup()
-                .addContainerGap(282, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
-                .addComponent(jButton1)
-                .addGap(25, 25, 25))
-        );
-        panelHeaderLayout.setVerticalGroup(
-            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(panelHeaderLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        panelPedidos.add(panelHeader, java.awt.BorderLayout.NORTH);
 
-        panelPedidos.add(panelHeader);
+        panelContent.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        panelPedidos.add(panelContent, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(panelPedidos, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -211,6 +197,7 @@ public class VerPedidos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel6;
+    public static javax.swing.JPanel panelContent;
     private javax.swing.JPanel panelHeader;
     public static javax.swing.JPanel panelPedidos;
     // End of variables declaration//GEN-END:variables
