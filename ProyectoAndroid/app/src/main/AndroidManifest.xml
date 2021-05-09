@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.AutoBurger.android">
+    package="com.AutoBurger.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,15 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.AutoBurger.android.ActivityVerHistorialPedidos"></activity>
-        <activity android:name="com.AutoBurger.android.EsperarComida" />
-        <activity android:name="com.AutoBurger.android.VerPedidoActual" />
-        <activity android:name="com.AutoBurger.android.VerDetallesMenu" />
-        <activity android:name="com.AutoBurger.android.VerDetallesProducto" />
-        <activity android:name="com.AutoBurger.android.FormularioRegistro" />
-        <activity android:name="com.AutoBurger.android.ActivityCartaAlimentos" />
-        <activity android:name="com.AutoBurger.android.BienvenidaActivity" />
-        <activity android:name="com.AutoBurger.android.MainActivity">
+        <activity android:name="com.AutoBurger.app.ActivityVerHistorialPedidos"></activity>
+        <activity android:name="com.AutoBurger.app.EsperarComida" />
+        <activity android:name="com.AutoBurger.app.VerPedidoActual" />
+        <activity android:name="com.AutoBurger.app.VerDetallesMenu" />
+        <activity android:name="com.AutoBurger.app.VerDetallesProducto" />
+        <activity android:name="com.AutoBurger.app.FormularioRegistro" />
+        <activity android:name="com.AutoBurger.app.ActivityCartaAlimentos" />
+        <activity android:name="com.AutoBurger.app.BienvenidaActivity" />
+        <activity android:name="com.AutoBurger.app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

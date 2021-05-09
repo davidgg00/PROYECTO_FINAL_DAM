@@ -1,4 +1,4 @@
-package com.AutoBurger.android;
+package com.AutoBurger.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.AutoBurger.app.Controlador.Validar;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,7 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.AutoBurger.android.Modelo.Conexion;
+import com.AutoBurger.app.Modelo.Conexion;
 
 import org.json.JSONObject;
 
@@ -41,6 +42,20 @@ public class FormularioRegistro extends AppCompatActivity {
      * @param view
      */
     public void realizarRegistro(View view){
+        String error = "";
+        if (!Validar.correo(etCorreo.getText().toString())){
+            error += "El correo ha de ser válido y de máximo 50 carácteres\n";
+        }
+
+        if (!Validar.nombreUsuario(etNombre.getText().toString())){
+            error += "El nombre ha de ser válido (máximo 25 caracteres y solo letras)\n";
+        }
+
+        if (!Validar.password(etPassword.getText().toString())){
+            error += "La contraseña no puede estar vacía";
+        }
+
+        if (error.isEmpty()){
             RequestQueue queue = Volley.newRequestQueue(FormularioRegistro.this);
             StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
                     Conexion.URL_WEB_SERVICES + "Usuario/registroUsuario.php",
@@ -49,8 +64,7 @@ public class FormularioRegistro extends AppCompatActivity {
                         public void onResponse(String response) {
                             try {
                                 JSONObject objResultado = new JSONObject(response);
-                                String estado=objResultado.get("estado").toString();
-                                if (estado.equalsIgnoreCase("exito")){
+                                if (Validar.respuestaWebService(objResultado)){
                                     Toast.makeText(FormularioRegistro.this,"Registro realizado correctamente, inicie sesión.",Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     finish();
@@ -78,6 +92,10 @@ public class FormularioRegistro extends AppCompatActivity {
                 }
             };
             queue.add(jsonObjectRequest);
+        } else {
+            Toast.makeText(FormularioRegistro.this,error,Toast.LENGTH_LONG).show();
+        }
+
     }
 
     /**

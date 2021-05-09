@@ -1,4 +1,4 @@
-package com.AutoBurger.android.Modelo;
+package com.AutoBurger.app.Modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;

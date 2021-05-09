@@ -1,4 +1,4 @@
-package com.AutoBurger.android;
+package com.AutoBurger.app;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.AutoBurger.android;
+package com.AutoBurger.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,10 +19,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.AutoBurger.android.Modelo.Conexion;
-import com.AutoBurger.android.Modelo.Menu;
-import com.AutoBurger.android.Modelo.Pedido;
-import com.AutoBurger.android.Modelo.Producto;
+import com.AutoBurger.app.Modelo.Conexion;
+import com.AutoBurger.app.Modelo.Menu;
+import com.AutoBurger.app.Modelo.Pedido;
+import com.AutoBurger.app.Modelo.Producto;
 
 import org.json.JSONException;
 import org.json.JSONObject;

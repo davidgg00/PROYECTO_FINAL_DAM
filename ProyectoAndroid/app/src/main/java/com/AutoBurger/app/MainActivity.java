@@ -1,4 +1,4 @@
-package com.AutoBurger.android;
+package com.AutoBurger.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.AutoBurger.app.Controlador.Validar;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,8 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.AutoBurger.android.Controlador.GestionProductos;
-import com.AutoBurger.android.Modelo.Conexion;
+import com.AutoBurger.app.Controlador.GestionProductos;
+import com.AutoBurger.app.Modelo.Conexion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,18 +81,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject objResultado = new JSONObject(response);
-                            String estado=objResultado.get("estado").toString();
-                            if (estado.equalsIgnoreCase("exito")){
-                                System.out.println(objResultado.toString());
+                            if (Validar.respuestaWebService(objResultado)){
                                 Intent intent = new Intent(getApplicationContext(), BienvenidaActivity.class);
                                 intent.putExtra("email",objResultado.get("email").toString());
                                 intent.putExtra("nombre",objResultado.get("nombre").toString());
                                 startActivity(intent);
                             } else {
+                                System.out.println(objResultado);
                                 Toast.makeText(MainActivity.this,"Usuario o contraseña incorrecta",Toast.LENGTH_LONG).show();
                             }
-
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

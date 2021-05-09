@@ -12,7 +12,7 @@ if (isset($email) && isset($password)) {
     $resultado = $cbd->consultaSeleccionParam($sql, $parametros);
 
     if ($resultado) {
-        $respuesta = array("estado" => "exito", "email" => $email, "nombre" => $resultado[0]->nombre);
+        $respuesta = array("code" => "CR_OK", "email" => $email, "nombre" => $resultado[0]->nombre);
     } else {
         $respuesta = array(
             "estado" => "error",

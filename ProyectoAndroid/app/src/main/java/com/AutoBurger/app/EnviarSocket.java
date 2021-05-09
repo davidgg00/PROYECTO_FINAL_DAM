@@ -1,9 +1,9 @@
-package com.AutoBurger.android;
+package com.AutoBurger.app;
 
 import android.os.AsyncTask;
 
 
-import com.AutoBurger.android.Modelo.Pedido;
+import com.AutoBurger.app.Modelo.Pedido;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

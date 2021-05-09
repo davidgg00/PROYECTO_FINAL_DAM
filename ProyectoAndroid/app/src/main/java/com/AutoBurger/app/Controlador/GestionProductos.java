@@ -1,4 +1,4 @@
-package com.AutoBurger.android.Controlador;
+package com.AutoBurger.app.Controlador;
 
 import android.content.Context;
 
@@ -8,8 +8,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.AutoBurger.android.Modelo.Conexion;
-import com.AutoBurger.android.Modelo.Producto;
+import com.AutoBurger.app.Modelo.Conexion;
+import com.AutoBurger.app.Modelo.Producto;
 
 import java.util.ArrayList;
 import java.util.HashMap;

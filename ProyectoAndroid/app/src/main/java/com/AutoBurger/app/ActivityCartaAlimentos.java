@@ -1,4 +1,4 @@
-package com.AutoBurger.android;
+package com.AutoBurger.app;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,11 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.AutoBurger.android.Modelo.Ingrediente;
-import com.AutoBurger.android.Modelo.Menu;
-import com.AutoBurger.android.Modelo.Pedido;
-import com.AutoBurger.android.Modelo.Producto;
-import com.AutoBurger.android.Modelo.recyclerAdapter;
+import com.AutoBurger.app.Modelo.Ingrediente;
+import com.AutoBurger.app.Modelo.Menu;
+import com.AutoBurger.app.Modelo.Pedido;
+import com.AutoBurger.app.Modelo.Producto;
+import com.AutoBurger.app.Modelo.recyclerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

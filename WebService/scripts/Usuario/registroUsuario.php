@@ -11,10 +11,10 @@ if (isset($nombre) && isset($email) && isset($password)) {
     $resultado = $cbd->consultaManipulacion($sql, $parametros);
 
     if ($resultado == 0) {
-        $resultado = array("estado" => "error");
+        $resultado = Protocolo::CR_ERROR_MANIPULACION;
     } else {
-        $resultado = array("estado" => "exito");
+        $resultado = Protocolo::CR_OK_MANIPULACION;
     }
 
-    echo json_encode($resultado);
+    echo $resultado;
 }

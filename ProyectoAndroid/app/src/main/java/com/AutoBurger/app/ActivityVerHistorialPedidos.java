@@ -1,4 +1,4 @@
-package com.AutoBurger.android;
+package com.AutoBurger.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.AutoBurger.android.Controlador.GestionProductos;
-import com.AutoBurger.android.Modelo.Menu;
-import com.AutoBurger.android.Modelo.Pedido;
-import com.AutoBurger.android.Modelo.Producto;
+import com.AutoBurger.app.Controlador.GestionProductos;
+import com.AutoBurger.app.Modelo.Menu;
+import com.AutoBurger.app.Modelo.Pedido;
+import com.AutoBurger.app.Modelo.Producto;
 
 import org.json.JSONArray;
 import org.json.JSONException;

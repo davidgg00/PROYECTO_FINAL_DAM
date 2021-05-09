@@ -1,4 +1,4 @@
-package com.AutoBurger.android;
+package com.AutoBurger.app;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.widget.TextView;
 
-import com.AutoBurger.android.Modelo.Pedido;
+import com.AutoBurger.app.Modelo.Pedido;
 
 import java.util.concurrent.ExecutionException;
 

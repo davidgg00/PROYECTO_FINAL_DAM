@@ -1,4 +1,4 @@
-package com.AutoBurger.android.Modelo;
+package com.AutoBurger.app.Modelo;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.AutoBurger.android.R;
+import com.AutoBurger.app.R;
 
 import java.util.ArrayList;
 
