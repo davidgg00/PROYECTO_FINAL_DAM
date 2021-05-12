@@ -196,7 +196,6 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), VerDetallesProducto.class);
                 intent.putExtra("producto",tipoProducto.get(position));
                 intent.putExtra("pedido",pedido);
-                finish();
                 startActivity(intent);
             }
         };
@@ -210,7 +209,6 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), VerDetallesMenu.class);
                 intent.putExtra("menu",menu.get(position));
                 intent.putExtra("pedido",pedido);
-                finish();
                 startActivity(intent);
             }
         };

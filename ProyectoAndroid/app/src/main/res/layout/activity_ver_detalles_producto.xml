@@ -49,17 +49,19 @@
                 android:text="Ingredientes:"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/etIngredProducto"
-                android:layout_width="310dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:editable="false"
-                android:ems="10"
-                android:enabled="false"
-                android:gravity="start|top"
-                android:inputType="textMultiLine" />
+            <ScrollView
+                android:id="@+id/scrollIngredientesProducto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/wrapperIngredientesProducto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
 
             <TextView
                 android:id="@+id/labelPrecio"
@@ -89,6 +91,7 @@
                 android:background="@drawable/botonredondeado"
                 android:onClick="volverCarta"
                 android:text="Volver a la carta" />
+
         </LinearLayout>
 
         <LinearLayout

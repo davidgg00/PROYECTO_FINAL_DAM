@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.AutoBurger.app.Modelo.Ingrediente;
@@ -18,7 +21,9 @@ public class VerDetallesProducto extends AppCompatActivity {
     TextView titulo,precio;
     Pedido pedido;
     Producto producto;
-    EditText etIngredProducto;
+    ScrollView scrollIngredientesProduct;
+    LinearLayout wrapperIngredientesProducto;
+    TextView labelIngredientes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +31,9 @@ public class VerDetallesProducto extends AppCompatActivity {
 
         titulo = (TextView)findViewById(R.id.labelTitulo);
         precio = (TextView)findViewById(R.id.labelPrecio);
-        etIngredProducto = (EditText)findViewById(R.id.etIngredProducto);
+        scrollIngredientesProduct = (ScrollView)findViewById(R.id.scrollIngredientesProducto);
+        wrapperIngredientesProducto = (LinearLayout)findViewById(R.id.wrapperIngredientesProducto);
+        labelIngredientes = (TextView)findViewById(R.id.labelIngredientes);
 
         //Recibimos parametros
         Bundle bundle=getIntent().getExtras();
@@ -36,11 +43,31 @@ public class VerDetallesProducto extends AppCompatActivity {
         titulo.setText(producto.getNombre());
         precio.setText(String.valueOf(producto.getPrecio()) + "€");
         ArrayList<Ingrediente> ingredientes = producto.getIngredientes();
-        String resultado = "";
-        for (Ingrediente ingrediente: ingredientes) {
-            resultado+="-" + ingrediente.getNombre()+"\n\n";
+
+        switch(producto.getTipo()) {
+            case "Hamburguesa":
+                for (Ingrediente ingrediente : ingredientes) {
+                    TextView textView = new TextView(this);
+                    textView.setText("-" + ingrediente.getNombre());
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    wrapperIngredientesProducto.addView(textView);
+                }
+                break;
+            case "Bebida":
+                TextView textView = new TextView(this);
+                textView.setText("-" + producto.getNombre());
+                labelIngredientes.setText("Producto: ");
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                wrapperIngredientesProducto.addView(textView);
+                break;
+
+            case "Patatas":
+                TextView textView2 = new TextView(this);
+                textView2.setText("Aceite de girasol y sal.");
+                textView2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                wrapperIngredientesProducto.addView(textView2);
+                break;
         }
-        etIngredProducto.setText(resultado);
 
     }
 

@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.AutoBurger.app.Modelo.Ingrediente;
 import com.AutoBurger.app.Modelo.Menu;
 import com.AutoBurger.app.Modelo.Pedido;
 import com.AutoBurger.app.Modelo.Producto;
@@ -18,8 +22,9 @@ public class VerDetallesMenu extends AppCompatActivity {
     TextView titulo,precio;
     Pedido pedido;
     Menu menu;
-    EditText etIngredProducto;
-
+    EditText etProductosMenu;
+    ScrollView scrollProductosMenu;
+    LinearLayout wrapperProductosMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +33,8 @@ public class VerDetallesMenu extends AppCompatActivity {
 
         titulo = (TextView)findViewById(R.id.labelTitulo);
         precio = (TextView)findViewById(R.id.labelPrecio);
-        etIngredProducto = (EditText)findViewById(R.id.etIngredProducto);
+        wrapperProductosMenu = (LinearLayout)findViewById(R.id.wrapperProductosMenu);
+        scrollProductosMenu = (ScrollView)findViewById(R.id.scrollProductosMenu );
 
         //Recibimos parametros
         Bundle bundle=getIntent().getExtras();
@@ -38,7 +44,14 @@ public class VerDetallesMenu extends AppCompatActivity {
         titulo.setText(menu.getNombre());
         precio.setText(String.valueOf(menu.getPrecio()) + "€");
 
-        etIngredProducto.setText("-");
+        for (Producto producto: menu.getProductos()) {
+            TextView textView = new TextView(this);
+            textView.setText("-" + producto.getNombre());
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,18);
+            wrapperProductosMenu.addView(textView);
+
+        }
+
     }
 
     public void volverCarta(View view){

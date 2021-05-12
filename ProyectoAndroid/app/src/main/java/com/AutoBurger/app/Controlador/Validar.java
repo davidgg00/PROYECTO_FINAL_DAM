@@ -6,11 +6,6 @@ import org.json.JSONObject;
 public class Validar {
     public static boolean respuestaWebService(JSONObject json){
         try {
-            System.out.println(json.toString());
-            System.out.println(json.toString());
-            System.out.println(json.toString());
-            System.out.println(json.toString());
-            System.out.println(json.toString());
             String estado=json.get("code").toString();
             if (estado.equalsIgnoreCase("CR_OK")){
                 return true;
