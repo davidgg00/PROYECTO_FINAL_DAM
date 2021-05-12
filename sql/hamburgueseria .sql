@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2021 a las 20:01:18
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.9
+-- Servidor: mysql
+-- Tiempo de generación: 12-05-2021 a las 16:39:36
+-- Versión del servidor: 5.7.34
+-- Versión de PHP: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `hamburgueseria`
 --
-CREATE DATABASE IF NOT EXISTS `hamburgueseria` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `hamburgueseria`;
 
 -- --------------------------------------------------------
 
@@ -41,6 +39,18 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`email`, `password`, `nombre`) VALUES
 ('invitado@invitado.com', '', 'invitado');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comida_menu`
+--
+
+CREATE TABLE `comida_menu` (
+  `id` int(11) NOT NULL,
+  `idProductoMenu` int(11) NOT NULL,
+  `idProductoAlimento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -65,16 +75,6 @@ CREATE TABLE `ingredientes` (
   `nombre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `ingredientes`
---
-
-INSERT INTO `ingredientes` (`id`, `nombre`) VALUES
-(1, 'Queso'),
-(2, 'Ketchup'),
-(3, 'Pollo'),
-(4, 'Ternera');
-
 -- --------------------------------------------------------
 
 --
@@ -85,19 +85,6 @@ CREATE TABLE `ingredientes_hamburguesa` (
   `id` int(11) NOT NULL,
   `idHamburguesa` int(11) NOT NULL,
   `idIngrediente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `menus`
---
-
-CREATE TABLE `menus` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(25) NOT NULL,
-  `precio` double NOT NULL,
-  `ruta_img` varchar(125) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -149,20 +136,8 @@ CREATE TABLE `producto` (
   `id` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `precio` double NOT NULL,
-  `tipo` enum('Hamburguesa','Bebida','Patatas','') NOT NULL,
+  `tipo` enum('Hamburguesa','Bebida','Patatas','Menu') NOT NULL,
   `ruta_img` varchar(125) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `productos_menu`
---
-
-CREATE TABLE `productos_menu` (
-  `id` int(11) NOT NULL,
-  `idProducto` int(11) NOT NULL,
-  `idMenu` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -174,6 +149,14 @@ CREATE TABLE `productos_menu` (
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`email`);
+
+--
+-- Indices de la tabla `comida_menu`
+--
+ALTER TABLE `comida_menu`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idProductoMenu` (`idProductoMenu`,`idProductoAlimento`),
+  ADD KEY `idProductoAlimento` (`idProductoAlimento`);
 
 --
 -- Indices de la tabla `detalle_pedido`
@@ -198,12 +181,6 @@ ALTER TABLE `ingredientes_hamburguesa`
   ADD KEY `idIngrediente` (`idIngrediente`);
 
 --
--- Indices de la tabla `menus`
---
-ALTER TABLE `menus`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
@@ -217,16 +194,14 @@ ALTER TABLE `producto`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `productos_menu`
---
-ALTER TABLE `productos_menu`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idProducto` (`idProducto`,`idMenu`),
-  ADD KEY `idMenu` (`idMenu`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `comida_menu`
+--
+ALTER TABLE `comida_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
@@ -238,18 +213,12 @@ ALTER TABLE `detalle_pedido`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes_hamburguesa`
 --
 ALTER TABLE `ingredientes_hamburguesa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `menus`
---
-ALTER TABLE `menus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -265,14 +234,15 @@ ALTER TABLE `producto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `productos_menu`
---
-ALTER TABLE `productos_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `comida_menu`
+--
+ALTER TABLE `comida_menu`
+  ADD CONSTRAINT `comida_menu_ibfk_1` FOREIGN KEY (`idProductoMenu`) REFERENCES `producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comida_menu_ibfk_2` FOREIGN KEY (`idProductoAlimento`) REFERENCES `producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `detalle_pedido`
@@ -293,13 +263,6 @@ ALTER TABLE `ingredientes_hamburguesa`
 --
 ALTER TABLE `pedidos`
   ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`email_cliente`) REFERENCES `cliente` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `productos_menu`
---
-ALTER TABLE `productos_menu`
-  ADD CONSTRAINT `productos_menu_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `productos_menu_ibfk_2` FOREIGN KEY (`idMenu`) REFERENCES `menus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

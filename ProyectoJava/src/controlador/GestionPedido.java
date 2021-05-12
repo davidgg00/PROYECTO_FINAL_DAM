@@ -5,7 +5,7 @@
  */
 package controlador;
 
-import com.AutoBurger.android.Modelo.Pedido;
+import com.AutoBurger.app.Modelo.Pedido;
 import com.google.gson.Gson;
 import modelo.Json;
 import utilidades.Constantes;

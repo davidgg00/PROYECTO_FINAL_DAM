@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+#docker run --name my-own-mysql -e MYSQL_ROOT_PASSWORD=mypass123 -d mysql
+#docker run -dp 3000:3000 --network todo-app -e MYSQL_HOST=mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=secret -e MYSQL_DB=todos getting-started:v2
+  www:
+    build: .
+    restart: always
+    ports: 
+        - "80:80"
+    volumes:
+        - ./www:/var/www/html/
+    links:
+        - mysql
+    networks:
+        - default    
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports: 
+      - "3306:3306"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: hamburgueseria
+      MYSQL_USER: user
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test      
+    networks:
+        - default  
+  
+# docker run -d     --network todo-app --network-alias mysql     -v todo-mysql-data:/var/lib/mysql     -e MYSQL_ROOT_PASSWORD=secret     -e MYSQL_DATABASE=todos     mysql:5.7
+#docker run --name my-own-phpmyadmin -d --link my-own-mysql:db -p 8081:80 phpmyadmin
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links: 
+      - mysql:mysql
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: mysql
+  

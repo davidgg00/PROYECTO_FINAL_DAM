@@ -6,10 +6,10 @@
 package modelo;
 
 import Vista.VerPedidos;
-import com.AutoBurger.android.Modelo.Pedido;
-import com.AutoBurger.android.Modelo.Producto;
-import com.AutoBurger.android.Modelo.Menu;
-import com.AutoBurger.android.Modelo.Ingrediente;
+import com.AutoBurger.app.Modelo.Pedido;
+import com.AutoBurger.app.Modelo.Producto;
+import com.AutoBurger.app.Modelo.Menu;
+import com.AutoBurger.app.Modelo.Ingrediente;
 import controlador.GestionPedido;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -98,9 +98,9 @@ public class ClientHandler extends Thread {
             panel.add(scroll, BorderLayout.NORTH);
             panel.add(b2, BorderLayout.SOUTH);
 
-            VerPedidos.panelPedidos.add(panel);
-            VerPedidos.panelPedidos.repaint();
-            VerPedidos.panelPedidos.revalidate();
+            VerPedidos.panelContent.add(panel);
+            VerPedidos.panelContent.repaint();
+            VerPedidos.panelContent.revalidate();
 
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -6,7 +6,7 @@
 package Vista;
 
 import modelo.ClientHandler;
-import com.AutoBurger.android.Modelo.Pedido;
+import com.AutoBurger.app.Modelo.Pedido;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;

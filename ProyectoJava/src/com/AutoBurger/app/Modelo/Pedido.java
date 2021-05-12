@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.AutoBurger.android.Modelo;
+package com.AutoBurger.app.Modelo;
 
 import java.io.Serializable;
 import modelo.*;
