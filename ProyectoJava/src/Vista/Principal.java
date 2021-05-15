@@ -77,6 +77,7 @@ VerPedidos m;
         btnOpcMenus = new javax.swing.JButton();
         btnOpcProductos = new javax.swing.JButton();
         btnHistorialPedidos = new javax.swing.JButton();
+        btnOpcIngredientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 615));
@@ -143,6 +144,15 @@ VerPedidos m;
             }
         });
 
+        btnOpcIngredientes.setBackground(new java.awt.Color(171, 167, 111));
+        btnOpcIngredientes.setText("Opciones Ingredientes");
+        btnOpcIngredientes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnOpcIngredientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpcIngredientesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPadreLayout = new javax.swing.GroupLayout(panelPadre);
         panelPadre.setLayout(panelPadreLayout);
         panelPadreLayout.setHorizontalGroup(
@@ -153,6 +163,7 @@ VerPedidos m;
             .addGroup(panelPadreLayout.createSequentialGroup()
                 .addGap(355, 355, 355)
                 .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnOpcIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHistorialPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOpcMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,13 +176,15 @@ VerPedidos m;
                 .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(btnVerPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnOpcIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(btnOpcMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(42, 42, 42)
                 .addComponent(btnOpcProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
+                .addGap(47, 47, 47)
                 .addComponent(btnHistorialPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(65, 65, 65))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,7 +195,7 @@ VerPedidos m;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 678, Short.MAX_VALUE)
         );
 
         pack();
@@ -214,6 +227,13 @@ VerPedidos m;
     private void btnHistorialPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialPedidosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHistorialPedidosActionPerformed
+
+    private void btnOpcIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcIngredientesActionPerformed
+        // TODO add your handling code here:
+        OpcionesIngredientes opcIngr = new OpcionesIngredientes();
+        opcIngr.setVisible(true);
+        opcIngr.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnOpcIngredientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +272,7 @@ VerPedidos m;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHistorialPedidos;
+    private javax.swing.JButton btnOpcIngredientes;
     private javax.swing.JButton btnOpcMenus;
     private javax.swing.JButton btnOpcProductos;
     private javax.swing.JButton btnVerPedidos;
