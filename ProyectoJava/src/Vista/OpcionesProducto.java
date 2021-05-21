@@ -848,6 +848,12 @@ public class OpcionesProducto extends javax.swing.JFrame {
             //Si la ejecución de añadir el producto con sus ingredientes es correcta.
             if (resultado) {
                 productos = GestionProducto.getAll();
+                elegirProduc.removeAllItems();
+                elegirProduc_borrar.removeAllItems();
+                for (Producto producto : productos) {
+                    elegirProduc.addItem(producto.getNombre());
+                    elegirProduc_borrar.addItem(producto.getNombre());
+                }
                 JOptionPane.showMessageDialog(null, "Producto insertado correctamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Error de inserción");
@@ -931,9 +937,10 @@ public class OpcionesProducto extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Producto editado correctamente");
                     productos = GestionProducto.getAll();
                     elegirProduc.removeAllItems();
-                    productos = GestionProducto.getAll();
+                    elegirProduc_borrar.removeAllItems();
                     for (Producto producto : productos) {
-                        elegirProduc.addItem(producto.getNombre() + "," + producto.getPrecio() + "€");
+                        elegirProduc.addItem(producto.getNombre());
+                        elegirProduc_borrar.addItem(producto.getNombre());
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Error de inserción");
@@ -1058,10 +1065,12 @@ public class OpcionesProducto extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Error de borrado");
         }
-        elegirProduc_borrar.removeAllItems();
         productos = GestionProducto.getAll();
+        elegirProduc.removeAllItems();
+        elegirProduc_borrar.removeAllItems();
         for (Producto producto : productos) {
-            elegirProduc_borrar.addItem(producto.getNombre() + "," + producto.getPrecio() + "€");
+            elegirProduc.addItem(producto.getNombre());
+            elegirProduc_borrar.addItem(producto.getNombre());
         }
         elegirProduc_borrar.setSelectedIndex(0);
     }//GEN-LAST:event_btnBorrarEditarProductoActionPerformed

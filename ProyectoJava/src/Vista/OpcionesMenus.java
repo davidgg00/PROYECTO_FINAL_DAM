@@ -48,8 +48,6 @@ public class OpcionesMenus extends javax.swing.JFrame {
      */
     public OpcionesMenus() {
         initComponents();
-        
-       
 
         productos = GestionProducto.getAll();
         DefaultListModel modelo = new DefaultListModel();
@@ -100,10 +98,10 @@ public class OpcionesMenus extends javax.swing.JFrame {
             etNombre_borrarMenu.setText(menuSeleccionado.getNombre());
             etPrecio_borrarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));
         }
-        
-        panelFormularioCM.setBackground(new Color(181,97,54,240));
-        panelFormularioBM.setBackground(new Color(181,97,54,240));
-        panelFormularioEM.setBackground(new Color(181,97,54,240));
+
+        panelFormularioCM.setBackground(new Color(181, 97, 54, 240));
+        panelFormularioBM.setBackground(new Color(181, 97, 54, 240));
+        panelFormularioEM.setBackground(new Color(181, 97, 54, 240));
     }
 
     /**
@@ -804,7 +802,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
         dialogBorrarMenu.pack();
         dialogBorrarMenu.setVisible(true);
         dialogBorrarMenu.setLocationRelativeTo(null);
-        dialogBorrarMenu.setSize(700,700);
+        dialogBorrarMenu.setSize(700, 700);
     }//GEN-LAST:event_btnBorrarMenuActionPerformed
 
     private void btnEnviarEditarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarEditarMenuActionPerformed
@@ -840,6 +838,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
             for (int i = 0; i < listaMenuSelInd.length; i++) {
                 productosSel.add(productos.get(listaMenuSelInd[i]));
             }
+
             if (error.isEmpty()) {
                 GestionMenu.borrarTodosProductos(menuSeleccionado.getId());
 
@@ -852,7 +851,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
                 boolean resultado = GestionMenu.editar(new Menu(menuSeleccionado.getId(), etNombre_editarMenu.getText().toString(), Double.parseDouble(etPrecio_editarMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
 
                 if (resultado) {
-                    JOptionPane.showMessageDialog(null, "Producto editado correctamente");
+                    JOptionPane.showMessageDialog(null, "Menu editado correctamente");
                     productos = GestionProducto.getAll();
                     elegirMenu_editar.removeAllItems();
                     for (Menu menu : menus) {
@@ -865,6 +864,12 @@ public class OpcionesMenus extends javax.swing.JFrame {
                     }
                     listaProductos_editarMenu.setModel(modelo);
                     menus = GestionMenu.getAll();
+                    elegirMenu_borrar.removeAllItems();
+                    elegirMenu_editar.removeAllItems();
+                    for (Menu menu : menus) {
+                        elegirMenu_borrar.addItem(menu.getNombre());
+                        elegirMenu_editar.addItem(menu.getNombre());
+                    }
                     ArrayList<Integer> selecs = new ArrayList<>();
                     menuSeleccionado = menus.get(elegirMenu_editar.getSelectedIndex());
                     int contador = 0;
@@ -1104,6 +1109,13 @@ public class OpcionesMenus extends javax.swing.JFrame {
             boolean resultado = GestionMenu.add(new Menu(etNombre_crearmenu.getText(), Double.parseDouble(etPrecio_crearMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
             if (resultado) {
                 JOptionPane.showMessageDialog(null, "Menu insertado correctamente");
+                menus = GestionMenu.getAll();
+                elegirMenu_borrar.removeAllItems();
+                elegirMenu_editar.removeAllItems();
+                for (Menu menu : menus) {
+                    elegirMenu_borrar.addItem(menu.getNombre());
+                    elegirMenu_editar.addItem(menu.getNombre());
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Error de inserción");
             }
