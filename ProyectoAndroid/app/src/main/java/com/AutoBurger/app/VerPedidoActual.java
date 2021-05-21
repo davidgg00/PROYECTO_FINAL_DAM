@@ -1,7 +1,9 @@
 package com.AutoBurger.app;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -27,6 +29,10 @@ import com.AutoBurger.app.Modelo.Producto;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -132,57 +138,61 @@ public class VerPedidoActual extends AppCompatActivity {
     }
 
     public void pagarPedido(View view){
-        RequestQueue queue = Volley.newRequestQueue(VerPedidoActual.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Conexion.URL_WEB_SERVICES + "Pedido/insertarPedido.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
 
-                        try {
+            RequestQueue queue = Volley.newRequestQueue(VerPedidoActual.this);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Conexion.URL_WEB_SERVICES + "Pedido/insertarPedido.php",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
 
-                            System.out.println(response);
+                            try {
 
-                            JSONObject respuesta = new JSONObject(response);
+                                System.out.println(response);
+
+                                JSONObject respuesta = new JSONObject(response);
 
 
-                            for (Object objeto : pedido.getCuenta()){
-                                if (objeto instanceof Producto){
-                                    addDetallePedidoBBDD(((Producto) objeto).getId(), Integer.parseInt(respuesta.get("id").toString()));
-                                    ((Producto) objeto).getId();
-                                } else if(objeto instanceof Menu){
-                                    addDetallePedidoBBDD(((Menu) objeto).getId(), Integer.parseInt(respuesta.get("id").toString()));
+                                for (Object objeto : pedido.getCuenta()){
+                                    if (objeto instanceof Producto){
+                                        addDetallePedidoBBDD(((Producto) objeto).getId(), Integer.parseInt(respuesta.get("id").toString()));
+                                        ((Producto) objeto).getId();
+                                    } else if(objeto instanceof Menu){
+                                        addDetallePedidoBBDD(((Menu) objeto).getId(), Integer.parseInt(respuesta.get("id").toString()));
+                                    }
                                 }
+
+                                pedido.setId(Integer.parseInt(respuesta.get("id").toString()));
+                                pedido.setPedidoNumero(Integer.parseInt(respuesta.get("pedidoNumero").toString()));
+                                pedido.setFecha(respuesta.get("fecha").toString());
+                                pedido.setEntregado(Boolean.parseBoolean(respuesta.get("entregado").toString()));
+                                Intent intent = new Intent(VerPedidoActual.this, EsperarComida.class);
+                                intent.putExtra("pedidoNumero",respuesta.get("pedidoNumero").toString());
+                                intent.putExtra("pedido",pedido);
+                                finish();
+                                startActivity(intent);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
 
-                            pedido.setId(Integer.parseInt(respuesta.get("id").toString()));
-                            pedido.setPedidoNumero(Integer.parseInt(respuesta.get("pedidoNumero").toString()));
-                            pedido.setFecha(respuesta.get("fecha").toString());
-                            pedido.setEntregado(Boolean.parseBoolean(respuesta.get("entregado").toString()));
-                             Intent intent = new Intent(VerPedidoActual.this, EsperarComida.class);
-                            intent.putExtra("pedidoNumero",respuesta.get("pedidoNumero").toString());
-                             intent.putExtra("pedido",pedido);
-                            finish();
-                             startActivity(intent);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            }) {
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("email_cliente", pedido.getEmail_cliente());
+                    params.put("total_a_pagar", String.valueOf(pedido.getTotal_a_pagar()));
+                    return params;
+                }
+            };
+            queue.add(stringRequest);
 
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        }) {
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email_cliente", pedido.getEmail_cliente());
-                params.put("total_a_pagar", String.valueOf(pedido.getTotal_a_pagar()));
-                return params;
-            }
-        };
-        queue.add(stringRequest);
+
     }
 
     private void addDetallePedidoBBDD(final int detalle, final int idPedido){

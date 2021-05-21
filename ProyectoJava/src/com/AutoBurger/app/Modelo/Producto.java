@@ -1,7 +1,6 @@
 package com.AutoBurger.app.Modelo;
 
 import java.io.Serializable;
-import modelo.*;
 import java.util.ArrayList;
 
 /*

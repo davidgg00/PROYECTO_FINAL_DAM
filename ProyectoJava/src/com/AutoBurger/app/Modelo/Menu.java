@@ -5,9 +5,7 @@
  */
 package com.AutoBurger.app.Modelo;
 
-import modelo.*;
 import java.io.Serializable;
-import modelo.*;
 import java.util.ArrayList;
 
 /**

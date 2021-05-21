@@ -32,8 +32,7 @@ VerPedidos m;
             public void run() {
                 VerPedidos.abrirServerSocket();
             }
-        },
-                1000
+        },1000
         );
         }
         

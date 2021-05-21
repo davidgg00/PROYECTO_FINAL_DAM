@@ -6,7 +6,6 @@
 package com.AutoBurger.app.Modelo;
 
 import java.io.Serializable;
-import modelo.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 

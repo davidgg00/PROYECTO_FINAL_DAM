@@ -7,9 +7,18 @@ package Vista;
 
 import modelo.ClientHandler;
 import com.AutoBurger.app.Modelo.Pedido;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import controlador.GestionPedido;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -18,10 +27,13 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import modelo.Json;
 
 /**
  *
@@ -30,14 +42,14 @@ import javax.swing.JPanel;
 public class VerPedidos extends javax.swing.JFrame {
 
     static String mensaje = "";
-    
+
     /**
      * Creates new form VerPedidos
      */
     public VerPedidos() {
         initComponents();
         System.out.println("a");
-       
+
 //        new java.util.Timer().schedule( 
 //        new java.util.TimerTask() {
 //            @Override
@@ -47,23 +59,22 @@ public class VerPedidos extends javax.swing.JFrame {
 //        }, 
 //        5000 
 //);
-       // abrirServerSocket();
-        
+        // abrirServerSocket();
     }
 
-    public static void abrirServerSocket(){
-        
-    InputStreamReader isr;
+    public static void abrirServerSocket() {
+
+        InputStreamReader isr;
         BufferedReader br;
-        
+
         ServerSocket serverSocket = null;
-        
+
         try {
             serverSocket = new ServerSocket(8000);
         } catch (IOException ex) {
             Logger.getLogger(VerPedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         while (true) {
             Socket socket = null;
             try {
@@ -77,14 +88,13 @@ public class VerPedidos extends javax.swing.JFrame {
                 Thread nuevoHilo = new ClientHandler(socket, new DataInputStream(socket.getInputStream()), new DataOutputStream(socket.getOutputStream()), cuentaRecibido);
 
                 nuevoHilo.start();
-               
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }    
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -150,9 +160,9 @@ public class VerPedidos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       // Principal p = new Principal(false);
-       //p.setVisible(true);
-      // p.setLocationRelativeTo(null);
+        // Principal p = new Principal(false);
+        //p.setVisible(true);
+        // p.setLocationRelativeTo(null);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -187,11 +197,10 @@ public class VerPedidos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VerPedidos().setVisible(true);
-                
+
             }
         });
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

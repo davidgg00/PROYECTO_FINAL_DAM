@@ -6,7 +6,6 @@
 package modelo;
 
 import java.io.Serializable;
-import modelo.*;
 import java.util.ArrayList;
 
 /**

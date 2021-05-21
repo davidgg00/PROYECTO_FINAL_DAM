@@ -9,7 +9,6 @@ import Vista.VerPedidos;
 import com.AutoBurger.app.Modelo.Pedido;
 import com.AutoBurger.app.Modelo.Producto;
 import com.AutoBurger.app.Modelo.Menu;
-import com.AutoBurger.app.Modelo.Ingrediente;
 import controlador.GestionPedido;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,7 +23,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -53,8 +51,7 @@ public class ClientHandler extends Thread {
             //añadido
             ObjectOutputStream out = new ObjectOutputStream(this.socket.getOutputStream());
 
-            //DataOutputStream dout = new DataOutputStream((s.getOutputStream()));
-            //dout.writeBoolean(true);
+            
             JPanel panel = new JPanel();
             panel.setBackground(Color.gray);
 

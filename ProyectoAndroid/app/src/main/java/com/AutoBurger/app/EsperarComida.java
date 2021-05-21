@@ -6,28 +6,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.widget.TextView;
 
+import com.AutoBurger.app.Controlador.GestionPedidos;
+import com.AutoBurger.app.Controlador.GestionProductos;
 import com.AutoBurger.app.Modelo.Pedido;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class EsperarComida extends AppCompatActivity {
     TextView numeroPedidoLabel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esperar_comida);
 
-        numeroPedidoLabel = (TextView)findViewById(R.id.labelPedidoNumero);
+        numeroPedidoLabel = (TextView) findViewById(R.id.labelPedidoNumero);
 
         //Recibimos parametros
-        Bundle bundle=getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
         int numeroPedido = Integer.parseInt(bundle.get("pedidoNumero").toString());
         final Pedido pedido = (Pedido) bundle.get("pedido");
 
@@ -41,7 +47,7 @@ public class EsperarComida extends AppCompatActivity {
                 EnviarSocket enviar = new EnviarSocket();
 
                 try {
-                    if (!enviar.execute(pedido).get().toString().isEmpty()){
+                    if (enviar.execute(pedido).get() != null) {
                         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 // Vibrate for 500 milliseconds
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -70,12 +76,39 @@ public class EsperarComida extends AppCompatActivity {
                                 .show();
 
 
-                    }else {
-                        System.out.println("elseee");
+                    } else {
+                        Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                System.out.println(GestionPedidos.borrarPedido(pedido.getId(), getApplicationContext()));
+                            }
+                        });
+                        thread.start();
+                        new AlertDialog.Builder(EsperarComida.this)
+                                .setTitle("ERROR")
+                                .setMessage("no se ha podido conectar con el servidor, hable con los responsables del restaurante")
+
+                                // Specifying a listener allows you to take an action before dismissing the dialog.
+                                // The dialog is automatically dismissed when a dialog button is clicked.
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(EsperarComida.this, ActivityCartaAlimentos.class);
+                                        intent.putExtra("pedido",pedido);
+                                        finish();
+                                        startActivity(intent);
+                                    }
+                                })
+
+                                // A null listener allows the button to dismiss the dialog and take no further action
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (NullPointerException e) {
                     e.printStackTrace();
                 }
             }

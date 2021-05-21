@@ -1,8 +1,13 @@
 package com.AutoBurger.app;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 
+import androidx.appcompat.app.AlertDialog;
+
+import com.AutoBurger.app.Controlador.GestionPedidos;
 import com.AutoBurger.app.Modelo.Pedido;
 
 import java.io.DataOutputStream;
@@ -11,7 +16,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 
 public class EnviarSocket extends AsyncTask<Pedido, Pedido,Pedido> {
@@ -28,7 +35,9 @@ public class EnviarSocket extends AsyncTask<Pedido, Pedido,Pedido> {
         Boolean fin = false;
         Pedido cuentareturn = null;
         try {
-            s = new Socket("192.168.1.23",8000);
+            s = new Socket();
+            s.connect(new InetSocketAddress("192.168.1.23",8000), 5000);
+
             OutputStream outputStream = s.getOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(pedido);
@@ -44,10 +53,18 @@ public class EnviarSocket extends AsyncTask<Pedido, Pedido,Pedido> {
             //hasta aqui
             // s.close();
         } catch (UnknownHostException e) {
+            System.out.println("1");
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                s.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+
         } catch (ClassNotFoundException e) {
+            System.out.println("3");
             e.printStackTrace();
         }
 

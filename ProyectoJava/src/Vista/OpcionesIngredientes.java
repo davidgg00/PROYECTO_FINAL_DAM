@@ -13,7 +13,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Ingrediente;

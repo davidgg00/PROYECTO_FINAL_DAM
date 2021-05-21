@@ -29,6 +29,7 @@ public class Constantes {
     public static final String URL_DELETE_PRODUCTOS_MENU = SERVER + "Menu_Productos/eliminarTodosProductosMenu.php";
     public static final String URL_DELETE_INGREDIENTE = SERVER + "Ingredientes/eliminarIngrediente.php";
     public static final String URL_PEDIDO_ENTREGADO = SERVER + "Pedido/pedidoEntregado.php";
+    public static final String URL_LISTAR_PEDIDOS_PENDIENTRES = SERVER + "Pedido/listarPedidosPendientes.php";
     public static final String URL_DELETE_MENU = SERVER + "Menu/eliminarMenu.php";
     public static final String CR_OK = "CR_OK";
     public static final String CR_ERROR = "CR_ERROR";
