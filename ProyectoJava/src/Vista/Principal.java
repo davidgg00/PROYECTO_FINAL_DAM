@@ -225,6 +225,9 @@ VerPedidos m;
 
     private void btnHistorialPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialPedidosActionPerformed
         // TODO add your handling code here:
+        OpcionesHistorialPedidos opcHistorial = new OpcionesHistorialPedidos();
+        opcHistorial.setVisible(true);
+        opcHistorial.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnHistorialPedidosActionPerformed
 
     private void btnOpcIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcIngredientesActionPerformed
