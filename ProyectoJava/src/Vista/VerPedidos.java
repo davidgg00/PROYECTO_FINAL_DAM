@@ -5,8 +5,10 @@
  */
 package Vista;
 
+import com.AutoBurger.app.Modelo.Menu;
 import modelo.ClientHandler;
 import com.AutoBurger.app.Modelo.Pedido;
+import com.AutoBurger.app.Modelo.Producto;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -48,18 +50,7 @@ public class VerPedidos extends javax.swing.JFrame {
      */
     public VerPedidos() {
         initComponents();
-        System.out.println("a");
-
-//        new java.util.Timer().schedule( 
-//        new java.util.TimerTask() {
-//            @Override
-//            public void run() {
-//                abrirServerSocket();
-//            }
-//        }, 
-//        5000 
-//);
-        // abrirServerSocket();
+        getPedidosAntiguos();
     }
 
     public static void abrirServerSocket() {
@@ -210,4 +201,37 @@ public class VerPedidos extends javax.swing.JFrame {
     private javax.swing.JPanel panelHeader;
     public static javax.swing.JPanel panelPedidos;
     // End of variables declaration//GEN-END:variables
+
+    private void getPedidosAntiguos() {
+        JsonArray jsonArrayPedidos = GestionPedido.getPedidosPendientes();
+        
+        for (int i = 0; i < jsonArrayPedidos.size(); i++) {
+            System.out.println(jsonArrayPedidos.get(i).getAsJsonObject().get("pedido").toString());
+            JPanel panel = new JPanel();
+            panel.setBackground(Color.gray);
+
+            Pedido pedidoAntiguo = new Pedido(Integer.parseInt(jsonArrayPedidos.get(i).getAsJsonObject().get("id").toString().replace("\"", "")), jsonArrayPedidos.get(i).getAsJsonObject().get("email_cliente").toString(), Double.parseDouble(jsonArrayPedidos.get(i).getAsJsonObject().get("total_a_pagar").toString().replace("\"", "")));
+            JTextArea datosPedido = new JTextArea(4, 14);
+            datosPedido.setText(jsonArrayPedidos.get(i).getAsJsonObject().get("pedido").toString());
+            JButton b2 = new JButton("Pedido Listo");
+            b2.setBounds(100, 100, 80, 30);
+            b2.setBackground(Color.green);
+            b2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        b2.getParent().hide();
+                        GestionPedido.entregado(pedidoAntiguo);
+                }
+
+            });
+            JScrollPane scroll = new JScrollPane(datosPedido);
+            panel.setLayout(new BorderLayout());
+            panel.add(scroll, BorderLayout.NORTH);
+            panel.add(b2, BorderLayout.SOUTH);
+
+            VerPedidos.panelContent.add(panel);
+            VerPedidos.panelContent.repaint();
+            VerPedidos.panelContent.revalidate();
+        }
+    }
 }

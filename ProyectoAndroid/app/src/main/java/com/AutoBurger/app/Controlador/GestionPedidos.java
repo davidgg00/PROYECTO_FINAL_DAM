@@ -76,4 +76,30 @@ public class GestionPedidos {
         return datos.equalsIgnoreCase("{\"code\":\"CR_OK\", \"value\":\"OK_MANIPULACION\"}");
     }
 
+    public static boolean pedidoCompletado(final int idPedido, Context contexto){
+        String datos = null;
+        RequestQueue requestQueue = Volley.newRequestQueue(contexto);
+        RequestFuture<String> future = RequestFuture.newFuture();
+        StringRequest request = new StringRequest(Request.Method.GET, Conexion.URL_WEB_SERVICES + "Pedido/comprobarEstadoPedido.php?idPedido="+idPedido, future, future){
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("idPedido", String.valueOf(idPedido));
+                return params;
+            }
+        };
+        requestQueue.add(request);
+
+        try {
+            datos = future.get().toString();
+            System.out.println(datos);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        return datos.equalsIgnoreCase("{\"code\":\"CR_OK\", \"value\":\"OK_SELECCION\"}");
+    }
+
 }

@@ -30,6 +30,10 @@ public class Pedido implements Serializable {
         this.cuenta = new ArrayList<Object>();
     }
 
+    public Pedido(){
+        
+    }
+
     public int getId() {
         return id;
     }

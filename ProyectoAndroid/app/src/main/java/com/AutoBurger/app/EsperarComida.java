@@ -47,7 +47,10 @@ public class EsperarComida extends AppCompatActivity {
                 EnviarSocket enviar = new EnviarSocket();
 
                 try {
-                    if (enviar.execute(pedido).get() != null) {
+                    Pedido pedidoRecibido = enviar.execute(pedido).get();
+
+                    if (pedidoRecibido != null) {
+                        if (pedidoRecibido.getId() != -99){
                         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 // Vibrate for 500 milliseconds
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -74,8 +77,44 @@ public class EsperarComida extends AppCompatActivity {
                                 // A null listener allows the button to dismiss the dialog and take no further action
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .show();
+                        } else {
+                            Thread thread = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    do {
+                                        try {
+                                            TimeUnit.SECONDS.sleep(5);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        System.out.println("comprobando si el pedido pagado ya está completado...");
+                                    }while (!GestionPedidos.pedidoCompletado(pedido.getId(), getApplicationContext()));
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            new AlertDialog.Builder(EsperarComida.this)
+                                                    .setTitle("TU PEDIDO ESTÁ LISTO")
+                                                    .setMessage("VE A POR EL!")
 
+                                                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                                                    // The dialog is automatically dismissed when a dialog button is clicked.
+                                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            Intent intent = new Intent(EsperarComida.this, MainActivity.class);
+                                                            finish();
+                                                            startActivity(intent);
+                                                        }
+                                                    })
 
+                                                    // A null listener allows the button to dismiss the dialog and take no further action
+                                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                                    .show();
+                                        }
+                                    });
+                                }
+                            });
+                            thread.start();
+                        }
                     } else {
                         Thread thread = new Thread(new Runnable() {
                             @Override
