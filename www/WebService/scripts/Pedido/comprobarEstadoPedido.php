@@ -1,6 +1,6 @@
 <?php
 require_once '../MyWebService.php';
-$id = $_REQUEST['id'];
+$id = $_REQUEST['idPedido'];
 
 if (isset($id)) {
     $cbd = new ConexionBD();
