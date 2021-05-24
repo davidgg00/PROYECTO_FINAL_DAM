@@ -43,15 +43,14 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
             String datosPedido = "";
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject j = null;
+                JSONObject e = jsonArray.getJSONObject(i);
                 int contador = i + 1;
                 if (contador < (jsonArray.length() - 1)){
                     j = jsonArray.getJSONObject(i+1);
-                }
-
-                JSONObject e = jsonArray.getJSONObject(i);
-                if (j == null){
+                } else {
                     j = jsonArray.getJSONObject(i);
                 }
+
 
                 datosPedido += e.get("nombre") + "\n";
                 //Si el pedido siguiente es distinto al anterior o es el último creamos botones y texto.
@@ -65,7 +64,7 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
                     txt.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
 
                     final Button btn = new Button(this);
-                    if (e.get("idPedido").toString().equalsIgnoreCase(jsonArray.getJSONObject(i - 1).get("idPedido").toString())){
+                    if (i == 0 || e.get("idPedido").toString().equalsIgnoreCase(jsonArray.getJSONObject(i - 1).get("idPedido").toString())){
                         btn.setId(Integer.parseInt(e.get("idPedido").toString()));
                         btn.setOnClickListener(new View.OnClickListener() {
                             @Override
