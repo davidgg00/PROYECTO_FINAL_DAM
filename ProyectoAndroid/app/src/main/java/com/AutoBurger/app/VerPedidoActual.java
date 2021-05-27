@@ -138,93 +138,10 @@ public class VerPedidoActual extends AppCompatActivity {
     }
 
     public void pagarPedido(View view){
-
-            RequestQueue queue = Volley.newRequestQueue(VerPedidoActual.this);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Conexion.URL_WEB_SERVICES + "Pedido/insertarPedido.php",
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-
-                            try {
-
-                                System.out.println(response);
-
-                                JSONObject respuesta = new JSONObject(response);
-
-
-                                for (Object objeto : pedido.getCuenta()){
-                                    if (objeto instanceof Producto){
-                                        addDetallePedidoBBDD(((Producto) objeto).getId(), Integer.parseInt(respuesta.get("id").toString()));
-                                        ((Producto) objeto).getId();
-                                    } else if(objeto instanceof Menu){
-                                        addDetallePedidoBBDD(((Menu) objeto).getId(), Integer.parseInt(respuesta.get("id").toString()));
-                                    }
-                                }
-
-                                pedido.setId(Integer.parseInt(respuesta.get("id").toString()));
-                                pedido.setPedidoNumero(Integer.parseInt(respuesta.get("pedidoNumero").toString()));
-                                pedido.setFecha(respuesta.get("fecha").toString());
-                                pedido.setEntregado(Boolean.parseBoolean(respuesta.get("entregado").toString()));
-                                Intent intent = new Intent(VerPedidoActual.this, EsperarComida.class);
-                                intent.putExtra("pedidoNumero",respuesta.get("pedidoNumero").toString());
-                                intent.putExtra("pedido",pedido);
-                                finish();
-                                startActivity(intent);
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                }
-            }) {
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("email_cliente", pedido.getEmail_cliente());
-                    params.put("total_a_pagar", String.valueOf(pedido.getTotal_a_pagar()));
-                    return params;
-                }
-            };
-            queue.add(stringRequest);
-
-
-
-    }
-
-    private void addDetallePedidoBBDD(final int detalle, final int idPedido){
-        RequestQueue queue = Volley.newRequestQueue(VerPedidoActual.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Conexion.URL_WEB_SERVICES + "Pedido/insertarDetallePedido.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            System.out.println(response);
-                            JSONObject objResultado = new JSONObject(response);
-                            String extadox = objResultado.get("estado").toString();
-                            if (!extadox.equalsIgnoreCase("exito")) {
-                                Toast.makeText(VerPedidoActual.this, "error al crear el pedido", Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        }) {
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("idPedido", String.valueOf(idPedido));
-                params.put("idProducto", String.valueOf(detalle));
-                return params;
-            }
-        };
-        queue.add(stringRequest);
+        Intent intent = new Intent(getApplicationContext(), ActivityPasarelaPago.class);
+        intent.putExtra("pedido",pedido);
+        finish();
+        startActivity(intent);
     }
 
     public void volveraCarta(View view){

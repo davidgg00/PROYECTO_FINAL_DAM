@@ -14,15 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.AutoBurger.app.ActivityVerHistorialPedidos"></activity>
-        <activity android:name="com.AutoBurger.app.EsperarComida" />
-        <activity android:name="com.AutoBurger.app.VerPedidoActual" />
-        <activity android:name="com.AutoBurger.app.VerDetallesMenu" />
-        <activity android:name="com.AutoBurger.app.VerDetallesProducto" />
-        <activity android:name="com.AutoBurger.app.FormularioRegistro" />
-        <activity android:name="com.AutoBurger.app.ActivityCartaAlimentos" />
-        <activity android:name="com.AutoBurger.app.BienvenidaActivity" />
-        <activity android:name="com.AutoBurger.app.MainActivity">
+        <activity android:name=".ActivityPasarelaPago"></activity>
+        <activity android:name=".ActivityVerHistorialPedidos" />
+        <activity android:name=".EsperarComida" />
+        <activity android:name=".VerPedidoActual" />
+        <activity android:name=".VerDetallesMenu" />
+        <activity android:name=".VerDetallesProducto" />
+        <activity android:name=".FormularioRegistro" />
+        <activity android:name=".ActivityCartaAlimentos" />
+        <activity android:name=".BienvenidaActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
