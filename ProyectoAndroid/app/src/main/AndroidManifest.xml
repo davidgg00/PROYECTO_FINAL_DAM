@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityPasarelaPago"></activity>
+        <activity android:name=".activity_AjustesPerfil"></activity>
+        <activity android:name=".ActivityPasarelaPago" />
         <activity android:name=".ActivityVerHistorialPedidos" />
         <activity android:name=".EsperarComida" />
         <activity android:name=".VerPedidoActual" />

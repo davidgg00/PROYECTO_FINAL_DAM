@@ -44,7 +44,6 @@ public class ActivityPasarelaPago extends AppCompatActivity {
                 .cardholderName(CardForm.FIELD_REQUIRED)
                 .postalCodeRequired(true)
                 .mobileNumberRequired(true)
-                .mobileNumberExplanation("SMS is required on this number")
                 .actionLabel("Purchase")
                 .setup(ActivityPasarelaPago.this);
 

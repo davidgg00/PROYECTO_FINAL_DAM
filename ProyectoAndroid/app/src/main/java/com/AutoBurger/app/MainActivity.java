@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.AutoBurger.app.Controlador.Validar;
+import com.AutoBurger.app.Modelo.Usuario;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -83,15 +84,15 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject objResultado = new JSONObject(response);
                             if (Validar.respuestaWebService(objResultado)){
                                 Intent intent = new Intent(getApplicationContext(), BienvenidaActivity.class);
-                                intent.putExtra("email",objResultado.get("email").toString());
-                                intent.putExtra("nombre",objResultado.get("nombre").toString());
+                                Usuario usuario = new Usuario(objResultado.get("email").toString(), objResultado.get("password").toString(), objResultado.get("nombre").toString());
+                                System.out.println(usuario.toString() + "xd");
+                                intent.putExtra("usuario", usuario);
+
                                 startActivity(intent);
                             } else {
-                                System.out.println(objResultado);
                                 Toast.makeText(MainActivity.this,"Usuario o contraseña incorrecta",Toast.LENGTH_LONG).show();
                             }
                         } catch (Exception e) {
-                            e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {

@@ -10,5 +10,5 @@ if (isset($email_cliente)) {
 
     $resultado = json_encode($resultado);
 
-    echo !empty($resultado) ? $resultado : "sin_PedidosAntiguos";
+    echo $resultado;
 }

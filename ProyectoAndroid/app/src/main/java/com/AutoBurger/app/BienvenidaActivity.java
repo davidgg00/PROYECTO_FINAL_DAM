@@ -1,40 +1,39 @@
 package com.AutoBurger.app;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.AutoBurger.app.Controlador.GestionPedidos;
 import com.AutoBurger.app.Modelo.Pedido;
+import com.AutoBurger.app.Modelo.Usuario;
 
 public class BienvenidaActivity extends AppCompatActivity {
 
-    private Button btnVerHistorial;
-    private String email;
+    private Button btnVerHistorial, btnAjustesPerfil;
+    private Usuario usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bienvenida);
         btnVerHistorial = (Button) findViewById(R.id.btnVerHistorial);
+        btnAjustesPerfil = (Button) findViewById(R.id.btnAjusterPerfil);
 
         //Recibimos parametros
         Bundle bundle=getIntent().getExtras();
-        email =bundle.getString("email");
-        String nombre =bundle.getString("nombre");
+        usuario = (Usuario) bundle.get("usuario");
 
-        System.out.println(bundle.toString());
-        if (!email.equalsIgnoreCase("invitado@invitado.com")){
+        if (!usuario.getEmail().equalsIgnoreCase("invitado@invitado.com")){
             btnVerHistorial.setVisibility(View.VISIBLE);
+            btnAjustesPerfil.setVisibility(View.VISIBLE);
         }
     }
 
     public void irACarta(View view){
         Intent intent = new Intent(BienvenidaActivity.this, ActivityCartaAlimentos.class);
-        Pedido pedido = new Pedido(email,0,null);
+        Pedido pedido = new Pedido(usuario.getEmail(),0,null);
         intent.putExtra("pedido",pedido);
         finish();
         startActivity(intent);
@@ -46,8 +45,7 @@ public class BienvenidaActivity extends AppCompatActivity {
             public void run() {
                 //Guardaremos los datos de las patatas en variables de sesión, para así solo acceder una vez por cada inicio de la app
                 Bundle bundle=getIntent().getExtras();
-                String email =bundle.getString("email");
-                String pedidos = GestionPedidos.getPedidosAntiguos(getApplicationContext(),email);
+                String pedidos = GestionPedidos.getPedidosAntiguos(getApplicationContext(),usuario.getEmail());
 
                 System.out.println(pedidos);
                 if (pedidos.equalsIgnoreCase("[]")){
@@ -58,15 +56,21 @@ public class BienvenidaActivity extends AppCompatActivity {
                     }));
                 } else {
                     Intent intent = new Intent(BienvenidaActivity.this, ActivityVerHistorialPedidos.class);
-                    intent.putExtra("email", email);
+                    intent.putExtra("usuario", usuario);
                     intent.putExtra("pedidos", pedidos);
-                    finish();
                     startActivity(intent);
                 }
 
             }
         });
         thread.start();
+
+    }
+
+    public void irAjustesCliente(View view){
+        Intent intent = new Intent(BienvenidaActivity.this,  activity_AjustesPerfil.class);
+        intent.putExtra("usuario", usuario);
+        startActivity(intent);
 
     }
 }

@@ -11,7 +11,6 @@ public class Validar {
                 return true;
             }
         } catch (JSONException e) {
-            e.printStackTrace();
             return false;
         }
 
@@ -34,7 +33,7 @@ public class Validar {
     }
 
     public static boolean password(String password){
-        if (!password.isEmpty()){
+        if (!password.isEmpty() && password.length() >= 6){
             return true;
         }
         return false;

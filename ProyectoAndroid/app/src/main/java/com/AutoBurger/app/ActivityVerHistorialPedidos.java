@@ -15,6 +15,7 @@ import com.AutoBurger.app.Controlador.GestionProductos;
 import com.AutoBurger.app.Modelo.Menu;
 import com.AutoBurger.app.Modelo.Pedido;
 import com.AutoBurger.app.Modelo.Producto;
+import com.AutoBurger.app.Modelo.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +40,7 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
 
         //Convertimos los Strings a JSONArray, los recorremos y los almacenamos en el arraylist de pedidos
         try {
+            System.out.println(pedidos.toString());
             JSONArray jsonArray = new JSONArray(pedidos);
             String datosPedido = "";
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -100,9 +102,21 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Bundle bundle = getIntent().getExtras();
+        Usuario usuario = (Usuario) bundle.get("usuario");
+        Intent intent = new Intent(ActivityVerHistorialPedidos.this,  BienvenidaActivity.class);
+        intent.putExtra("usuario", usuario);
+        startActivity(intent);
+        finish();
+
+    }
+
     private void addProductoPedido(final int id) {
         Bundle bundle = getIntent().getExtras();
-        final String email = bundle.getString("email");
+        Usuario usuario = (Usuario) bundle.get("usuario");
+        final String email =usuario.getEmail();
         final Pedido pedido = new Pedido(email, 0, null);
 
         final String pedidos = bundle.getString("pedidos");
@@ -162,8 +176,8 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
     public void irAtras(View view){
         Intent intent = new Intent(ActivityVerHistorialPedidos.this, BienvenidaActivity.class);
         Bundle bundle = getIntent().getExtras();
-        String email = bundle.getString("email");
-        intent.putExtra("email",email);
+        Usuario usuario = (Usuario) bundle.get("usuario");
+        intent.putExtra("usuario",usuario);
         finish();
         startActivity(intent);
     }

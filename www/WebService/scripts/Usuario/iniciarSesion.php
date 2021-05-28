@@ -7,12 +7,12 @@ $password = $_REQUEST['password'];
 //Comprobamos si los hemos recibido
 if (isset($email) && isset($password)) {
     $cbd = new ConexionBD();
-    $sql = "Select nombre FROM cliente where email = ? AND password = ?";
+    $sql = "Select * FROM cliente where email = ? AND password = ?";
     $parametros = array($email, MD5($password));
     $resultado = $cbd->consultaSeleccionParam($sql, $parametros);
 
     if ($resultado) {
-        $respuesta = array("code" => "CR_OK", "email" => $email, "nombre" => $resultado[0]->nombre);
+        $respuesta = array("code" => "CR_OK", "email" => $email, "nombre" => $resultado[0]->nombre, "password" => $resultado[0]->password);
     } else {
         $respuesta = array(
             "estado" => "error",

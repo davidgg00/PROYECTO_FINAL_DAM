@@ -88,6 +88,17 @@
                 android:onClick="irAHistorialPedidos"
                 android:text="Ver historial Pedidos"
                 android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/btnAjusterPerfil"
+                android:layout_width="231dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/botonredondeado"
+                android:cursorVisible="false"
+                android:onClick="irAjustesCliente"
+                android:text="Ajustes de Perfil"
+                android:visibility="invisible" />
         </LinearLayout>
 
     </LinearLayout>
