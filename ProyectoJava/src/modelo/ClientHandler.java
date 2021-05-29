@@ -69,6 +69,7 @@ public class ClientHandler extends Thread {
 
             }
             datosPedido.setText(total);
+            datosPedido.setEditable(false);
             JButton b2 = new JButton("Pedido Listo");
             b2.setBounds(100, 100, 80, 30);
             b2.setBackground(Color.green);

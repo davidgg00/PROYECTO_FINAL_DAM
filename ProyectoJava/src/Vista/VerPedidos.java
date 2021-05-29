@@ -16,8 +16,10 @@ import com.google.gson.JsonObject;
 import controlador.GestionPedido;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,10 +34,12 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import modelo.Json;
+import test.WrapLayout;
 
 /**
  *
@@ -50,6 +54,8 @@ public class VerPedidos extends javax.swing.JFrame {
      */
     public VerPedidos() {
         initComponents();
+        panelContent.setLayout(new WrapLayout(0));
+        panelContentPadre.setHorizontalScrollBar(null);
         getPedidosAntiguos();
     }
 
@@ -105,10 +111,11 @@ public class VerPedidos extends javax.swing.JFrame {
         panelHeader = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        panelContentPadre = new javax.swing.JScrollPane();
         panelContent = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/background_pedidosPendientes.jpg"));  
+                    VerPedidos.class.getResource("/imagenes/background_pedidosPendientes.jpg"));  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -141,8 +148,10 @@ public class VerPedidos extends javax.swing.JFrame {
 
         panelPedidos.add(panelHeader, java.awt.BorderLayout.NORTH);
 
-        panelContent.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        panelPedidos.add(panelContent, java.awt.BorderLayout.CENTER);
+        panelContent.setMaximumSize(new java.awt.Dimension(10, 10));
+        panelContentPadre.setViewportView(panelContent);
+
+        panelPedidos.add(panelContentPadre, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(panelPedidos, java.awt.BorderLayout.CENTER);
 
@@ -198,6 +207,7 @@ public class VerPedidos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel6;
     public static javax.swing.JPanel panelContent;
+    public static javax.swing.JScrollPane panelContentPadre;
     private javax.swing.JPanel panelHeader;
     public static javax.swing.JPanel panelPedidos;
     // End of variables declaration//GEN-END:variables
@@ -212,7 +222,21 @@ public class VerPedidos extends javax.swing.JFrame {
 
             Pedido pedidoAntiguo = new Pedido(Integer.parseInt(jsonArrayPedidos.get(i).getAsJsonObject().get("id").toString().replace("\"", "")), jsonArrayPedidos.get(i).getAsJsonObject().get("email_cliente").toString(), Double.parseDouble(jsonArrayPedidos.get(i).getAsJsonObject().get("total_a_pagar").toString().replace("\"", "")));
             JTextArea datosPedido = new JTextArea(4, 14);
-            datosPedido.setText(jsonArrayPedidos.get(i).getAsJsonObject().get("pedido").toString());
+            datosPedido.setEditable(false);
+            datosPedido.setText(jsonArrayPedidos.get(i).getAsJsonObject().get("pedido").toString().replace("\"", "").replace(",", "\n"));
+            String email_cliente = jsonArrayPedidos.get(i).getAsJsonObject().get("email_cliente").toString().replace("\"", "");
+            String nPedido = jsonArrayPedidos.get(i).getAsJsonObject().get("pedidoNumero").toString().replace("\"", ""); 
+            JButton buttonDatosCliente = new JButton("Datos Cliente");
+            buttonDatosCliente.setBounds(100, 100, 80, 30);
+            buttonDatosCliente.setBackground(Color.orange);
+            buttonDatosCliente.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(null, email_cliente.equalsIgnoreCase("invitado@invitado.com") ? "Sesión Invitado \n NºPedido: " + nPedido : email_cliente + "\n NºPedido: " + nPedido);
+                }
+
+            });
+            
             JButton b2 = new JButton("Pedido Listo");
             b2.setBounds(100, 100, 80, 30);
             b2.setBackground(Color.green);
@@ -227,11 +251,13 @@ public class VerPedidos extends javax.swing.JFrame {
             JScrollPane scroll = new JScrollPane(datosPedido);
             panel.setLayout(new BorderLayout());
             panel.add(scroll, BorderLayout.NORTH);
+            panel.add(buttonDatosCliente,BorderLayout.CENTER);
             panel.add(b2, BorderLayout.SOUTH);
 
             VerPedidos.panelContent.add(panel);
             VerPedidos.panelContent.repaint();
             VerPedidos.panelContent.revalidate();
+            
         }
     }
 }

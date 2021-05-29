@@ -101,9 +101,8 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="panelContent">
+        <Container class="javax.swing.JScrollPane" name="panelContentPadre">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      Principal.class.getResource(&quot;/imagenes/background_pedidosPendientes.jpg&quot;));  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
           <Constraints>
@@ -112,9 +111,22 @@
             </Constraint>
           </Constraints>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-            <Property name="alignment" type="int" value="0"/>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="panelContent">
+              <Properties>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[10, 10]"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;     public void paintComponent(Graphics g) {  &#xd;&#xa;       Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;       VerPedidos.class.getResource(&quot;/imagenes/background_pedidosPendientes.jpg&quot;));  &#xd;&#xa;       g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;       }  &#xd;&#xa;     };"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+            </Container>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>
