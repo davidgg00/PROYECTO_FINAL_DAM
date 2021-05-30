@@ -27,7 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="5"
-            android:orientation="vertical">
+            android:background="#59FFFFFF"
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -46,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:background="@drawable/botonredondeado"
                 android:onClick="irAtras"
                 android:text="Volver hacia atrás" />
 

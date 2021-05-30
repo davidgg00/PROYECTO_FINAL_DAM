@@ -35,37 +35,104 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button"
+            <LinearLayout
+                android:id="@+id/ln1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:background="#594A4A4A"
+                android:gravity="center"
                 android:onClick="irPagina1"
-                android:text="Hamburguesas" />
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button2"
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/burger" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Hamburguesas"
+                    android:textColor="#EAE2E2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ln2"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:background="#594A4A4A"
+                android:gravity="center"
                 android:onClick="irPagina2"
-                android:text="Bebidas" />
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button3"
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/bebida" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bebidas"
+                    android:textColor="#EAE2E2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ln3"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:background="#594A4A4A"
+                android:gravity="center"
                 android:onClick="irPagina3"
-                android:text="Patatas" />
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button4"
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/patatas" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Patatas"
+                    android:textColor="#EAE2E2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ln4"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:background="#594A4A4A"
+                android:gravity="center"
                 android:onClick="irPagina4"
-                android:text="Menús" />
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/menu" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Menús"
+                    android:textColor="#EAE2E2" />
+            </LinearLayout>
 
         </LinearLayout>
 

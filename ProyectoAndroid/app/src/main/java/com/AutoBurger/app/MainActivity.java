@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
      */
     public void iniciarSesionInvitado(View view){
         Intent intent = new Intent(this, BienvenidaActivity.class);
-        intent.putExtra("email","invitado@invitado.com");
-        intent.putExtra("nombre","invitado");
+        Usuario usuario = new Usuario("invitado@invitado.com", "", "invitado");
+        intent.putExtra("usuario",usuario);
         startActivity(intent);
     }
 

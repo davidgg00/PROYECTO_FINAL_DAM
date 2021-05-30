@@ -1,47 +1,29 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.AutoBurger.app.Modelo.Conexion;
 import com.AutoBurger.app.Modelo.Menu;
 import com.AutoBurger.app.Modelo.Pedido;
 import com.AutoBurger.app.Modelo.Producto;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class VerPedidoActual extends AppCompatActivity {
     private Pedido pedido;
     private TextView labelPrecio;
     private LinearLayout wrapperPedidos;
-    private ArrayList<Button> botones = new ArrayList<>();
+    private ArrayList<ImageView> botones = new ArrayList<ImageView>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,22 +52,23 @@ public class VerPedidoActual extends AppCompatActivity {
 
                 TextView txt = new TextView(this);
                 txt.setText(((Producto) producto).getNombre());
-                //layout_weight:1
                 txt.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
 
-                final Button btn = new Button(this);
-                btn.setId(index);
-                btn.setOnClickListener(new View.OnClickListener() {
+                final ImageView quitarProducto = new ImageView(this);
+                quitarProducto.setImageResource(R.drawable.imgeliminarproducto);
+                quitarProducto.setId(index);
+                quitarProducto.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        borrarProductoPedido(btn.getId(),wrapPedido);
+                        borrarProductoPedido(quitarProducto.getId(),wrapPedido);
                     }
                 });
-                btn.setText("Eliminar");
-                btn.setGravity(Gravity.RIGHT);
+                LinearLayout.LayoutParams parametros =  new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                wrapPedido.setLayoutParams(parametros);
+                parametros.setMargins(10,10,10,40);
                 wrapPedido.addView(txt);
-                wrapPedido.addView(btn);
-                botones.add(btn);
+                wrapPedido.addView(quitarProducto);
+                botones.add(quitarProducto);
                 wrapperPedidos.addView(wrapPedido);
             } else if (producto instanceof Menu){
                 final LinearLayout wrapPedido = new LinearLayout(this);
@@ -94,19 +77,22 @@ public class VerPedidoActual extends AppCompatActivity {
                 txt.setText(((Menu) producto).getNombre());
                 txt.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
 
-                final Button btn = new Button(this);
-                btn.setId(index);
-                btn.setOnClickListener(new View.OnClickListener() {
+                final ImageView quitarProducto = new ImageView(this);
+                quitarProducto.setImageResource(R.drawable.imgeliminarproducto);
+                quitarProducto.setId(index);
+                quitarProducto.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        borrarProductoPedido(btn.getId(),wrapPedido);
+                        borrarProductoPedido(quitarProducto.getId(),wrapPedido);
                     }
                 });
-                btn.setText("Eliminar");
-                btn.setGravity(Gravity.RIGHT);
+
+                LinearLayout.LayoutParams parametros =  new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                wrapPedido.setLayoutParams(parametros);
+                parametros.setMargins(10,10,10,40);
                 wrapPedido.addView(txt);
-                wrapPedido.addView(btn);
-                botones.add(btn);
+                wrapPedido.addView(quitarProducto);
+                botones.add(quitarProducto);
                 wrapperPedidos.addView(wrapPedido);
             }
             index++;
@@ -124,7 +110,7 @@ public class VerPedidoActual extends AppCompatActivity {
         System.out.println(precio);
 
         pedido.setTotal_a_pagar(pedido.getTotal_a_pagar() - precio);
-        labelPrecio.setText(String.valueOf(pedido.getTotal_a_pagar()));
+        labelPrecio.setText(String.valueOf(pedido.getTotal_a_pagar()) + "€");
         pedido.getCuenta().remove(index);
         botones.remove(index);
         if (index < pedido.getCuenta().size()){
@@ -138,10 +124,14 @@ public class VerPedidoActual extends AppCompatActivity {
     }
 
     public void pagarPedido(View view){
-        Intent intent = new Intent(getApplicationContext(), ActivityPasarelaPago.class);
-        intent.putExtra("pedido",pedido);
-        finish();
-        startActivity(intent);
+        if (pedido.getCuenta().size() > 0){
+            Intent intent = new Intent(getApplicationContext(), ActivityPasarelaPago.class);
+            intent.putExtra("pedido",pedido);
+            finish();
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(),"¡No hay ningun producto en el pedido!",Toast.LENGTH_LONG).show();
+        }
     }
 
     public void volveraCarta(View view){
