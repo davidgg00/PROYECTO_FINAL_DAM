@@ -17,7 +17,9 @@ import com.AutoBurger.app.Modelo.Menu;
 import com.AutoBurger.app.Modelo.Pedido;
 import com.AutoBurger.app.Modelo.Producto;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class VerPedidoActual extends AppCompatActivity {
     private Pedido pedido;
@@ -125,6 +127,10 @@ public class VerPedidoActual extends AppCompatActivity {
 
     public void pagarPedido(View view){
         if (pedido.getCuenta().size() > 0){
+            //Obtenemos la fecha y hora actual
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            pedido.setFecha(formatter.format(date));
             Intent intent = new Intent(getApplicationContext(), ActivityPasarelaPago.class);
             intent.putExtra("pedido",pedido);
             finish();

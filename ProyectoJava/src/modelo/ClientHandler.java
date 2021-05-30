@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -70,6 +71,17 @@ public class ClientHandler extends Thread {
             }
             datosPedido.setText(total);
             datosPedido.setEditable(false);
+            String email_cliente = pedidoRecibido.getEmail_cliente();
+            int nPedido = pedidoRecibido.getPedidoNumero(); 
+            JButton buttonDatosCliente = new JButton("Datos Cliente");
+            buttonDatosCliente.setBounds(100, 100, 80, 30);
+            buttonDatosCliente.setBackground(Color.orange);
+            buttonDatosCliente.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(null, email_cliente.equalsIgnoreCase("invitado@invitado.com") ? "Sesión Invitado \n NºPedido: " + nPedido : email_cliente + "\n NºPedido: " + nPedido);
+                }
+                });
             JButton b2 = new JButton("Pedido Listo");
             b2.setBounds(100, 100, 80, 30);
             b2.setBackground(Color.green);
@@ -94,6 +106,7 @@ public class ClientHandler extends Thread {
             JScrollPane scroll = new JScrollPane(datosPedido);
             panel.setLayout(new BorderLayout());
             panel.add(scroll, BorderLayout.NORTH);
+            panel.add(buttonDatosCliente,BorderLayout.CENTER);
             panel.add(b2, BorderLayout.SOUTH);
 
             VerPedidos.panelContent.add(panel);

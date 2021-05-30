@@ -71,6 +71,7 @@ public class ActivityPasarelaPago extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         try {
+                            System.out.println(pedido.getFecha());
 
                             System.out.println(response);
 
@@ -111,6 +112,7 @@ public class ActivityPasarelaPago extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("email_cliente", pedido.getEmail_cliente());
                 params.put("total_a_pagar", String.valueOf(pedido.getTotal_a_pagar()));
+                params.put("fecha",pedido.getFecha());
                 return params;
             }
         };
