@@ -8,6 +8,19 @@ package Vista;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -15,7 +28,9 @@ import javax.swing.JPanel;
  * @author DavidGG
  */
 public class Principal extends javax.swing.JFrame {
-VerPedidos m;
+
+    VerPedidos m;
+
     /**
      * Creates new form Principal
      */
@@ -27,15 +42,15 @@ VerPedidos m;
         m = new VerPedidos();
         if (abrirSocket) {
             new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-            @Override
-            public void run() {
-                VerPedidos.abrirServerSocket();
-            }
-        },1000
-        );
+                    new java.util.TimerTask() {
+                @Override
+                public void run() {
+                    VerPedidos.abrirServerSocket();
+                }
+            }, 1000
+            );
         }
-        
+
     }
 
     public Principal() {
@@ -77,6 +92,7 @@ VerPedidos m;
         btnOpcProductos = new javax.swing.JButton();
         btnHistorialPedidos = new javax.swing.JButton();
         btnOpcIngredientes = new javax.swing.JButton();
+        btnCopiaSeguridad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 615));
@@ -152,6 +168,15 @@ VerPedidos m;
             }
         });
 
+        btnCopiaSeguridad.setBackground(new java.awt.Color(171, 167, 111));
+        btnCopiaSeguridad.setText("Copia de Seguridad");
+        btnCopiaSeguridad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCopiaSeguridad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCopiaSeguridadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPadreLayout = new javax.swing.GroupLayout(panelPadre);
         panelPadre.setLayout(panelPadreLayout);
         panelPadreLayout.setHorizontalGroup(
@@ -162,6 +187,7 @@ VerPedidos m;
             .addGroup(panelPadreLayout.createSequentialGroup()
                 .addGap(355, 355, 355)
                 .addGroup(panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCopiaSeguridad, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOpcIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHistorialPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOpcMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,17 +199,19 @@ VerPedidos m;
             panelPadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPadreLayout.createSequentialGroup()
                 .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(49, 49, 49)
                 .addComponent(btnVerPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnOpcIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(btnOpcMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addComponent(btnOpcProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(18, 18, 18)
                 .addComponent(btnHistorialPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addGap(18, 18, 18)
+                .addComponent(btnCopiaSeguridad, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,6 +265,86 @@ VerPedidos m;
         opcIngr.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnOpcIngredientesActionPerformed
 
+    private void btnCopiaSeguridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopiaSeguridadActionPerformed
+        // TODO add your handling code here:
+        String[] options = new String[]{"Fecha última copia seguridad", "Realizar copia de seguridad", "Restaurar base de datos", "Cancelar"};
+        int response = JOptionPane.showOptionDialog(null, "Puedes realizar copias de seguridad de la base de datos.\nSolo se guardan los datos, las fotos no.", "COPIA DE SEGURIDAD",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                null, options, options[0]);
+        System.out.println(response);
+        switch (response) {
+            case 0:
+                File directory = new File("./");
+                System.out.println(new File("../sql/hamburgueseria.sql").exists());
+                JOptionPane.showMessageDialog(this, new Date(new File("../sql/hamburgueseria.sql").lastModified()), "FECHA ÚLTIMA COPIA SEGURIDAD BBDD", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case 1:
+                try {
+                Process p = Runtime.getRuntime().exec("mysqldump.exe -u root --database hamburgueseria");
+                InputStream is = p.getInputStream();//Pedimos la entrada
+                FileOutputStream fos = new FileOutputStream("../sql/hamburgueseria.sql");
+                byte[] buffer = new byte[1000]; //Creamos una variable de tipo byte para el buffer
+
+                int leido = is.read(buffer); //Devuelve el número de bytes leídos o -1 si se alcanzó el final del stream.
+                while (leido > 0) {
+                    fos.write(buffer, 0, leido);//Buffer de caracteres, Desplazamiento de partida para empezar a escribir caracteres, Número de caracteres para escribir
+                    leido = is.read(buffer);
+                }
+                fos.close();
+                JOptionPane.showMessageDialog(this, "Copia de seguridad realizada correctamente", "Copia de Seguridad", JOptionPane.PLAIN_MESSAGE);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                
+            }
+                break;
+            case 2:
+                int reply = JOptionPane.showConfirmDialog(this, "¿Desea realizar la copia de seguridad?\n Una vez hecha no puede dar marcha atrás.", "ATENCIÓN", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    File scriptFile = new File("../sql/hamburgueseria.sql");
+
+                    BufferedReader entrada = null;
+                    try {
+                        entrada = new BufferedReader(new FileReader(scriptFile));
+                    } catch (FileNotFoundException e) {
+                        JOptionPane.showMessageDialog(this, "No hay una copia de seguridad hecha", "ERROR AL IMPORTAR LA COPIA DE SEGURIDAD", JOptionPane.ERROR_MESSAGE);
+                    }
+                    String linea = null;
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String salto = System.getProperty("line.separator");
+                    try {
+                        while ((linea = entrada.readLine()) != null) {
+                            stringBuilder.append(linea);
+                            stringBuilder.append(salto);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    String consulta = stringBuilder.toString();
+
+                    try {
+                        Class.forName("com.mysql.jdbc.Driver");
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        Connection connmysql = (Connection) DriverManager
+                                .getConnection("jdbc:mysql://localhost/hamburgueseria?allowMultiQueries=true", "root", "");
+                        Statement sents = connmysql.createStatement();
+                        int res = sents.executeUpdate(consulta);
+                        JOptionPane.showMessageDialog(this, "Copia de seguridad importada correctamente.");
+                        connmysql.close();
+                        sents.close();
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(this, "Error en la ejecución SQL del archivo", "Archivo corrupto", JOptionPane.ERROR_MESSAGE);
+                        e.printStackTrace();
+                    }
+                }
+
+                break;
+        }
+    }//GEN-LAST:event_btnCopiaSeguridadActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -273,6 +381,7 @@ VerPedidos m;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCopiaSeguridad;
     private javax.swing.JButton btnHistorialPedidos;
     private javax.swing.JButton btnOpcIngredientes;
     private javax.swing.JButton btnOpcMenus;
