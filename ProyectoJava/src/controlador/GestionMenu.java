@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import com.google.gson.Gson;
@@ -15,15 +10,15 @@ import modelo.Producto;
 import utilidades.Constantes;
 
 /**
- *
  * @author DavidGG
+ * @version 1.0
  */
 public class GestionMenu {
 
     /**
      * Método que obtiente todos los Menús de la base de datos
      *
-     * @return
+     * @return boolean
      */
     public static ArrayList<Menu> getAll() {
         String values = "tipoProducto=Menu";
@@ -42,7 +37,7 @@ public class GestionMenu {
     /**
      * Método que obtiente todos los productos de un Menú
      *
-     * @return
+     * @return boolean
      */
     public static ArrayList<Menu> getProductos(ArrayList<Menu> menus) {
         for (Menu menu : menus) {
@@ -67,7 +62,7 @@ public class GestionMenu {
      *
      * @param p
      * @param ingredientesSel
-     * @return
+     * @return boolean
      */
     public static boolean add(Menu menu) {
         String values = "nombre=" + menu.getNombre() + "&precio=" + menu.getPrecio() + "&ruta_img=" + menu.getRuta_img() + "&tipo=Menu";
@@ -90,6 +85,8 @@ public class GestionMenu {
      * vamos a cambiar los ingredientes de un producto
      *
      * @param id
+     * 
+     * @return boolean
      */
     public static boolean borrarTodosProductos(int id) {
         String values = "idMenu=" + id;
@@ -100,6 +97,11 @@ public class GestionMenu {
         return json.getCodigo().equals(Constantes.CR_OK);
     }
     
+    /**
+     * Método que edita un menú en la base de datos
+     * @param menu
+     * @return boolean
+     */
     public static boolean editar(Menu menu) {
         String values = "id=" + menu.getId() + "&nombre=" + menu.getNombre() + "&precio=" + menu.getPrecio() + "&ruta_img=" + menu.getRuta_img();
         System.out.println(values);
@@ -118,6 +120,11 @@ public class GestionMenu {
         return json.getCodigo().equals(Constantes.CR_OK);
     }
     
+    /**
+     * Método que borra un menú en la base de datos
+     * @param id
+     * @return boolean
+     */
     public static boolean remove(int id) {
         String values = "id=" + id;
         String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_DELETE_MENU, values);

@@ -1,7 +1,5 @@
 package utilidades;
 
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,31 +10,26 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Clase HttpRequest: permite enviar (INSERT,DELETE,UPDATE) y recibir (SELECT) datos del WebService
- * 
- * https://www.codejava.net/java-se/networking/how-to-use-java-urlconnection-and-httpurlconnection
- * 
- * 
- * @author encarna
- *
+ * @author DavidGG
+ * @version 1.0
  */
-
 public final class HttpRequest {
 
-	/**
-	 * Enviar peticiones de ACTUALIZACIÓN
-	 * @param url
-	 * @param values
-	 * @return
-	 */
+    /**
+     * Enviar peticiones de ACTUALIZACIÓN
+     *
+     * @param url
+     * @param values
+     * @return
+     */
     public static String POST_REQUEST(String url, String values) {
         try {
             StringBuilder result = new StringBuilder();
             URL url2 = new URL(url);
             URLConnection conn = url2.openConnection();
             conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());      
-            
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+
             wr.write(values);
             wr.flush();
             BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -57,7 +50,7 @@ public final class HttpRequest {
 
     /**
      * Solicitar la ejecución de consultas select
-     * 
+     *
      * @param url
      * @param values
      * @return
@@ -68,7 +61,6 @@ public final class HttpRequest {
             String URL = url + "?" + values;
             URL obj = new URL(URL);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-           // con.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             while ((inputLine = in.readLine()) != null) {

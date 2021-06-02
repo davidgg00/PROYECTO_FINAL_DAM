@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import java.util.ArrayList;
-//import modelo.Json;
 import modelo.Producto;
 import java.lang.reflect.Type;
 import modelo.Ingrediente;
@@ -16,15 +10,15 @@ import modelo.Json;
 import utilidades.Constantes;
 
 /**
- *
  * @author DavidGG
+ * @version 1.0
  */
 public class GestionProducto {
 
     /**
      * Método que lista todos los productos de la base de datos
      *
-     * @return
+     * @return ArrayList<Producto>
      */
     public static ArrayList<Producto> getAll() {
         String values = "";
@@ -43,7 +37,7 @@ public class GestionProducto {
     /**
      * Método que retorna todos los ingredientes de todas las hamburguesas
      *
-     * @return
+     * @return ArrayList<Producto>
      */
     public static ArrayList<Producto> getAllIngredientesHamburguesa(ArrayList<Producto> productos) {
 
@@ -65,27 +59,14 @@ public class GestionProducto {
         return productos;
     }
 
-    /**
-     * Método que borra un producto de la base de datos
-     *
-     * @param id
-     * @return
-     */
-//    public static boolean borrar(int id) {
-//        String values = "id=" + id;
-//        String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_DELETE_PRODUCTO, values);
-//        Gson gson = new Gson();
-//        Json json = gson.fromJson(resultado, Json.class);
-//
-//        return json.getCodigo().equals(Constantes.CR_OK);
-//    }
+
     /**
      * Método que añade un producto en la base de datos justo con sus
      * ingredientes
      *
      * @param p
      * @param ingredientesSel
-     * @return
+     * @return boolean
      */
     public static boolean add(Producto p) {
         String values = "nombre=" + p.getNombre() + "&precio=" + p.getPrecio() + "&tipo=" + p.getTipo() + "&ruta_img=" + p.getRuta_img();
@@ -111,6 +92,7 @@ public class GestionProducto {
      * vamos a cambiar los ingredientes de un producto
      *
      * @param id
+     * @return boolean
      */
     public static boolean borrarTodosIngredientes(int id) {
         String values = "idHamburguesa=" + id;
@@ -126,7 +108,7 @@ public class GestionProducto {
      *
      * @param id
      * @param p
-     * @return
+     * @return boolean
      */
     public static boolean editar(Producto p) {
         String values = "id=" + p.getId() + "&nombre=" + p.getNombre() + "&precio=" + p.getPrecio() + "&ruta_img=" + p.getRuta_img();
@@ -146,6 +128,11 @@ public class GestionProducto {
         return json.getCodigo().equals(Constantes.CR_OK);
     }
 
+    /**
+     * Método que borra un producto de la base de datos
+     * @param id
+     * @return boolean
+     */
     public static boolean remove(int id) {
         String values = "id=" + id;
         String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_DELETE_PRODUCTO, values);

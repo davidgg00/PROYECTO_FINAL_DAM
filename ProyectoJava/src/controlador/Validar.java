@@ -3,6 +3,10 @@ package controlador;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author DavidGG
+ * @version 1.0
+ */
 public class Validar {
 
     /**

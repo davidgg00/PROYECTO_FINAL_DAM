@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import java.io.FileInputStream;
@@ -12,12 +7,18 @@ import java.io.IOException;
 import org.apache.commons.net.ftp.FTPClient;
 
 /**
- *
  * @author DavidGG
+ * @version 1.0
  */
 public class GestionFTP {
     static String servidor = "files.000webhost.com", usuario = "autoburger", clave = "Proyecto_Final_2020";
     
+    /**
+     * Método que sube una imagen al servidor FTP
+     * @param rutaLocal
+     * @param timestamp
+     * @return 
+     */
     public static boolean subir(String rutaLocal, String timestamp){
         FTPClient cliente = new FTPClient();
         try {
@@ -53,6 +54,11 @@ public class GestionFTP {
         return true;
     }
     
+    /**
+     * Método que borra una imagen del servidor FTP
+     * @param ruta_img
+     * @return 
+     */
     public static boolean borrar(String ruta_img){
         FTPClient cliente = new FTPClient();
         try {

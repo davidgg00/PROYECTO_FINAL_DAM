@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import Vista.VerPedidos;
@@ -26,16 +21,23 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
- *
  * @author DavidGG
+ * @version 1.0
  */
 public class ClientHandler extends Thread {
-
+    
     DataInputStream dataIn;
     DataOutputStream dataOut;
     Socket socket;
     Pedido pedidoRecibido;
 
+    /**
+     * Constructor
+     * @param socket
+     * @param dataIn
+     * @param dataOut
+     * @param pedidoRecibido 
+     */
     public ClientHandler(Socket socket, DataInputStream dataIn, DataOutputStream dataOut, Pedido pedidoRecibido) {
         this.socket = socket;
         this.dataIn = dataIn;
@@ -43,13 +45,15 @@ public class ClientHandler extends Thread {
         this.pedidoRecibido = pedidoRecibido;
     }
 
+    /**
+     * Método que al arrancar el hilo, añade el pedido en la vista "VerPedidos"
+     */
     @Override
     public void run() {
         String received;
         String toReturn;
 
         try {
-            //añadido
             ObjectOutputStream out = new ObjectOutputStream(this.socket.getOutputStream());
 
             
@@ -58,7 +62,6 @@ public class ClientHandler extends Thread {
 
             JTextArea datosPedido = new JTextArea(4, 14);
             String total = "";
-            System.out.println(pedidoRecibido.toString());
             for (Object alimento : pedidoRecibido.getCuenta()) {
                 if (alimento instanceof Producto) {
                     System.out.println(alimento.toString());
