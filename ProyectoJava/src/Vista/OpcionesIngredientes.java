@@ -52,14 +52,14 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         jPanel3 = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/back_opcHamburguesas.jpg"));  
+                    "imagenes/back_opcHamburguesas.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
         panelHeader1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        javax.swing.JPanel panelContentCI = new JPanel() {        public void paintComponent(Graphics g) {          Image img = Toolkit.getDefaultToolkit().getImage(          Principal.class.getResource("/imagenes/back_opcHamburguesas.jpg"));          g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);          }        };
+        javax.swing.JPanel panelContentCI = new JPanel() {        public void paintComponent(Graphics g) {          Image img = Toolkit.getDefaultToolkit().getImage(          "imagenes/back_opcHamburguesas.jpg");          g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);          }        };
         panelFormularioCI = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnEnviarCrearIngrediente = new javax.swing.JButton();
@@ -68,7 +68,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         jPanel4 = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/back_opcHamburguesas.jpg"));  
+                    "imagenes/back_opcHamburguesas.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -78,7 +78,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         javax.swing.JPanel panelContentEI = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/back_opcHamburguesas.jpg"));  
+                    "imagenes/back_opcHamburguesas.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -92,7 +92,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         jPanel6 = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/back_opcHamburguesas.jpg"));  
+                    "imagenes/back_opcHamburguesas.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -102,7 +102,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         javax.swing.JPanel panelContentBI = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/back_opcHamburguesas.jpg"));  
+                    "imagenes/back_opcHamburguesas.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -115,7 +115,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         jPanel1 = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/back_opcMenus.jpg"));  
+                    "imagenes/back_opcMenus.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -125,7 +125,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         panelContent = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/back_opcIngredientes.jpg"));  
+                    "imagenes/back_opcIngredientes.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -150,7 +150,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelHeader1.add(jLabel7, java.awt.BorderLayout.CENTER);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/goback.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon("imagenes/goback.png"));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -247,7 +247,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         jLabel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelHeader2.add(jLabel8, java.awt.BorderLayout.CENTER);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/goback.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon("imagenes/goback.png"));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -360,7 +360,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         jLabel13.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelHeader3.add(jLabel13, java.awt.BorderLayout.CENTER);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/goback.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon("imagenes/goback.png"));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -476,7 +476,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelHeader.add(jLabel6, java.awt.BorderLayout.CENTER);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/goback.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon("imagenes/goback.png"));
         jButton6.setMaximumSize(new java.awt.Dimension(50, 47));
         jButton6.setMinimumSize(new java.awt.Dimension(50, 47));
         jButton6.setPreferredSize(new java.awt.Dimension(100, 47));

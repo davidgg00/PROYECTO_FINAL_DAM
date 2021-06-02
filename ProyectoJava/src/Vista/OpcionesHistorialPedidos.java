@@ -42,7 +42,7 @@ public class OpcionesHistorialPedidos extends javax.swing.JFrame {
         jPanel1 = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/back_opcMenus.jpg"));  
+                    "/imagenes/back_opcMenus.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -52,7 +52,7 @@ public class OpcionesHistorialPedidos extends javax.swing.JFrame {
         panelContent = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/back_opcIngredientes.jpg"));  
+                    "imagenes/back_opcIngredientes.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -81,7 +81,7 @@ public class OpcionesHistorialPedidos extends javax.swing.JFrame {
         jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelHeader.add(jLabel6, java.awt.BorderLayout.CENTER);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/goback.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon("imagenes/goback.png"));
         jButton6.setMaximumSize(new java.awt.Dimension(50, 47));
         jButton6.setMinimumSize(new java.awt.Dimension(50, 47));
         jButton6.setPreferredSize(new java.awt.Dimension(100, 47));

@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -99,7 +100,7 @@ public class VerPedidos extends javax.swing.JFrame {
         panelPedidos = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    VerPedidos.class.getResource("/imagenes/background_pedidosPendientes.jpg"));  
+                    "imagenes/background_pedidosPendientes.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -110,7 +111,7 @@ public class VerPedidos extends javax.swing.JFrame {
         panelContent = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    VerPedidos.class.getResource("/imagenes/background_pedidosPendientes.jpg"));  
+                    "imagenes/background_pedidosPendientes.jpg");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };
@@ -133,7 +134,7 @@ public class VerPedidos extends javax.swing.JFrame {
         jLabel6.setMinimumSize(null);
         panelHeader.add(jLabel6, java.awt.BorderLayout.CENTER);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/goback.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon("imagenes/goback.png"));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

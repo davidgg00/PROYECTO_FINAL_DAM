@@ -60,7 +60,7 @@ public class Principal extends javax.swing.JFrame {
         panelPadre = new JPanel() {  
             public void paintComponent(Graphics g) {  
                 Image img = Toolkit.getDefaultToolkit().getImage(  
-                    Principal.class.getResource("/imagenes/background_2.png"));  
+                    "imagenes/background_2.png");  
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
             }  
         };

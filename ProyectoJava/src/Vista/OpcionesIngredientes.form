@@ -33,7 +33,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      Principal.class.getResource(&quot;/imagenes/back_opcHamburguesas.jpg&quot;));  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      &quot;imagenes/back_opcHamburguesas.jpg&quot;);  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -76,8 +76,8 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton5">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagenes/goback.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(&quot;imagenes/goback.png&quot;)" type="code"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -104,7 +104,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {        public void paintComponent(Graphics g) {          Image img = Toolkit.getDefaultToolkit().getImage(          Principal.class.getResource(&quot;/imagenes/back_opcHamburguesas.jpg&quot;));          g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);          }        };"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {        public void paintComponent(Graphics g) {          Image img = Toolkit.getDefaultToolkit().getImage(          &quot;imagenes/back_opcHamburguesas.jpg&quot;);          g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);          }        };"/>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
@@ -224,7 +224,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      Principal.class.getResource(&quot;/imagenes/back_opcHamburguesas.jpg&quot;));  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      &quot;imagenes/back_opcHamburguesas.jpg&quot;);  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -267,8 +267,8 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton3">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagenes/goback.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(&quot;imagenes/goback.png&quot;)" type="code"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -292,7 +292,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      Principal.class.getResource(&quot;/imagenes/back_opcHamburguesas.jpg&quot;));  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      &quot;imagenes/back_opcHamburguesas.jpg&quot;);  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
@@ -442,7 +442,7 @@
       <SubComponents>
         <Container class="javax.swing.JPanel" name="jPanel6">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      Principal.class.getResource(&quot;/imagenes/back_opcHamburguesas.jpg&quot;));  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      &quot;imagenes/back_opcHamburguesas.jpg&quot;);  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
           </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -485,8 +485,8 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton4">
                   <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagenes/goback.png"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.ImageIcon(&quot;imagenes/goback.png&quot;)" type="code"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -510,7 +510,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      Principal.class.getResource(&quot;/imagenes/back_opcHamburguesas.jpg&quot;));  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      &quot;imagenes/back_opcHamburguesas.jpg&quot;);  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
@@ -671,7 +671,7 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      Principal.class.getResource(&quot;/imagenes/back_opcMenus.jpg&quot;));  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      &quot;imagenes/back_opcMenus.jpg&quot;);  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -714,8 +714,8 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton6">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/goback.png"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new javax.swing.ImageIcon(&quot;imagenes/goback.png&quot;)" type="code"/>
                 </Property>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[50, 47]"/>
@@ -740,7 +740,7 @@
         </Container>
         <Container class="javax.swing.JPanel" name="panelContent">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;   public void paintComponent(Graphics g) {  &#xd;&#xa;     Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;     Principal.class.getResource(&quot;/imagenes/back_opcIngredientes.jpg&quot;));  &#xd;&#xa;     g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;     }  &#xd;&#xa;   };"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;   public void paintComponent(Graphics g) {  &#xd;&#xa;     Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;     &quot;imagenes/back_opcIngredientes.jpg&quot;);  &#xd;&#xa;     g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;     }  &#xd;&#xa;   };"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

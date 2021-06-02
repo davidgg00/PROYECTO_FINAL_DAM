@@ -46,7 +46,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      Principal.class.getResource(&quot;/imagenes/background_2.png&quot;));  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {  &#xd;&#xa;    public void paintComponent(Graphics g) {  &#xd;&#xa;      Image img = Toolkit.getDefaultToolkit().getImage(  &#xd;&#xa;      &quot;imagenes/background_2.png&quot;);  &#xd;&#xa;      g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  &#xd;&#xa;      }  &#xd;&#xa;    };"/>
       </AuxValues>
 
       <Layout>
