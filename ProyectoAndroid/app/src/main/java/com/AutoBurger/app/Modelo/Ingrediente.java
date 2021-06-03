@@ -2,6 +2,11 @@ package com.AutoBurger.app.Modelo;
 
 import java.io.Serializable;
 
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class Ingrediente implements Serializable{
     private int id;
     private String nombre;

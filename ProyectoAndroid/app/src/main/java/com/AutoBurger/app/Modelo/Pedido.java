@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-//Serializable porque va a pasar de un activity a otro
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class Pedido implements Serializable {
     private int id;
     private String email_cliente;

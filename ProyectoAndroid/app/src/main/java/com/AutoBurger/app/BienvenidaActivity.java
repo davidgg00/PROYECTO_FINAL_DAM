@@ -1,11 +1,13 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.AutoBurger.app.Controlador.GestionPedidos;
 import com.AutoBurger.app.Modelo.Pedido;
 import com.AutoBurger.app.Modelo.Usuario;
@@ -31,6 +33,10 @@ public class BienvenidaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que te lleva al activity Carta
+     * @param view
+     */
     public void irACarta(View view){
         Intent intent = new Intent(BienvenidaActivity.this, ActivityCartaAlimentos.class);
         Pedido pedido = new Pedido(usuario.getEmail(),0,null);
@@ -39,6 +45,10 @@ public class BienvenidaActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Método que te lleva al activity HistorialPedidos
+     * @param view
+     */
     public void irAHistorialPedidos(View view){
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -67,6 +77,10 @@ public class BienvenidaActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método que te lleva al activity AjustesCliete
+     * @param view
+     */
     public void irAjustesCliente(View view){
         Intent intent = new Intent(BienvenidaActivity.this,  activity_AjustesPerfil.class);
         intent.putExtra("usuario", usuario);

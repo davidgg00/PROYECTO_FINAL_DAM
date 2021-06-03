@@ -2,6 +2,11 @@ package com.AutoBurger.app.Modelo;
 
 import java.io.Serializable;
 
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class Usuario implements Serializable {
     private String email, password, nombre;
 

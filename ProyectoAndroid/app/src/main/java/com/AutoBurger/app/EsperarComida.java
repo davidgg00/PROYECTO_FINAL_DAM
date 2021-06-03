@@ -1,22 +1,19 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.preference.PreferenceManager;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.AutoBurger.app.Controlador.GestionPedidos;
-import com.AutoBurger.app.Controlador.GestionProductos;
 import com.AutoBurger.app.Modelo.Pedido;
 
 import java.util.concurrent.ExecutionException;

@@ -1,7 +1,5 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -10,6 +8,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.AutoBurger.app.Controlador.GestionProductos;
 import com.AutoBurger.app.Modelo.Menu;
@@ -22,7 +22,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class ActivityVerHistorialPedidos extends AppCompatActivity {
     private ArrayList<Button> botones = new ArrayList<>();
     private LinearLayout wrapperHistorialPedidos;
@@ -102,6 +106,9 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que cuando se pulsa ir hacia atrás del MOVIL, te llva al activity Bienvenida
+     */
     @Override
     public void onBackPressed() {
         Bundle bundle = getIntent().getExtras();
@@ -113,6 +120,10 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
 
     }
 
+    /**
+     * Método que añade los productos de un pedido antiguo al pedido actual
+     * @param id
+     */
     private void addProductoPedido(final int id) {
         Bundle bundle = getIntent().getExtras();
         Usuario usuario = (Usuario) bundle.get("usuario");
@@ -173,6 +184,10 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
 
     }
 
+    /**
+     * Método que al hacer click para ir hacia atrás en la APP MOVIL, te lleva al activity Bienvenida
+     * @param view
+     */
     public void irAtras(View view){
         Intent intent = new Intent(ActivityVerHistorialPedidos.this, BienvenidaActivity.class);
         Bundle bundle = getIntent().getExtras();

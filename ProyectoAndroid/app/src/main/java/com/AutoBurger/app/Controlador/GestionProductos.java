@@ -2,22 +2,24 @@ package com.AutoBurger.app.Controlador;
 
 import android.content.Context;
 
+import com.AutoBurger.app.Modelo.Conexion;
+import com.AutoBurger.app.Modelo.Producto;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.AutoBurger.app.Modelo.Conexion;
-import com.AutoBurger.app.Modelo.Producto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-
 /**
- * Clase que hará peticiones a la tabla Productos.
+ *
+ * @author DavidGG
+ * @version 1.0
+ * Clase que hará peticiones a la tabla Productos
  */
 public class GestionProductos {
     private static ArrayList<Producto> hamburguesas = new ArrayList<>();
@@ -47,6 +49,12 @@ public class GestionProductos {
         return null;
     }
 
+    /**
+     * Método que obtiene los productos de un menú determinado
+     * @param contexto
+     * @param idMenu
+     * @return
+     */
     public static String getProductosMenu(Context contexto, final int idMenu){
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
@@ -75,7 +83,7 @@ public class GestionProductos {
 
 
     /**
-     * Método que obtendrá las bebidas que están disponibles en la BBDD
+     * Método que obtendrá las bebidas que están en la BBDD
      * @param contexto
      * @return datos
      */
@@ -100,7 +108,7 @@ public class GestionProductos {
     }
 
     /**
-     * Método que obtendrá las patatas que están disponibles en la BBDD
+     * Método que obtendrá las patatas que están en la BBDD
      * @param contexto
      * @return datos
      */

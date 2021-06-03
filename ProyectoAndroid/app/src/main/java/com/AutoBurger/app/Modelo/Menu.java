@@ -3,6 +3,11 @@ package com.AutoBurger.app.Modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class Menu implements Serializable {
     private int id;
     private String nombre,ruta_img;

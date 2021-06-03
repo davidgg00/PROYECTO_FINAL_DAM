@@ -1,12 +1,12 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.AutoBurger.app.Modelo.Conexion;
 import com.AutoBurger.app.Modelo.Menu;
@@ -26,7 +26,11 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class ActivityPasarelaPago extends AppCompatActivity {
     CardForm cardForm;
     Button buy;
@@ -60,6 +64,9 @@ public class ActivityPasarelaPago extends AppCompatActivity {
         });
     }
 
+    /**
+     * Método que inserta el pedido en la bbdd
+     */
     private void inserccionPedidoBBDD(){
 
         Bundle bundle=getIntent().getExtras();
@@ -119,6 +126,11 @@ public class ActivityPasarelaPago extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
+    /**
+     * Método que añade los detalles del pedido (productos y menús)
+     * @param detalle
+     * @param idPedido
+     */
     private void addDetallePedidoBBDD(final int detalle, final int idPedido){
         RequestQueue queue = Volley.newRequestQueue(ActivityPasarelaPago.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Conexion.URL_WEB_SERVICES + "Pedido/insertarDetallePedido.php",

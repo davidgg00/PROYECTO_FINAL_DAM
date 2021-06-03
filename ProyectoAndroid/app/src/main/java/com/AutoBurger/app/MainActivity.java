@@ -1,7 +1,5 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,7 +8,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.AutoBurger.app.Controlador.GestionProductos;
 import com.AutoBurger.app.Controlador.Validar;
+import com.AutoBurger.app.Modelo.Conexion;
 import com.AutoBurger.app.Modelo.Usuario;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -19,8 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.AutoBurger.app.Controlador.GestionProductos;
-import com.AutoBurger.app.Modelo.Conexion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +29,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
     EditText etCorreo,etPassword;

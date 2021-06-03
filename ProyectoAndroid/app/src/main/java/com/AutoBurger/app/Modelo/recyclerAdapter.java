@@ -11,11 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.AutoBurger.app.R;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyViewHolder> {
     private ArrayList<Producto> productos;
     private ArrayList<Menu> menus;

@@ -2,28 +2,30 @@ package com.AutoBurger.app.Controlador;
 
 import android.content.Context;
 
+import com.AutoBurger.app.Modelo.Conexion;
 import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.AutoBurger.app.Modelo.Conexion;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class GestionPedidos {
 
+    /**
+     * Método que obtiene todos los pedidos antiguos de un cliente
+     * @param contexto
+     * @param email_cliente
+     * @return
+     */
     public static String getPedidosAntiguos(Context contexto, final String email_cliente){
 
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
@@ -50,6 +52,12 @@ public class GestionPedidos {
         return null;
     }
 
+    /**
+     * Método que borra un pedido. Se ejecuta cuando hay error y no se establece la conexion con el servidor
+     * @param idPedido
+     * @param contexto
+     * @return
+     */
     public static boolean borrarPedido(final int idPedido, Context contexto){
         String datos = null;
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);
@@ -76,6 +84,12 @@ public class GestionPedidos {
         return datos.equalsIgnoreCase("{\"code\":\"CR_OK\", \"value\":\"OK_MANIPULACION\"}");
     }
 
+    /**
+     * Método que comprueba el estado del pedido del cliente
+     * @param idPedido
+     * @param contexto
+     * @return
+     */
     public static boolean pedidoCompletado(final int idPedido, Context contexto){
         String datos = null;
         RequestQueue requestQueue = Volley.newRequestQueue(contexto);

@@ -1,7 +1,5 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.AutoBurger.app.Controlador.Validar;
+import com.AutoBurger.app.Modelo.Conexion;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,13 +18,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.AutoBurger.app.Modelo.Conexion;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class FormularioRegistro extends AppCompatActivity {
     private Button btnRegistro;
     EditText etNombre,etCorreo,etPassword;

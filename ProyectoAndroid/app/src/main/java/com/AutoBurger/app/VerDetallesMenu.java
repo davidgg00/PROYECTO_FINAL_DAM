@@ -1,7 +1,5 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -11,13 +9,18 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.AutoBurger.app.Modelo.Ingrediente;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.AutoBurger.app.Modelo.Menu;
 import com.AutoBurger.app.Modelo.Pedido;
 import com.AutoBurger.app.Modelo.Producto;
 
 import java.util.ArrayList;
-
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class VerDetallesMenu extends AppCompatActivity {
     TextView titulo,precio;
     Pedido pedido;
@@ -54,10 +57,18 @@ public class VerDetallesMenu extends AppCompatActivity {
 
     }
 
+    /**
+     * Método que te devuelve al activity anterior cuando haces click en "ir hacia atrás" de la app movil
+     * @param view
+     */
     public void volverCarta(View view){
         finish();
     }
 
+    /**
+     * Método que te añade el producto al pedido actual al hacer click en "Añadir pedido"
+     * @param view
+     */
     public void addProducto(View view){
         ArrayList<Producto> prods = menu.getProductos();
         pedido.getCuenta().add(menu);

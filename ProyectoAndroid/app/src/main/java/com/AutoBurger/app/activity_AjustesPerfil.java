@@ -1,14 +1,12 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.AutoBurger.app.Controlador.Validar;
 import com.AutoBurger.app.Modelo.Conexion;
@@ -29,6 +27,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class activity_AjustesPerfil extends AppCompatActivity {
     EditText etNombre,etCorreo,etPasswordActual,etPasswordNueva;
     Usuario usuario;
@@ -46,6 +49,9 @@ public class activity_AjustesPerfil extends AppCompatActivity {
         etCorreo.setText(usuario.getEmail());
     }
 
+    /**
+     * Si se da click al volver atrás del MOVIL, enviamos los datos del usuario
+     */
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(activity_AjustesPerfil.this,  BienvenidaActivity.class);
@@ -55,6 +61,10 @@ public class activity_AjustesPerfil extends AppCompatActivity {
 
     }
 
+    /**
+     * Método que edita el perfil del usuario
+     * @param view
+     */
     public void editarPerfil(View view){
         String errores = "";
         if (!Validar.nombreUsuario(etNombre.getText().toString())){

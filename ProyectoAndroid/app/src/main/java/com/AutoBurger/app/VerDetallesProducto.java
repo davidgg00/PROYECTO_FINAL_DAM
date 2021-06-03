@@ -1,22 +1,25 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.AutoBurger.app.Modelo.Ingrediente;
 import com.AutoBurger.app.Modelo.Pedido;
 import com.AutoBurger.app.Modelo.Producto;
 
 import java.util.ArrayList;
-
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class VerDetallesProducto extends AppCompatActivity {
     TextView titulo,precio;
     Pedido pedido;
@@ -71,6 +74,10 @@ public class VerDetallesProducto extends AppCompatActivity {
 
     }
 
+    /**
+     * Método que al hacer click en "volver hacia atrás" de la APP MOVIL, te lleva a la carta de alimentos
+     * @param view
+     */
     public void volverCarta(View view){
         Intent intent = new Intent(getApplicationContext(), ActivityCartaAlimentos.class);
         intent.putExtra("pedido",pedido);
@@ -78,6 +85,10 @@ public class VerDetallesProducto extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Método que al hacer click añade el producto al pedido Actual
+     * @param view
+     */
     public void addProducto(View view){
         pedido.getCuenta().add(producto);
         pedido.setTotal_a_pagar(pedido.getTotal_a_pagar() + producto.getPrecio());

@@ -1,21 +1,21 @@
 package com.AutoBurger.app;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.AutoBurger.app.Modelo.Ingrediente;
 import com.AutoBurger.app.Modelo.Menu;
@@ -29,7 +29,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class ActivityCartaAlimentos extends AppCompatActivity {
     private ViewPager view1;
     private ArrayList<Producto> hamburguesas = new ArrayList<>();
@@ -66,12 +70,19 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
 
     }
 
+    /**
+     * Método que te lleva al activity VerPedidoActual
+     * @param view
+     */
     public void verPedidoActual(View view){
         Intent intent = new Intent(getApplicationContext(), VerPedidoActual.class);
         intent.putExtra("pedido",pedido);
         startActivity(intent);
     }
 
+    /**
+     * Método que obtiene de SESSION; todos los menu.
+     */
     private void obtenerMenus() {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String menus_session = sharedPrefs.getString("menus", "");
@@ -106,6 +117,9 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que obtiene de SESSION todas las patatas.
+     */
     private void obtenerPatatas() {
         //Obtenemos las hamburguesas almacenadas en las sesión
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -186,8 +200,10 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         }
     }
 
-
-
+    /**
+     * Método que te lleva al VerDetallesProducto del producto que has clickado
+     * @param tipoProducto
+     */
     private void setOnClickListener(final ArrayList<Producto> tipoProducto) {
 
         listener = new recyclerAdapter.RecyclerViewClickListener() {
@@ -201,6 +217,10 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         };
     }
 
+    /**
+     * Método que te lleva al VerDetallesProducto del menu que has clickado
+     * @param menu
+     */
     private void setOnClickListener2(final ArrayList<Menu> menu) {
 
         listener = new recyclerAdapter.RecyclerViewClickListener() {
@@ -214,6 +234,11 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         };
     }
 
+    /**
+     * Añadimos adapter para productos
+     * @param productos
+     * @param recyclerView
+     */
     private void setAdapter(ArrayList<Producto> productos, RecyclerView recyclerView) {
         recyclerAdapter adapter = new recyclerAdapter(productos,listener, getApplicationContext(), this);
 
@@ -223,6 +248,11 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Añadimos adapter para menu
+     * @param menu
+     * @param recyclerView
+     */
     private void setAdapter2(ArrayList<Menu> menu, RecyclerView recyclerView) {
         recyclerAdapter adapter = new recyclerAdapter(getApplicationContext(),menu,listener,this);
 
@@ -232,23 +262,42 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Método que te lleva a la pagina 1 de los productos
+     * @param v
+     */
     public void irPagina1(View v) {
         view1.setCurrentItem(0);
 
     }
 
+    /**
+     * Método que te lleva a la pagina 2 de los productos
+     * @param v
+     */
     public void irPagina2(View v) {
         view1.setCurrentItem(1);
     }
 
+    /**
+     * Método que te lleva a la pagina 3 de los productos
+     * @param v
+     */
     public void irPagina3(View v) {
         view1.setCurrentItem(2);
     }
 
+    /**
+     * Método que te lleva a la pagina 4 de los productos
+     * @param v
+     */
     public void irPagina4(View v) {
         view1.setCurrentItem(3);
     }
 
+    /**
+     * Clase que gestiona las paginas de la carta y los clicks a los productos
+     */
     class AdminPageAdapter extends PagerAdapter
     {
 

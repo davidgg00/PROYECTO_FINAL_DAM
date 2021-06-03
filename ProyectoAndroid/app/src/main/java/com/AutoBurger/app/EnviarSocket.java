@@ -1,7 +1,9 @@
 package com.AutoBurger.app;
 
 import android.os.AsyncTask;
+
 import com.AutoBurger.app.Modelo.Pedido;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,7 +14,11 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
-
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class EnviarSocket extends AsyncTask<Pedido, Pedido,Pedido> {
 
     Socket s;
@@ -20,6 +26,11 @@ public class EnviarSocket extends AsyncTask<Pedido, Pedido,Pedido> {
     PrintWriter pw;
     Pedido pedido;
 
+    /**
+     * Método que ejecuta en segundo plano la espera del socket de confirmación de pedido terminado
+     * @param Voids
+     * @return
+     */
     @Override
     protected Pedido doInBackground(Pedido... Voids) {
         System.out.println("doinbackground ejecutandose");

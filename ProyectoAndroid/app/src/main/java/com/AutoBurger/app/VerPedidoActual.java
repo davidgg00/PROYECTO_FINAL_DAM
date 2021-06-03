@@ -1,17 +1,16 @@
 package com.AutoBurger.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.AutoBurger.app.Modelo.Menu;
 import com.AutoBurger.app.Modelo.Pedido;
@@ -20,7 +19,11 @@ import com.AutoBurger.app.Modelo.Producto;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
+ *
+ * @author DavidGG
+ * @version 1.0
+ */
 public class VerPedidoActual extends AppCompatActivity {
     private Pedido pedido;
     private TextView labelPrecio;
@@ -101,6 +104,11 @@ public class VerPedidoActual extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que borra un producto del pedido actual
+     * @param index
+     * @param wrapPedido
+     */
     public void borrarProductoPedido(int index, LinearLayout wrapPedido){
         double precio = 0;
         if (pedido.getCuenta().get(index) instanceof Producto){
@@ -125,6 +133,10 @@ public class VerPedidoActual extends AppCompatActivity {
         wrapPedido.setVisibility(View.GONE);
     }
 
+    /**
+     * Método que te lleva a la pasarela de pago para pagar el pedido
+     * @param view
+     */
     public void pagarPedido(View view){
         if (pedido.getCuenta().size() > 0){
             //Obtenemos la fecha y hora actual
@@ -140,6 +152,10 @@ public class VerPedidoActual extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que te devuelve al activity anterior al hacer click en "ir hacia atrás" del pedido actual
+     * @param view
+     */
     public void volveraCarta(View view){
         Intent intent = new Intent(getApplicationContext(), ActivityCartaAlimentos.class);
         intent.putExtra("pedido",pedido);
