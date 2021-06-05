@@ -105,6 +105,18 @@ public class VerPedidoActual extends AppCompatActivity {
     }
 
     /**
+     * Si se da click al volver atrás del MOVIL, enviamos el pedido actual
+     */
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(VerPedidoActual.this,  ActivityCartaAlimentos.class);
+        intent.putExtra("pedido", pedido);
+        startActivity(intent);
+        finish();
+
+    }
+
+    /**
      * Método que borra un producto del pedido actual
      * @param index
      * @param wrapPedido
