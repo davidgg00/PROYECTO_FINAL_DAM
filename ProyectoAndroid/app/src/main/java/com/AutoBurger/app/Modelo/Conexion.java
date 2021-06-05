@@ -6,5 +6,5 @@ package com.AutoBurger.app.Modelo;
  * @version 1.0
  */
 public class Conexion {
-    public static final String URL_WEB_SERVICES ="http://10.0.2.2/WebService/scripts/";
+    public static final String URL_WEB_SERVICES ="http://192.168.1.23/WebService/scripts/";
 }

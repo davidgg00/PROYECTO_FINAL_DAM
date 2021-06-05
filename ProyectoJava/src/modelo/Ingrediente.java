@@ -1,16 +1,19 @@
 package modelo;
+   
+import java.io.Serializable;
 
 /**
  * @author DavidGG
  * @version 1.0
  */
-public class Ingrediente {
+public class Ingrediente implements Serializable{
     private int id;
-    private String nombre;
+    private String nombreINGR;
+    private static final long serialVersionUID = 1L;
 
     public Ingrediente(int id, String nombre) {
         this.id = id;
-        this.nombre = nombre;
+        this.nombreINGR = nombre;
     }
 
     public int getId() {
@@ -22,18 +25,18 @@ public class Ingrediente {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombreINGR;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombreINGR = nombre;
     }
 
     @Override
     public String toString() {
         return "Ingrediente{" +
                 "id=" + id +
-                ", nombre='" + nombre + '\'' +
+                ", nombreINGR='" + nombreINGR + '\'' +
                 '}';
     }
 }

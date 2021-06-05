@@ -105,7 +105,7 @@ public class ActivityCartaAlimentos extends AppCompatActivity {
                             JSONObject e3 = jsonArrayIngredientes.getJSONObject(n);
                             productos.add(new Producto(Integer.parseInt(e3.get("id").toString()), e3.get("nombre").toString(), Double.parseDouble(e3.get("precio").toString()),e3.get("tipo").toString(),e3.get("ruta_img").toString()));
                         }
-                        menus.add(new Menu(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()), productos, e.get("ruta_img").toString()));
+                        menus.add(new Menu(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()),  e.get("ruta_img").toString(),productos));
                     }
 
                 }

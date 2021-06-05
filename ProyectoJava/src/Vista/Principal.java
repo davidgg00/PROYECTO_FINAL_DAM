@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * @author DavidGG
- * @version 1.0
+ * @author DavidGG  
+ * @version 1.0 
  */
 public class Principal extends javax.swing.JFrame {
 

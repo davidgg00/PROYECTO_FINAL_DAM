@@ -155,7 +155,7 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
                                         productosArrayList.add(new Producto(Integer.parseInt(d.get("id").toString()), d.get("nombre").toString(), Double.parseDouble(d.get("precio").toString()), d.get("ruta_img").toString(), d.get("tipo").toString()));
                                     }
                                     System.out.println("aaa");
-                                    productos.add(new Menu(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()), productosArrayList, e.get("ruta_img").toString()));
+                                    productos.add(new Menu(Integer.parseInt(e.get("id").toString()), e.get("nombre").toString(), Double.parseDouble(e.get("precio").toString()), e.get("ruta_img").toString(),productosArrayList));
                                     pedido.setTotal_a_pagar(pedido.getTotal_a_pagar() + Double.parseDouble(e.get("precio").toString()));
                                 } catch (JSONException ex) {
                                     ex.printStackTrace();

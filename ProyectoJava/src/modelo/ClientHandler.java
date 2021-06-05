@@ -1,9 +1,7 @@
 package modelo;
 
 import Vista.VerPedidos;
-import com.AutoBurger.app.Modelo.Pedido;
-import com.AutoBurger.app.Modelo.Producto;
-import com.AutoBurger.app.Modelo.Menu;
+import com.google.gson.Gson;
 import controlador.GestionPedido;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -25,7 +22,7 @@ import javax.swing.JTextArea;
  * @version 1.0
  */
 public class ClientHandler extends Thread {
-    
+
     DataInputStream dataIn;
     DataOutputStream dataOut;
     Socket socket;
@@ -33,10 +30,11 @@ public class ClientHandler extends Thread {
 
     /**
      * Constructor
+     *
      * @param socket
      * @param dataIn
      * @param dataOut
-     * @param pedidoRecibido 
+     * @param pedidoRecibido
      */
     public ClientHandler(Socket socket, DataInputStream dataIn, DataOutputStream dataOut, Pedido pedidoRecibido) {
         this.socket = socket;
@@ -54,37 +52,31 @@ public class ClientHandler extends Thread {
         String toReturn;
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(this.socket.getOutputStream());
+            dataOut = new DataOutputStream(this.socket.getOutputStream());
 
-            
             JPanel panel = new JPanel();
             panel.setBackground(Color.gray);
 
             JTextArea datosPedido = new JTextArea(4, 14);
             String total = "";
             for (Object alimento : pedidoRecibido.getCuenta()) {
-                if (alimento instanceof Producto) {
-                    System.out.println(alimento.toString());
-                    total += ((Producto) alimento).getNombre() + "\n";
-                } else if (alimento instanceof Menu) {
-                    System.out.println(alimento.toString());
-                    total += ((Menu) alimento).getNombre() + "\n";
-                }
-
+                int l = alimento.toString().indexOf("nombre=");
+                int x = alimento.toString().indexOf(",", l);
+                total += alimento.toString().substring(l + 7, x) + "\n";
             }
             datosPedido.setText(total);
             datosPedido.setEditable(false);
             String email_cliente = pedidoRecibido.getEmail_cliente();
-            int nPedido = pedidoRecibido.getPedidoNumero(); 
+            int nPedido = pedidoRecibido.getPedidoNumero();
             JButton buttonDatosCliente = new JButton("Datos Cliente");
             buttonDatosCliente.setBounds(100, 100, 80, 30);
             buttonDatosCliente.setBackground(Color.orange);
             buttonDatosCliente.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                        JOptionPane.showMessageDialog(null, email_cliente.equalsIgnoreCase("invitado@invitado.com") ? "Sesión Invitado \n NºPedido: " + nPedido : email_cliente + "\n NºPedido: " + nPedido);
+                    JOptionPane.showMessageDialog(null, email_cliente.equalsIgnoreCase("invitado@invitado.com") ? "Sesión Invitado \n NºPedido: " + nPedido : email_cliente + "\n NºPedido: " + nPedido);
                 }
-                });
+            });
             JButton b2 = new JButton("Pedido Listo");
             b2.setBounds(100, 100, 80, 30);
             b2.setBackground(Color.green);
@@ -92,13 +84,15 @@ public class ClientHandler extends Thread {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        out.writeObject(pedidoRecibido);
+                        Gson gson = new Gson();
+                        String json = gson.toJson(pedidoRecibido);
+
+                        dataOut.writeUTF(json);
                         socket.close();
                         dataIn.close();
                         dataOut.close();
                         b2.getParent().hide();
                         GestionPedido.entregado(pedidoRecibido);
-                        
 
                     } catch (IOException ex) {
                         ex.printStackTrace();
@@ -109,7 +103,7 @@ public class ClientHandler extends Thread {
             JScrollPane scroll = new JScrollPane(datosPedido);
             panel.setLayout(new BorderLayout());
             panel.add(scroll, BorderLayout.NORTH);
-            panel.add(buttonDatosCliente,BorderLayout.CENTER);
+            panel.add(buttonDatosCliente, BorderLayout.CENTER);
             panel.add(b2, BorderLayout.SOUTH);
 
             VerPedidos.panelContent.add(panel);

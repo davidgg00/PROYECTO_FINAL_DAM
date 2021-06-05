@@ -60,8 +60,7 @@ public class GestionMenu {
     /**
      * Método que añade un menú en la base de datos justo con sus productos
      *
-     * @param p
-     * @param ingredientesSel
+     * @param menu
      * @return boolean
      */
     public static boolean add(Menu menu) {

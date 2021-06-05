@@ -1,5 +1,5 @@
 package modelo;
-
+  
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -202,7 +202,7 @@ public class ClienteFTP {
     /**
      * M�todo que sube un archivo al servidor FTP
      *
-     * @param directorio
+     * @param rutaArchivoLocal
      * @return
      */
     public boolean subirArchivo(String rutaArchivoLocal) {
@@ -224,36 +224,11 @@ public class ClienteFTP {
 
     }
 
-    /**
-     * M�todo que descarga un archivo del servidor FTP
-     *
-     * @param directorio
-     * @return
-     */
-    public boolean descargarArchivo(String nombre, String rutaDestinoLocal) {
-
-        Boolean transferencia = false;
-        Boolean error = false;
-        try (FileOutputStream fos = new FileOutputStream(rutaDestinoLocal + "\\" + nombre)) {
-            transferencia = cliente.retrieveFile(nombre, fos);
-        } catch (FileNotFoundException e) {
-            error = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (transferencia && !error) {
-            System.out.println("Se descarg� el archivo correctamente!");
-        } else {
-            System.out.println("Error, el archivo a descargar y/o el directorio a donde lo quieres llevar no existe");
-        }
-        return transferencia;
-    }
-
+   
     /**
      * M�todo que crea elimina un archivo del FTPs
      *
-     * @param directorio
+     * @param nombre
      * @return
      */
     public boolean eliminarArchivo(String nombre) {

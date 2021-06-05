@@ -1,14 +1,14 @@
 package controlador;
 
-import com.AutoBurger.app.Modelo.Pedido;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import modelo.Json;
+import modelo.Pedido;
 import utilidades.Constantes;
 
 /**
- * @author DavidGG
+ * @author DavidGG           
  * @version 1.0
  */
 public class GestionPedido {

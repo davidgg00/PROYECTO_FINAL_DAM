@@ -1,7 +1,7 @@
 package modelo;
 
-/**
- * @author DavidGG
+/**   
+ * @author DavidGG      
  * @version 1.0
  */
 public class Json {

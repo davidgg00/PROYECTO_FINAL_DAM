@@ -11,7 +11,7 @@ import java.net.URLConnection;
 
 /**
  * @author DavidGG
- * @version 1.0
+ * @version 1.0   
  */
 public final class HttpRequest {
 

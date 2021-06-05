@@ -18,7 +18,7 @@ public class GestionProducto {
     /**
      * Método que lista todos los productos de la base de datos
      *
-     * @return ArrayList<Producto>
+     * @return productos_todo
      */
     public static ArrayList<Producto> getAll() {
         String values = "";
@@ -37,7 +37,7 @@ public class GestionProducto {
     /**
      * Método que retorna todos los ingredientes de todas las hamburguesas
      *
-     * @return ArrayList<Producto>
+     * @return productos
      */
     public static ArrayList<Producto> getAllIngredientesHamburguesa(ArrayList<Producto> productos) {
 
@@ -65,7 +65,6 @@ public class GestionProducto {
      * ingredientes
      *
      * @param p
-     * @param ingredientesSel
      * @return boolean
      */
     public static boolean add(Producto p) {
@@ -106,7 +105,6 @@ public class GestionProducto {
     /**
      * Método que edita un producto de la base de datos
      *
-     * @param id
      * @param p
      * @return boolean
      */

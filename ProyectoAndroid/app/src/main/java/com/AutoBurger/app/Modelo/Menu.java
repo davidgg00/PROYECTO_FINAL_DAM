@@ -8,19 +8,43 @@ import java.util.ArrayList;
  * @author DavidGG
  * @version 1.0
  */
-public class Menu implements Serializable {
+public class Menu implements Serializable{
     private int id;
-    private String nombre,ruta_img;
+    private String nombre;
     private double precio;
+    private String ruta_img;
     private ArrayList<Producto> productos;
     private static final long serialVersionUID = 1L;
-    public Menu(int id, String nombre, double precio, ArrayList<Producto> productos, String ruta_img) {
+
+    public Menu(String nombre, double precio, String ruta_img, ArrayList<Producto> productos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.ruta_img = ruta_img;
+        this.productos = productos;
+    }
+
+    public Menu(int id, String nombre, double precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+
+    public Menu(int id, String nombre,double precio, ArrayList<Producto> productos) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.productos = productos;
-        this.ruta_img = ruta_img;
     }
+
+    public Menu(int id, String nombre, double precio, String ruta_img,ArrayList<Producto> productos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.ruta_img = ruta_img;
+        this.productos = productos;
+    }
+
 
     public int getId() {
         return id;
@@ -46,14 +70,6 @@ public class Menu implements Serializable {
         this.precio = precio;
     }
 
-    public void setRuta_img(String ruta_img) {
-        this.ruta_img = ruta_img;
-    }
-
-    public String getRuta_img() {
-        return ruta_img;
-    }
-
     public ArrayList<Producto> getProductos() {
         return productos;
     }
@@ -62,14 +78,19 @@ public class Menu implements Serializable {
         this.productos = productos;
     }
 
+    public String getRuta_img() {
+        return ruta_img;
+    }
+
+    public void setRuta_img(String ruta_img) {
+        this.ruta_img = ruta_img;
+    }
+
     @Override
     public String toString() {
-        return "Menu{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", ruta_img='" + ruta_img + '\'' +
-                ", precio=" + precio +
-                ", productos=" + productos +
-                '}';
+        return "Menu{" + "id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", ruta_img=" + ruta_img + ", productos=" + productos + '}';
     }
+
+
+
 }

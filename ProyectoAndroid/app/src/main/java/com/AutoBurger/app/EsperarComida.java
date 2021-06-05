@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.AutoBurger.app.Controlador.GestionPedidos;
 import com.AutoBurger.app.Modelo.Pedido;
+import com.google.gson.Gson;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -44,7 +45,9 @@ public class EsperarComida extends AppCompatActivity {
                 EnviarSocket enviar = new EnviarSocket();
 
                 try {
-                    Pedido pedidoRecibido = enviar.execute(pedido).get();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(pedido);
+                    Pedido pedidoRecibido = enviar.execute(json).get();
 
                     if (pedidoRecibido != null) {
                         if (pedidoRecibido.getId() != -99){
@@ -58,7 +61,7 @@ public class EsperarComida extends AppCompatActivity {
                         }
 
                         new AlertDialog.Builder(EsperarComida.this)
-                                .setTitle("TU PEDIDO ESTÁ LISTO")
+                                .setTitle("TU PEDIDO ESTA LISTO")
                                 .setMessage("VE A POR EL!")
 
                                 // Specifying a listener allows you to take an action before dismissing the dialog.
@@ -90,7 +93,7 @@ public class EsperarComida extends AppCompatActivity {
                                         @Override
                                         public void run() {
                                             new AlertDialog.Builder(EsperarComida.this)
-                                                    .setTitle("TU PEDIDO ESTÁ LISTO")
+                                                    .setTitle("TU PEDIDO ESTa LISTO")
                                                     .setMessage("VE A POR EL!")
 
                                                     // Specifying a listener allows you to take an action before dismissing the dialog.

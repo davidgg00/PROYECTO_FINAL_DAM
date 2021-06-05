@@ -34,8 +34,22 @@ public class Pedido implements Serializable {
         this.cuenta = new ArrayList<Object>();
     }
 
+    public Pedido(int id, String email_cliente, double total_a_pagar) {
+        this.id = id;
+        this.email_cliente = email_cliente;
+        this.total_a_pagar = total_a_pagar;
+    }
+
+    public Pedido(int id,String email_cliente, double total_a_pagar, ArrayList<Object> cuenta) {
+        this.id = id;
+        this.email_cliente = email_cliente;
+        this.total_a_pagar = total_a_pagar;
+        this.cuenta = new ArrayList<Object>();
+    }
+
+
     public Pedido(){
-        
+
     }
 
     public int getId() {

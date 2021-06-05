@@ -3,7 +3,9 @@ package com.AutoBurger.app;
 import android.os.AsyncTask;
 
 import com.AutoBurger.app.Modelo.Pedido;
+import com.google.gson.Gson;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,12 +21,11 @@ import java.net.UnknownHostException;
  * @author DavidGG
  * @version 1.0
  */
-public class EnviarSocket extends AsyncTask<Pedido, Pedido,Pedido> {
+public class EnviarSocket extends AsyncTask<String, String,Pedido> {
 
     Socket s;
-    DataOutputStream dtr;
     PrintWriter pw;
-    Pedido pedido;
+    String pedido;
 
     /**
      * Método que ejecuta en segundo plano la espera del socket de confirmación de pedido terminado
@@ -32,25 +33,33 @@ public class EnviarSocket extends AsyncTask<Pedido, Pedido,Pedido> {
      * @return
      */
     @Override
-    protected Pedido doInBackground(Pedido... Voids) {
+    protected Pedido doInBackground(String... Voids) {
         System.out.println("doinbackground ejecutandose");
+        Pedido pedidoobj;
         pedido = Voids[0];
         Boolean fin = false;
+        String json;
         Pedido cuentareturn = null;
+        Gson gson = new Gson();
         try {
             s = new Socket();
             s.connect(new InetSocketAddress("192.168.1.23",8000), 5000);
 
-            OutputStream outputStream = s.getOutputStream();
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(pedido);
+            DataOutputStream dout = new DataOutputStream(s.getOutputStream());
+            dout.writeUTF(pedido);
+            //TENGO QUE HACER ESTO
+            pedidoobj = gson.fromJson(pedido, Pedido.class);
 
             do {
-                System.out.println("Tu cuenta es: " + pedido.getId());
-                ObjectInputStream objectInput = new ObjectInputStream(s.getInputStream());
+                System.out.println("Tu cuenta es: " + pedido);
+                DataInputStream dis = new DataInputStream(s.getInputStream());
                 System.out.println("entro do_while");
-                cuentareturn = (Pedido) objectInput.readObject();
-            } while (cuentareturn.getId() != pedido.getId() || cuentareturn == null);
+                json = (String)dis.readUTF();
+                cuentareturn = gson.fromJson(json, Pedido.class);
+                System.out.println("a: " + cuentareturn.toString());
+            } while (cuentareturn.getId() != pedidoobj.getId() || cuentareturn == null);
+            System.out.println(cuentareturn.getId() != pedidoobj.getId());
+            System.out.println(cuentareturn == null);
             //objectInput.close();
             System.out.println("adios");
             //hasta aqui
@@ -69,8 +78,6 @@ public class EnviarSocket extends AsyncTask<Pedido, Pedido,Pedido> {
             cuentareturn.setId(-99);
             return cuentareturn;
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
 
         return cuentareturn;

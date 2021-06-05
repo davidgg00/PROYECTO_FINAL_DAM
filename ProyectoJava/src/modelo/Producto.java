@@ -1,12 +1,13 @@
 package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
+   
 /**
  * @author DavidGG
  * @version 1.0
  */
-public class Producto {
+public class Producto implements Serializable{
     private int id;
     private String nombre,ruta_img, tipo;
     private double precio;
@@ -21,6 +22,16 @@ public class Producto {
     }
 
     public Producto(int id, String nombre, double precio, String fotoAlimento, String tipo, ArrayList<Ingrediente> ingredientes) {
+        this.ingredientes.clear();
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.ruta_img = fotoAlimento;
+        this.tipo = tipo;
+        this.ingredientes = ingredientes;
+    }
+    
+    public Producto(int id,ArrayList<Ingrediente> ingredientes, String nombre, double precio, String fotoAlimento, String tipo) {
         this.ingredientes.clear();
         this.id = id;
         this.nombre = nombre;
