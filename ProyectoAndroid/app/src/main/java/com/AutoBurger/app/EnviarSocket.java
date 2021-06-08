@@ -2,6 +2,7 @@ package com.AutoBurger.app;
 
 import android.os.AsyncTask;
 
+import com.AutoBurger.app.Modelo.Conexion;
 import com.AutoBurger.app.Modelo.Pedido;
 import com.google.gson.Gson;
 
@@ -43,7 +44,7 @@ public class EnviarSocket extends AsyncTask<String, String,Pedido> {
         Gson gson = new Gson();
         try {
             s = new Socket();
-            s.connect(new InetSocketAddress("192.168.1.23",8000), 5000);
+            s.connect(new InetSocketAddress(Conexion.ipServerSocket,Conexion.puertoSocket), 5000);
 
             DataOutputStream dout = new DataOutputStream(s.getOutputStream());
             dout.writeUTF(pedido);

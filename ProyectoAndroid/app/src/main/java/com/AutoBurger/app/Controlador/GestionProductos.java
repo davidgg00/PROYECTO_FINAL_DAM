@@ -24,8 +24,6 @@ import java.util.concurrent.ExecutionException;
 public class GestionProductos {
     private static ArrayList<Producto> hamburguesas = new ArrayList<>();
 
-
-
     /**
      * Método que obtendrá los menus que están disponibles en la BBDD
      * @param contexto

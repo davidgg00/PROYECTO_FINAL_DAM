@@ -1,7 +1,13 @@
 package controlador;
 
+import java.io.File;
+import java.io.IOException;
+import static java.util.Arrays.stream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 
 /**
  * @author DavidGG
@@ -45,9 +51,12 @@ public class Validar {
     
     public static boolean imagenCorrecta(String imagen){
         String extension = imagen.substring(imagen.lastIndexOf("."));
-        System.out.println("aa: " + extension);
-        if (extension.equalsIgnoreCase(".jpg") || extension.equalsIgnoreCase(".png") || extension.equalsIgnoreCase(".jpeg")) {
-            return true;
+        try {
+            if (ImageIO.read(new File(imagen)) != null ) {
+                return true;
+            }
+        } catch (IOException ex) {
+            return false;
         }
         return false;
     }

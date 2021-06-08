@@ -839,6 +839,12 @@ public class OpcionesProducto extends javax.swing.JFrame {
             error += "Las hamburguesas deben tener algun ingrediene mínimo \n";
         }
 
+        for (Producto producto : productos) {
+            if (etNombre.getText().toString().equalsIgnoreCase(producto.getNombre())) {
+                error += "Ese nombre producto ya existe. Prueba con otro";
+            }
+        }
+
         if (error.isEmpty()) {
             //Creamos un arraylist con los ingredientes seleccionados y los añadimos
             ArrayList<Ingrediente> ingredientesSel = new ArrayList<>();
@@ -921,6 +927,12 @@ public class OpcionesProducto extends javax.swing.JFrame {
 
             if (productoSeleccionado.getTipo().equals("Hamburguesa") && listaIngredientes1.getSelectedIndices().length == 0) {
                 error += "La hamburguesa debe de tener un ingrediente minimo";
+            }
+
+            for (Producto producto : productos) {
+                if (!productoSeleccionado.getNombre().equalsIgnoreCase(etNombre_ep.getText().toString()) && producto.getNombre().equalsIgnoreCase(etNombre_ep.getText().toString())) {
+                    error += "Error, ya existe un producto con ese nombre \n";
+                }
             }
 
             if (error.isEmpty()) {

@@ -829,16 +829,25 @@ public class OpcionesMenus extends javax.swing.JFrame {
             }
 
             try {
-                String rutalocal = subirImagenEditarMenu.getSelectedFile().toString();
-                if (!Validar.imagenCorrecta(rutalocal)) {
-                    error += "La extensión de la imagen no es la correcta. (Tiene que ser JPG,JPEG o PNG) \n";
+                if (subirImagenEditarMenu.getSelectedFiles().length != 0) {
+                    String rutalocal = subirImagenEditarMenu.getSelectedFile().toString();
+                    if (!Validar.imagenCorrecta(rutalocal)) {
+                        error += "La extensión de la imagen no es la correcta. (Tiene que ser JPG,JPEG o PNG) \n";
+                    }
                 }
+
             } catch (NullPointerException e) {
                 error += "¡Debes seleccionar un fichero! \n";
             }
 
             if (listaProductos_editarMenu.getSelectedIndices().length == 0) {
                 error += "Las hamburguesas deben tener algun ingrediene mínimo \n";
+            }
+
+            for (Menu menu : menus) {
+                if (!menuSeleccionado.getNombre().equalsIgnoreCase(etNombre_editarMenu.getText().toString()) && menu.getNombre().equalsIgnoreCase(etNombre_editarMenu.getText().toString())) {
+                    error += "Error, ya existe un menú con ese nombre \n";
+                }
             }
 
             ArrayList<Producto> productosSel = new ArrayList<>();
@@ -851,14 +860,20 @@ public class OpcionesMenus extends javax.swing.JFrame {
 
             if (error.isEmpty()) {
                 GestionMenu.borrarTodosProductos(menuSeleccionado.getId());
-
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                String rutalocal = subirImagenEditarMenu.getSelectedFile().toString();
-                System.out.println(sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
-                GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
-                //new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productoSeleccionado.getTipo(), ingredientesSel)
-                boolean resultado = GestionMenu.editar(new Menu(menuSeleccionado.getId(), etNombre_editarMenu.getText().toString(), Double.parseDouble(etPrecio_editarMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
+                boolean resultado = false;
+                
+                //Si se ha seleccionado una imagen, se borra la antigua y se sube la nueva
+                if (subirImagenEditarMenu.getSelectedFiles().length != 0) {
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String rutalocal = subirImagenEditarMenu.getSelectedFile().toString();
+                    System.out.println(sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+                    GestionFTP.subir(rutalocal, sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4));
+                    //new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productoSeleccionado.getTipo(), ingredientesSel)
+                    resultado = GestionMenu.editar(new Menu(menuSeleccionado.getId(), etNombre_editarMenu.getText().toString(), Double.parseDouble(etPrecio_editarMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
+                } else {
+                    resultado = GestionMenu.editar(new Menu(menuSeleccionado.getId(), etNombre_editarMenu.getText().toString(), Double.parseDouble(etPrecio_editarMenu.getText().toString()), null, productosSel));
+                }
 
                 if (resultado) {
                     JOptionPane.showMessageDialog(null, "Menu editado correctamente");
@@ -1105,8 +1120,10 @@ public class OpcionesMenus extends javax.swing.JFrame {
                 bi = ImageIO.read(file);
                 Image image_escalada = bi.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
                 lblImagen.setIcon(new ImageIcon(image_escalada));
+            } catch (NullPointerException ep) {
+                JOptionPane.showMessageDialog(null, "Error.El archivo seleccionado no es una imagen.");
             } catch (IOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error.El archivo seleccionado no es una imagen.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Se pulsó la opcion Cancelar");
@@ -1140,6 +1157,12 @@ public class OpcionesMenus extends javax.swing.JFrame {
 
         if (listaProductos_crearmenu.getSelectedIndices().length <= 1) {
             error += "El menú deben tener dos alimentos como mínimo \n";
+        }
+
+        for (Menu menu : menus) {
+            if (etNombre_crearmenu.getText().toString().equalsIgnoreCase(menu.getNombre())) {
+                error += "Error, ya existe un menú con ese nombre \n";
+            }
         }
 
         if (error.isEmpty()) {

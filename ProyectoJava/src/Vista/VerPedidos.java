@@ -30,6 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import modelo.Pedido;
 import test.WrapLayout;
+import utilidades.Constantes;
 
 /**
  * @author DavidGG
@@ -58,7 +59,7 @@ public class VerPedidos extends javax.swing.JFrame {
         ServerSocket serverSocket = null;
 
         try {
-            serverSocket = new ServerSocket(8000);
+            serverSocket = new ServerSocket(Constantes.puertoSocket);
         } catch (IOException ex) {
             Logger.getLogger(VerPedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,7 +71,7 @@ public class VerPedidos extends javax.swing.JFrame {
             try {
                 Gson gson = new Gson();
                 socket = serverSocket.accept();
-
+  
                 DataInputStream dis = new DataInputStream(socket.getInputStream());
                 String json = (String) dis.readUTF();
                 Pedido cuentaRecibida = gson.fromJson(json, Pedido.class);

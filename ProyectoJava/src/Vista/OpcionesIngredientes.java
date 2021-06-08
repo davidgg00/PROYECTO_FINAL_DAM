@@ -9,7 +9,7 @@ import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JPanel;   
 import modelo.Ingrediente;
 
 /**
@@ -32,6 +32,7 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         elegirIngrediente_editar.removeAllItems();
         elegirIngrediente_borrar.removeAllItems();
         for (Ingrediente ingrediente : ingredientes) {
+            System.out.println(ingrediente.toString());
             elegirIngrediente_editar.addItem(ingrediente.getNombre());
             elegirIngrediente_borrar.addItem(ingrediente.getNombre());
         }
@@ -628,6 +629,12 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
         if (!Validar.nombreCorrecto(etNombre_crearIngrediente.getText())) {
             error += "El nombre no es correcto \n";
         }
+        
+         for (Ingrediente ingrediente : ingredientes) {
+                if (ingrediente.getNombre().toString().equalsIgnoreCase(etNombre_crearIngrediente.getText())) {
+                    error += "Error, ya existe un ingrediente con ese nombre \n";
+                }
+            }
 
         if (error.isEmpty()) {
             boolean resultado = GestionIngrediente.add(etNombre_crearIngrediente.getText());
@@ -693,22 +700,15 @@ public class OpcionesIngredientes extends javax.swing.JFrame {
             if (ingredienteSeleccionado.getNombre().equalsIgnoreCase(etNombre_editarIngrediente.getText())) {
                 error += "¡No has modificado el ingrediente!";
             }
+            
+             for (Ingrediente ingrediente : ingredientes) {
+                if (!ingredienteSeleccionado.getNombre().equalsIgnoreCase(etNombre_editarIngrediente.getText().toString()) && ingrediente.getNombre().equalsIgnoreCase(etNombre_editarIngrediente.getText().toString())) {
+                    error += "Error, ya existe un Ingrediente con ese nombre \n";
+                }
+            }
 
             if (error.isEmpty()) {
-
-                int joption = 0;
-                boolean resultado = false;
-                //Vamos a comprobar si el ingrediente editado coincide con otro, para poner una advertencia.
-                for (Ingrediente ingrediente : ingredientes) {
-                    if (etNombre_editarIngrediente.getText().equalsIgnoreCase(ingrediente.getNombre())) {
-                        joption = JOptionPane.showConfirmDialog(null,
-                                "¡Cuidado! Ya hay un ingrediente con el mismo nombre y podría crear conflictos... ¿Desea continuar?", null, JOptionPane.YES_NO_OPTION);
-                    }
-                }
-
-                if (joption == JOptionPane.YES_OPTION) {
-                    resultado = GestionIngrediente.editar(ingredienteSeleccionado.getId(), etNombre_editarIngrediente.getText());
-                }
+                boolean resultado = GestionIngrediente.editar(ingredienteSeleccionado.getId(), etNombre_editarIngrediente.getText());
 
                 if (resultado) {
                     JOptionPane.showMessageDialog(null, "Ingrediente editado correctamente");

@@ -1,12 +1,26 @@
 package utilidades;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author DavidGG
  * @version 1.0
  */
 public class Constantes {
+    
+    public static String ipDatabase = "localhost"; 
+    public static String userDatabase = "root";
+    public static String passwordDatabase="";
+    public static int puertoSocket = 8000;
 
-    public static final String SERVER = "http://localhost/webservice/scripts/";
+    //URLS
+    public static String SERVER = "http://" + ipDatabase + "/webservice/scripts/";
     public static final String URL_INSERT_PRODUCTO = SERVER + "Productos/insertarProducto.php";
     public static final String URL_INSERT_INGREDIENTES_PRODUCTO = SERVER + "Ingredientes_Hamburguesa/insertarIngredientesHamburguesa.php";
     public static final String URL_INSERT_INGREDIENTE = SERVER + "Ingredientes/insertarIngrediente.php";
@@ -25,7 +39,7 @@ public class Constantes {
     public static final String URL_DELETE_INGREDIENTE = SERVER + "Ingredientes/eliminarIngrediente.php";
     public static final String URL_PEDIDO_ENTREGADO = SERVER + "Pedido/pedidoEntregado.php";
     public static final String URL_LISTAR_PEDIDOS_PENDIENTRES = SERVER + "Pedido/listarPedidosPendientes.php";
-    public static final String URL_DELETE_MENU = SERVER + "Menu/eliminarMenu.php";
+    public static final String URL_DELETE_MENU = SERVER + "Productos/eliminarProducto.php";
     public static final String CR_OK = "CR_OK";
     public static final String CR_ERROR = "CR_ERROR";
 }

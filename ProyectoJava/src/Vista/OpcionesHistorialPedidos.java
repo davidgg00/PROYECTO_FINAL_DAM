@@ -16,6 +16,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+import utilidades.Constantes;
 
 /**
  * @author DavidGG
@@ -227,7 +228,7 @@ public class OpcionesHistorialPedidos extends javax.swing.JFrame {
         Connection conectar = null;
         try {
             Class.forName("org.gjt.mm.mysql.Driver");
-            conectar = DriverManager.getConnection("jdbc:mysql://localhost/hamburgueseria", "root", "");
+            conectar = DriverManager.getConnection("jdbc:mysql://localhost/hamburgueseria", Constantes.userDatabase, Constantes.passwordDatabase);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error de conexion de la base de datos");
         }
@@ -282,7 +283,7 @@ public class OpcionesHistorialPedidos extends javax.swing.JFrame {
         Connection conectar = null;
         try {
             Class.forName("org.gjt.mm.mysql.Driver");
-            conectar = DriverManager.getConnection("jdbc:mysql://localhost/hamburgueseria", "root", "");
+            conectar = DriverManager.getConnection("jdbc:mysql://localhost/hamburgueseria", Constantes.userDatabase, Constantes.passwordDatabase);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error de conexion de la base de datos");
         }
