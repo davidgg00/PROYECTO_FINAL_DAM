@@ -1,5 +1,7 @@
 package com.AutoBurger.app;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,6 +30,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         guardarMenus_sesion();
 
     }
-
 
 
     /**
@@ -80,42 +86,41 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void iniciarSesion(View view){
+            RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+            StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
+                    Conexion.URL_WEB_SERVICES + "Usuario/iniciarSesion.php",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject objResultado = new JSONObject(response);
+                                if (Validar.respuestaWebService(objResultado)) {
+                                    Intent intent = new Intent(getApplicationContext(), BienvenidaActivity.class);
+                                    Usuario usuario = new Usuario(objResultado.get("email").toString(), objResultado.get("password").toString(), objResultado.get("nombre").toString());
+                                    System.out.println(usuario.toString() + "xd");
+                                    intent.putExtra("usuario", usuario);
 
-        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-        StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
-                Conexion.URL_WEB_SERVICES + "Usuario/iniciarSesion.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject objResultado = new JSONObject(response);
-                            if (Validar.respuestaWebService(objResultado)){
-                                Intent intent = new Intent(getApplicationContext(), BienvenidaActivity.class);
-                                Usuario usuario = new Usuario(objResultado.get("email").toString(), objResultado.get("password").toString(), objResultado.get("nombre").toString());
-                                System.out.println(usuario.toString() + "xd");
-                                intent.putExtra("usuario", usuario);
-
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(MainActivity.this,"Usuario o contraseña incorrecta",Toast.LENGTH_LONG).show();
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(MainActivity.this, "Usuario o contraseña incorrecta", Toast.LENGTH_LONG).show();
+                                }
+                            } catch (Exception e) {
                             }
-                        } catch (Exception e) {
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        }) {
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params= new HashMap<>();
-                params.put("email", etCorreo.getText().toString());
-                params.put("password", etPassword.getText().toString());
-                return params;
-            }
-        };
-        queue.add(jsonObjectRequest);
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            }) {
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("email", etCorreo.getText().toString());
+                    params.put("password", etPassword.getText().toString());
+                    return params;
+                }
+            };
+            queue.add(jsonObjectRequest);
     }
 
     /**
@@ -167,8 +172,27 @@ public class MainActivity extends AppCompatActivity {
                     }
                     //Guardamos el JSONArray creado en la sesión
                     editor.putString("ingredientesHamburguesas",JSONArrayPadre.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                } catch (JSONException | NullPointerException e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            new AlertDialog.Builder(MainActivity.this)
+                                    .setTitle("ERROR.")
+                                    .setMessage("No se ha podido comunicar con la base de datos, contacte con el personal de la hamburguesería y reinicie la aplicación")
+
+                                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                                    // The dialog is automatically dismissed when a dialog button is clicked.
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                        }
+                                    })
+
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                        }
+                    });
+
                 }
                 // Y lo subimos
                 editor.commit();
@@ -262,8 +286,26 @@ public class MainActivity extends AppCompatActivity {
                     }
                     //Guardamos el JSONArray creado en la sesión
                     editor.putString("productosMenu",JSONArrayPadre.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                } catch (JSONException | NullPointerException ex) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            new AlertDialog.Builder(MainActivity.this)
+                                    .setTitle("ERROR.")
+                                    .setMessage("No se ha podido comunicar con la base de datos, contacte con el personal de la hamburguesería y reinicie la aplicación")
+
+                                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                                    // The dialog is automatically dismissed when a dialog button is clicked.
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                        }
+                                    })
+
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                        }
+                    });
                 }
                 // Y lo subimos
                 editor.commit();

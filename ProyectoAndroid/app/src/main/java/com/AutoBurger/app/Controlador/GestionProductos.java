@@ -40,11 +40,10 @@ public class GestionProductos {
             String test = future.get().toString();
             return test;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            return null;
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     /**
@@ -98,11 +97,10 @@ public class GestionProductos {
             System.out.print(bebidas);
             return bebidas;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            return null;
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     /**
@@ -122,11 +120,10 @@ public class GestionProductos {
             String test = future.get().toString();
             return test;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            return null;
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
 
@@ -147,11 +144,10 @@ public class GestionProductos {
             String datos = future.get().toString();
             return datos;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            return null;
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
 
