@@ -51,13 +51,14 @@ public class ActivityVerHistorialPedidos extends AppCompatActivity {
                 JSONObject j = null;
                 JSONObject e = jsonArray.getJSONObject(i);
                 int contador = i + 1;
-                if (contador < (jsonArray.length() - 1)){
+                if (contador <= (jsonArray.length() - 1)){
                     j = jsonArray.getJSONObject(i+1);
                 } else {
                     j = jsonArray.getJSONObject(i);
                 }
 
-
+                System.out.println(jsonArray.toString());
+                System.out.println(jsonArray.length());
                 datosPedido += e.get("nombre") + "\n";
                 //Si el pedido siguiente es distinto al anterior o es el último creamos botones y texto.
                 if (Integer.parseInt(e.get("idPedido").toString()) != Integer.parseInt(j.get("idPedido").toString()) || i == jsonArray.length() - 1){

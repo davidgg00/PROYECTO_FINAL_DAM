@@ -3,6 +3,7 @@ package Vista;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,8 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * @author DavidGG  
- * @version 1.0 
+ * @author DavidGG
+ * @version 1.0
  */
 public class Principal extends javax.swing.JFrame {
 
@@ -47,9 +48,11 @@ public class Principal extends javax.swing.JFrame {
             }, 1000
             );
         }
+        
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/logo2.png"));
 
     }
-
+    
     /**
      * Método que inicia toda la GUI
      */
@@ -108,6 +111,11 @@ public class Principal extends javax.swing.JFrame {
         btnVerPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerPedidosActionPerformed(evt);
+            }
+        });
+        btnVerPedidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnVerPedidosKeyPressed(evt);
             }
         });
 
@@ -347,6 +355,13 @@ public class Principal extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_btnCopiaSeguridadActionPerformed
+
+    private void btnVerPedidosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnVerPedidosKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_F10) {
+            btnVerPedidos.doClick();
+        }
+    }//GEN-LAST:event_btnVerPedidosKeyPressed
 
     /**
      * @param args the command line arguments
