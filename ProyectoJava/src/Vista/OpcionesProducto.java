@@ -977,6 +977,9 @@ public class OpcionesProducto extends javax.swing.JFrame {
                         elegirProduc.addItem(producto.getNombre());
                         elegirProduc_borrar.addItem(producto.getNombre());
                     }
+                    elegirProduc.setSelectedIndex(0);
+                    elegirProduc.setSelectedIndex(1);
+                    elegirProduc.setSelectedIndex(0);
                 } else {
                     JOptionPane.showMessageDialog(null, "Error de inserción");
                 }
@@ -995,7 +998,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
      */
     private void elegirProducItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_elegirProducItemStateChanged
         //Si hay algun en el combobox y se hace click para cambiar
-        if (elegirProduc.getItemCount() > 0 && evt.getStateChange() == ItemEvent.SELECTED) {
+        if (elegirProduc.getItemCount() > 0) {
             productoSeleccionado = productos.get(elegirProduc.getSelectedIndex());
             //Si es hamburguesa, habrá que seleccionar los ingredientes
             if (productoSeleccionado.getTipo().equalsIgnoreCase("Hamburguesa")) {
@@ -1017,6 +1020,10 @@ public class OpcionesProducto extends javax.swing.JFrame {
                         }
                     }
                     listaIngredientes1.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
+                    System.out.println("--------------");
+                    System.out.println(selecs.toString());
+                    System.out.println(listaIngredientes1.getSelectedIndices().length);
+                    System.out.println("--------------");
                     etNombre_ep.setText(productoSeleccionado.getNombre());
                     etPrecio_ep.setText(String.valueOf(productoSeleccionado.getPrecio()));
                     selecs.clear();

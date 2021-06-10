@@ -840,8 +840,8 @@ public class OpcionesMenus extends javax.swing.JFrame {
                 error += "¡Debes seleccionar un fichero! \n";
             }
 
-            if (listaProductos_editarMenu.getSelectedIndices().length == 0) {
-                error += "Las hamburguesas deben tener algun ingrediene mínimo \n";
+            if (listaProductos_editarMenu.getSelectedIndices().length <= 1) {
+                error += "Los menús deben tener como mínimo 2 productos \n";
             }
 
             for (Menu menu : menus) {

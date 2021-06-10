@@ -8,4 +8,4 @@ $resultado = $cbd->consultaSeleccion($sql);
 $resultado = json_encode($resultado);
 
 
-echo !empty($resultado) ? $resultado : "sin_ingredientes";
+echo !empty($resultado) ? str_replace("nombre", "nombreINGR", $resultado) : "sin_ingredientes";
