@@ -78,6 +78,7 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 615));
+        setResizable(false);
 
         panelPadre.setMinimumSize(new java.awt.Dimension(1014, 728));
         panelPadre.setPreferredSize(new java.awt.Dimension(1014, 728));
@@ -280,7 +281,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnCopiaSeguridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopiaSeguridadActionPerformed
 
         //Mostramos JOptionPane
-        String[] options = new String[]{"Fecha última copia seguridad", "Realizar copia de seguridad", "Restaurar base de datos", "Cancelar"};
+        String[] options = new String[]{"Fecha última copia seguridad", "Realizar copia de seguridad", "Cancelar"};
         int response = JOptionPane.showOptionDialog(null, "Puedes realizar copias de seguridad de la base de datos.\nSolo se guardan los datos, las fotos no.", "COPIA DE SEGURIDAD",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, options, options[0]);
@@ -310,47 +311,48 @@ public class Principal extends javax.swing.JFrame {
             }
             break;
             case 2:
-                int reply = JOptionPane.showConfirmDialog(this, "¿Desea realizar la copia de seguridad?\n Una vez hecha no puede dar marcha atrás.", "ATENCIÓN", JOptionPane.YES_NO_OPTION);
-                if (reply == JOptionPane.YES_OPTION) {
-                    File scriptFile = new File("../sql/hamburgueseria.sql");
-
-                    BufferedReader entrada = null;
-                    try {
-                        entrada = new BufferedReader(new FileReader(scriptFile));
-                    } catch (FileNotFoundException e) {
-                        JOptionPane.showMessageDialog(this, "No hay una copia de seguridad hecha", "ERROR AL IMPORTAR LA COPIA DE SEGURIDAD", JOptionPane.ERROR_MESSAGE);
-                    }
-                    String linea = null;
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String salto = System.getProperty("line.separator");
-                    try {
-                        while ((linea = entrada.readLine()) != null) {
-                            stringBuilder.append(linea);
-                            stringBuilder.append(salto);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    String consulta = stringBuilder.toString();
-
-                    try {
-                        Class.forName("com.mysql.jdbc.Driver");
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        Connection connmysql = (Connection) DriverManager
-                                .getConnection("jdbc:mysql://localhost/hamburgueseria?allowMultiQueries=true", "root", "");
-                        Statement sents = connmysql.createStatement();
-                        int res = sents.executeUpdate(consulta);
-                        JOptionPane.showMessageDialog(this, "Copia de seguridad importada correctamente.");
-                        connmysql.close();
-                        sents.close();
-                    } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(this, "Error en la ejecución SQL del archivo", "Archivo corrupto", JOptionPane.ERROR_MESSAGE);
-                        e.printStackTrace();
-                    }
-                }
+//                int reply = JOptionPane.showConfirmDialog(this, "¿Desea realizar la copia de seguridad?\n Una vez hecha no puede dar marcha atrás.", "ATENCIÓN", JOptionPane.YES_NO_OPTION);
+//                if (reply == JOptionPane.YES_OPTION) {
+//                    File scriptFile = new File("../sql/hamburgueseria.sql");
+//
+//                    BufferedReader entrada = null;
+//                    try {
+//                        entrada = new BufferedReader(new FileReader(scriptFile));
+//                    } catch (FileNotFoundException e) {
+//                        JOptionPane.showMessageDialog(this, "No hay una copia de seguridad hecha", "ERROR AL IMPORTAR LA COPIA DE SEGURIDAD", JOptionPane.ERROR_MESSAGE);
+//                    }
+//                    String linea = null;
+//                    StringBuilder stringBuilder = new StringBuilder();
+//                    String salto = System.getProperty("line.separator");
+//                    try {
+//                        while ((linea = entrada.readLine()) != null) {
+//                            stringBuilder.append(linea);
+//                            stringBuilder.append(salto);
+//                        }
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    String consulta = stringBuilder.toString();
+//                    System.out.println(consulta);
+//
+//                    try {
+//                        Class.forName("com.mysql.jdbc.Driver");
+//                    } catch (ClassNotFoundException e) {
+//                        e.printStackTrace();
+//                    }
+//                    try {
+//                        Connection connmysql = (Connection) DriverManager
+//                                .getConnection("jdbc:mysql://localhost/hamburgueseria?allowMultiQueries=true", "root", "");
+//                        Statement sents = connmysql.createStatement();
+//                        int res = sents.executeUpdate(consulta);
+//                        JOptionPane.showMessageDialog(this, "Copia de seguridad importada correctamente.");
+//                        connmysql.close();
+//                        sents.close();
+//                    } catch (SQLException e) {
+//                        JOptionPane.showMessageDialog(this, "Error en la ejecución SQL del archivo", "Archivo corrupto", JOptionPane.ERROR_MESSAGE);
+//                        e.printStackTrace();
+//                    }
+//                }
 
                 break;
         }

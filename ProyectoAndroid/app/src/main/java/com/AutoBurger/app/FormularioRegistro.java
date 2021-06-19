@@ -56,7 +56,7 @@ public class FormularioRegistro extends AppCompatActivity {
         }
 
         if (!Validar.password(etPassword.getText().toString())){
-            error += "La contraseña no puede estar vacía";
+            error += "La contraseña ha de tener minimo 6 caracteres";
         }
 
         if (error.isEmpty()){

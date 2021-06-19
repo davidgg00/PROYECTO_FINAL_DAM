@@ -1,6 +1,7 @@
 package com.AutoBurger.app;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -51,6 +52,7 @@ public class VerDetallesMenu extends AppCompatActivity {
             TextView textView = new TextView(this);
             textView.setText("-" + producto.getNombre());
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,18);
+            textView.setTextColor(Color.BLACK);
             wrapperProductosMenu.addView(textView);
 
         }

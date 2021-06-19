@@ -228,7 +228,7 @@ public class OpcionesHistorialPedidos extends javax.swing.JFrame {
         Connection conectar = null;
         try {
             Class.forName("org.gjt.mm.mysql.Driver");
-            conectar = DriverManager.getConnection("jdbc:mysql://localhost/hamburgueseria", Constantes.userDatabase, Constantes.passwordDatabase);
+            conectar = DriverManager.getConnection("jdbc:mysql://"+Constantes.ipDatabase+"/"+Constantes.nombreBBDD+"", Constantes.userDatabase, Constantes.passwordDatabase);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error de conexion de la base de datos");
         }

@@ -127,7 +127,6 @@ public class GestionMenu {
     public static boolean remove(int id) {
         String values = "id=" + id;
         String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_DELETE_MENU, values);
-        System.out.println(resultado);
         Gson gson = new Gson();
         Json json = gson.fromJson(resultado, Json.class);
         return json.getCodigo().equals(Constantes.CR_OK);

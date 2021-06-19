@@ -1,6 +1,7 @@
 package com.AutoBurger.app;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -53,6 +54,7 @@ public class VerDetallesProducto extends AppCompatActivity {
                     TextView textView = new TextView(this);
                     textView.setText("-" + ingrediente.getNombre());
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                    textView.setTextColor(Color.BLACK);
                     wrapperIngredientesProducto.addView(textView);
                 }
                 break;
@@ -61,6 +63,7 @@ public class VerDetallesProducto extends AppCompatActivity {
                 textView.setText("-" + producto.getNombre());
                 labelIngredientes.setText("Producto: ");
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                textView.setTextColor(Color.BLACK);
                 wrapperIngredientesProducto.addView(textView);
                 break;
 
@@ -68,6 +71,7 @@ public class VerDetallesProducto extends AppCompatActivity {
                 TextView textView2 = new TextView(this);
                 textView2.setText("Aceite de girasol y sal.");
                 textView2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+                textView2.setTextColor(Color.BLACK);
                 wrapperIngredientesProducto.addView(textView2);
                 break;
         }

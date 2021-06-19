@@ -1,6 +1,7 @@
 package com.AutoBurger.app;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,7 @@ public class VerPedidoActual extends AppCompatActivity {
                 TextView txt = new TextView(this);
                 txt.setText(((Producto) producto).getNombre());
                 txt.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+                txt.setTextColor(Color.BLACK);
 
                 final ImageView quitarProducto = new ImageView(this);
                 quitarProducto.setImageResource(R.drawable.imgeliminarproducto);
@@ -81,6 +83,7 @@ public class VerPedidoActual extends AppCompatActivity {
                 TextView txt = new TextView(this);
                 txt.setText(((Menu) producto).getNombre());
                 txt.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+                txt.setTextColor(Color.BLACK);
 
                 final ImageView quitarProducto = new ImageView(this);
                 quitarProducto.setImageResource(R.drawable.imgeliminarproducto);

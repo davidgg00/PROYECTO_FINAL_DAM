@@ -28,8 +28,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:text="¡Bienvenido a HamburgerGG! "
-                android:textColor="@color/colorPrimary"
+                android:text="¡Bienvenido a Autoburger! "
+                android:textColor="@color/bt_white"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -48,7 +48,7 @@
                 android:layout_weight="1"
                 android:gravity="center|center_vertical"
                 android:text="Desde esta aplicación podrás pedir y pagar la comida, sin  necesidad de esperar a que  te atiendan. "
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/bt_white"
                 android:textSize="18sp" />
 
             <TextView
@@ -58,7 +58,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="¡Haz click en el siguiente botón  para ver la carta y pedir!"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/bt_white"
                 android:textSize="18sp" />
         </LinearLayout>
 

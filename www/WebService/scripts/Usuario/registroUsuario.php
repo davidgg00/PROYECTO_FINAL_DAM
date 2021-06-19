@@ -17,4 +17,6 @@ if (isset($nombre) && isset($email) && isset($password)) {
     }
 
     echo $resultado;
+} else {
+    echo "error";
 }

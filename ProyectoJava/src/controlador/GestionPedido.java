@@ -33,6 +33,7 @@ public class GestionPedido {
     public static JsonArray getPedidosPendientes(){
         String values = "";
         String resultado = utilidades.HttpRequest.POST_REQUEST(Constantes.URL_LISTAR_PEDIDOS_PENDIENTRES, values);
+        System.out.println(resultado);
         JsonArray jsonarray = (JsonArray) new JsonParser().parse(resultado);
 
         return jsonarray;

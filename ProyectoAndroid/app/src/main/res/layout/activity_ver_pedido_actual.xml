@@ -38,6 +38,7 @@
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:text="PEDIDO ACTUAL:"
+                android:textColor="#000000"
                 android:textSize="24sp" />
 
             <ScrollView
@@ -61,6 +62,7 @@
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:text="0.00€"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <LinearLayout
@@ -77,7 +79,8 @@
                     android:layout_marginTop="10dp"
                     android:background="#79B556"
                     android:onClick="pagarPedido"
-                    android:text="Pagar Pedido" />
+                    android:text="Pagar Pedido"
+                    android:textColor="#000000" />
 
                 <Button
                     android:id="@+id/btnVolverCarta"
@@ -87,7 +90,8 @@
                     android:layout_marginTop="15dp"
                     android:background="#EC524B"
                     android:onClick="volveraCarta"
-                    android:text="Volver a la carta" />
+                    android:text="Volver a la carta"
+                    android:textColor="#000000" />
             </LinearLayout>
 
         </LinearLayout>

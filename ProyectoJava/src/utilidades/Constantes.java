@@ -13,14 +13,18 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 public class Constantes {
-    
-    public static String ipDatabase = "localhost"; 
+
+    public static String ipDatabase = "localhost";
     public static String userDatabase = "root";
-    public static String passwordDatabase="";
+    public static String passwordDatabase = "";
     public static int puertoSocket = 8000;
+    public static String servidorFTP = "files.000webhost.com";
+    public static String usuarioFTP = "autoburger";
+    public static String claveFTP = "Proyecto_Final_2020";
+    public static String nombreBBDD = "hamburgueseria";
 
     //URLS
-    public static String SERVER = "http://" + ipDatabase + "/webservice/scripts/";
+    public static String SERVER = "http://" + ipDatabase + "/WebService/scripts/";
     public static final String URL_INSERT_PRODUCTO = SERVER + "Productos/insertarProducto.php";
     public static final String URL_INSERT_INGREDIENTES_PRODUCTO = SERVER + "Ingredientes_Hamburguesa/insertarIngredientesHamburguesa.php";
     public static final String URL_INSERT_INGREDIENTE = SERVER + "Ingredientes/insertarIngrediente.php";

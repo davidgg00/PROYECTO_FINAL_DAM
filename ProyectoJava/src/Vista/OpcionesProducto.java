@@ -672,6 +672,7 @@ public class OpcionesProducto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(null);
+        setResizable(false);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -1040,13 +1041,14 @@ public class OpcionesProducto extends javax.swing.JFrame {
             try {
                 url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + productoSeleccionado.getRuta_img());
                 image = ImageIO.read(url);
+                Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            lblImagen_ed.setIcon(new ImageIcon(image_escalada));
             } catch (MalformedURLException ex) {
                 Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+            lblImagen_ed.setIcon(new ImageIcon("imagenes/imagen_no_encontrada.png"));
             }
-            Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            lblImagen_ed.setIcon(new ImageIcon(image_escalada));
+            
         }
     }//GEN-LAST:event_elegirProducItemStateChanged
 
@@ -1092,14 +1094,15 @@ public class OpcionesProducto extends javax.swing.JFrame {
                 System.out.println(productoSeleccionado.toString());
                 url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + productoSeleccionado.getRuta_img());
                 image = ImageIO.read(url);
+                Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            lblImagen_borrarProducto.setIcon(new ImageIcon(image_escalada));
+            listaDatosProducto_borrar.setText(productoSeleccionado.getNombre() + "\n" + productoSeleccionado.getTipo() + "\n" + productoSeleccionado.getPrecio());
             } catch (MalformedURLException ex) {
                 Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+                 lblImagen_borrarProducto.setIcon(new ImageIcon("imagenes/imagen_no_encontrada.png"));
             }
-            Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            lblImagen_borrarProducto.setIcon(new ImageIcon(image_escalada));
-            listaDatosProducto_borrar.setText(productoSeleccionado.getNombre() + "\n" + productoSeleccionado.getTipo() + "\n" + productoSeleccionado.getPrecio());
+            
         }
 
 

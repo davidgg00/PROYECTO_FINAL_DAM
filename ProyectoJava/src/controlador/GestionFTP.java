@@ -5,13 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.commons.net.ftp.FTPClient;
+import utilidades.Constantes;
 
 /**
  * @author DavidGG
  * @version 1.0
  */
 public class GestionFTP {
-    static String servidor = "files.000webhost.com", usuario = "autoburger", clave = "Proyecto_Final_2020";
+    
     
     /**
      * Método que sube una imagen al servidor FTP
@@ -22,9 +23,9 @@ public class GestionFTP {
     public static boolean subir(String rutaLocal, String timestamp){
         FTPClient cliente = new FTPClient();
         try {
-            cliente.connect(servidor);
+            cliente.connect(Constantes.servidorFTP);
             
-            if (cliente.login(usuario, clave)) {
+            if (cliente.login(Constantes.usuarioFTP, Constantes.claveFTP)) {
                 cliente.changeWorkingDirectory("public_html");
                 cliente.changeWorkingDirectory("imagenesProductos");
                 cliente.setFileType(FTPClient.BINARY_FILE_TYPE);
@@ -62,9 +63,9 @@ public class GestionFTP {
     public static boolean borrar(String ruta_img){
         FTPClient cliente = new FTPClient();
         try {
-            cliente.connect(servidor);
+            cliente.connect(Constantes.servidorFTP);
             
-            if (cliente.login(usuario, clave)) {
+            if (cliente.login(Constantes.usuarioFTP, Constantes.claveFTP)) {
                 cliente.changeWorkingDirectory("public_html");
                 cliente.changeWorkingDirectory("imagenesProductos");
                 cliente.setFileType(FTPClient.BINARY_FILE_TYPE);

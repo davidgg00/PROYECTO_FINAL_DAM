@@ -679,6 +679,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -863,7 +864,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
                 boolean resultado = false;
                 
                 //Si se ha seleccionado una imagen, se borra la antigua y se sube la nueva
-                if (subirImagenEditarMenu.getSelectedFiles().length != 0) {
+                if (subirImagenEditarMenu.getSelectedFile() != null) {
                     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String rutalocal = subirImagenEditarMenu.getSelectedFile().toString();
@@ -872,6 +873,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
                     //new Producto(productoSeleccionado.getId(), etNombre_ep.getText(), Double.parseDouble(etPrecio_ep.getText()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productoSeleccionado.getTipo(), ingredientesSel)
                     resultado = GestionMenu.editar(new Menu(menuSeleccionado.getId(), etNombre_editarMenu.getText().toString(), Double.parseDouble(etPrecio_editarMenu.getText().toString()), sdf1.format(timestamp) + rutalocal.substring(rutalocal.length() - 4), productosSel));
                 } else {
+                    System.out.println(subirImagenEditarMenu.getSelectedFiles().length);
                     resultado = GestionMenu.editar(new Menu(menuSeleccionado.getId(), etNombre_editarMenu.getText().toString(), Double.parseDouble(etPrecio_editarMenu.getText().toString()), null, productosSel));
                 }
 
@@ -985,14 +987,15 @@ public class OpcionesMenus extends javax.swing.JFrame {
                 try {
                     url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + menuSeleccionado.getRuta_img());
                     image = ImageIO.read(url);
+                    Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                lblImagen_editarMenu.setIcon(new ImageIcon(image_escalada));
+
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
-                    Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+                     lblImagen_editarMenu.setIcon(new ImageIcon("imagenes/imagen_no_encontrada.png"));
                 }
-                Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-                lblImagen_editarMenu.setIcon(new ImageIcon(image_escalada));
-
+                
                 listaProductos_editarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
                 etNombre_editarMenu.setText(menuSeleccionado.getNombre());
                 etPrecio_editarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));
@@ -1008,6 +1011,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
      */
     private void btnEnviarBorrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarBorrarMenuActionPerformed
         boolean resultado = GestionMenu.remove(menuSeleccionado.getId());
+        GestionFTP.borrar(menuSeleccionado.getRuta_img());
         //Si la ejecución de añadir el producto con sus ingredientes es correcta.
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Menu borrado correctamente");
@@ -1019,6 +1023,7 @@ public class OpcionesMenus extends javax.swing.JFrame {
         menus = GestionMenu.getAll();
         for (Menu menu : menus) {
             elegirMenu_borrar.addItem(menu.getNombre() + "-" + menu.getId());
+            elegirMenu_editar.addItem(menu.getNombre() + "-" + menu.getId());
         }
     }//GEN-LAST:event_btnEnviarBorrarMenuActionPerformed
 
@@ -1056,16 +1061,17 @@ public class OpcionesMenus extends javax.swing.JFrame {
                 try {
                     url = new URL("https://autoburger.000webhostapp.com/imagenesProductos/" + menuSeleccionado.getRuta_img());
                     image = ImageIO.read(url);
-                } catch (MalformedURLException ex) {
-                    Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                     Image image_escalada = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                 lblImagen_borrarMenu.setIcon(new ImageIcon(image_escalada));
                 listaProductos_borrarMenu.setSelectedIndices(selecs.stream().mapToInt(i -> i).toArray());
                 etNombre_borrarMenu.setText(menuSeleccionado.getNombre());
                 etPrecio_borrarMenu.setText(String.valueOf(menuSeleccionado.getPrecio()));
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(OpcionesProducto.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                     lblImagen_borrarMenu.setIcon(new ImageIcon("imagenes/imagen_no_encontrada.png"));
+                }
+               
 
             }
         }
